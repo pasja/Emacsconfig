@@ -136,7 +136,7 @@
 ;;(add-to-list 'load-path "~/.emacs.d/plugins")
 ;;(require 'yasnippet-bundle)
 
-;; add autopair
+;; configure autopair
 
 (require 'autopair)
 (autopair-global-mode 1)
