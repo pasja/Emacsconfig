@@ -74,14 +74,14 @@
 
 ;; easy C-x b
 
-(iswitchb-mode 1)
-(add-to-list 'iswitchb-buffer-ignore "^\*")
+;; (iswitchb-mode 1)
+;; (add-to-list 'iswitchb-buffer-ignore "^\*")
 
-(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-(defun iswitchb-local-keys ()
-  (define-key iswitchb-mode-map (kbd "<left>") 'iswitchb-next-match)
-  (define-key iswitchb-mode-map (kbd "<right>") 'iswitchb-prev-match)
-  )
+;; (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+;; (defun iswitchb-local-keys ()
+;;   (define-key iswitchb-mode-map (kbd "<left>") 'iswitchb-next-match)
+;;   (define-key iswitchb-mode-map (kbd "<right>") 'iswitchb-prev-match)
+;;   )
 
 ;; line and column numbers
 
@@ -116,7 +116,7 @@
 ;; usual programming
 
 (global-set-key (kbd "M-2") 'hippie-expand)
-(global-set-key (kbd "M-1") 'comment-dwim)
+(global-set-key (kbd "M-3") 'comment-dwim)
 
 
 ;; External libraries (with el-get)
