@@ -45,7 +45,7 @@
  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
  ido-use-url-at-point nil         ; don't use url at point (annoying)
 
- ido-enable-flex-matching nil     ; don't try to be too smart
+ ido-enable-flex-matching t       ; try to be too smart :-)
  ido-max-prospects 8              ; don't spam my minibuffer
  ido-confirm-unique-completion t) ; wait for RET, even with unique completion
 
@@ -93,13 +93,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.hu$" . zone-mode))
 
-;; smart shell start
+;; auto chmod scripts
 
-(defun sh (name)
-     "Smart shell start"
-     (interactive "sShell name: ")
-     (shell name)
-     )
+(add-hook 'after-save-hook
+  'executable-make-buffer-file-executable-if-script-p)
 
 ;; configure cperl
 
@@ -118,6 +115,13 @@
 (global-set-key (kbd "M-2") 'hippie-expand)
 (global-set-key (kbd "M-3") 'comment-dwim)
 
+;; smart shell start
+
+(defun sh (name)
+     "Smart shell start"
+     (interactive "sShell name: ")
+     (shell name)
+     )
 
 ;; External libraries (with el-get)
 
