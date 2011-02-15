@@ -12,7 +12,7 @@
 (setq initial-scratch-message nil
  inhibit-startup-message t
  inhibit-startup-echo-area-message t)
-(setq show-paren t)
+(show-paren-mode 1)
 (visual-line-mode 1)
 (column-number-mode 1)
 (global-linum-mode 1)
@@ -87,15 +87,20 @@
 
 ;; easy C-x b
 
-;; (iswitchb-mode 1)
-;; (add-to-list 'iswitchb-buffer-ignore "^\*")
+ ;; (iswitchb-mode 1)
+ ;; (add-to-list 'iswitchb-buffer-ignore "^\*")
 
-;; (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
-;; (defun iswitchb-local-keys ()
-;;   (define-key iswitchb-mode-map (kbd "<left>") 'iswitchb-next-match)
-;;   (define-key iswitchb-mode-map (kbd "<right>") 'iswitchb-prev-match)
-;;   )
+ ;; (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+ ;; (defun iswitchb-local-keys ()
+ ;;   (define-key iswitchb-mode-map (kbd "<left>") 'iswitchb-next-match)
+ ;;   (define-key iswitchb-mode-map (kbd "<right>") 'iswitchb-prev-match)
+ ;;   )
 
+;; clipboard settings
+
+(setq x-select-enable-primary nil  ; stops killing/yanking interacting with primary X11 selection
+  x-select-enable-clipboard t  ; makes killing/yanking interact with clipboard X11 selection
+  yank-pop-change-selection t)  ; makes rotating the kill ring change the X11 clipboard.
 
 ;; zone-mode for .hu
 
