@@ -1,17 +1,16 @@
-
 ;; forbidden commands
 
 (put 'narrow-to-region 'disabled nil)
-
 (put 'set-goal-column 'disabled nil)
-
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; Proper start
 
 (setq initial-scratch-message nil
- inhibit-startup-message t
- inhibit-startup-echo-area-message t)
+  inhibit-startup-message t
+  inhibit-startup-echo-area-message t
+  default-major-mode 'text-mode
+  confirm-nonexistent-file-or-buffer nil)
 (show-paren-mode 1)
 (visual-line-mode 1)
 (column-number-mode 1)
@@ -26,7 +25,7 @@
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
-;; only for rectangles
+;; rectangles
 
 (setq cua-enable-cua-keys nil) 
 (cua-mode t)
@@ -37,32 +36,29 @@
 (require 'ido) 
 (setq 
   ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
-
   ido-ignore-buffers ; ignore these guys
   '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
 
      "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
- ido-case-fold  t                 ; be case-insensitive
-
- ido-enable-last-directory-history t ; remember last used dirs
- ido-max-work-directory-list 30   ; should be enough
- ido-max-work-file-list      50   ; remember many
- ido-use-filename-at-point nil    ; don't use filename at point (annoying)
- ido-use-url-at-point nil         ; don't use url at point (annoying)
-
- ido-enable-flex-matching t       ; try to be too smart :-)
- ido-max-prospects 8              ; don't spam my minibuffer
- ido-confirm-unique-completion t ; wait for RET, even with unique completion
- confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
- ido-everywhere t
- ido-create-new-buffer 'always)
+  ido-case-fold  t                 ; be case-insensitive
+  ido-enable-last-directory-history t ; remember last used dirs
+  ido-max-work-directory-list 30   ; should be enough
+  ido-max-work-file-list      50   ; remember many
+  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+  ido-use-url-at-point nil         ; don't use url at point (annoying)
+  ido-enable-flex-matching t       ; try to be too smart :-)
+  ido-max-prospects 8              ; don't spam my minibuffer
+  ido-confirm-unique-completion t ; wait for RET, even with unique completion
+  confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
+  ido-everywhere t
+  ido-create-new-buffer 'always)
 (ido-mode 1)
 
 ;; ibuffer
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; autocomplete for minibuffer
+;; help for minibuffer
 
 (icomplete-mode t)
 
@@ -80,21 +76,10 @@
 (global-set-key (kbd "A-<up>") 'windmove-up)
 (global-set-key (kbd "A-<down>") 'windmove-down)
 
-;; buffer-change
+;; buffer change
 
 (global-set-key (kbd "C-<left>") 'next-buffer)
-(global-set-key (kbd "C-<right>") 'previous-buffer)
-
-;; easy C-x b
-
- ;; (iswitchb-mode 1)
- ;; (add-to-list 'iswitchb-buffer-ignore "^\*")
-
- ;; (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
- ;; (defun iswitchb-local-keys ()
- ;;   (define-key iswitchb-mode-map (kbd "<left>") 'iswitchb-next-match)
- ;;   (define-key iswitchb-mode-map (kbd "<right>") 'iswitchb-prev-match)
- ;;   )
+(global-set-key (kbd "C-<right>") 'previous-buffer) ;
 
 ;; clipboard settings
 
@@ -116,13 +101,13 @@
 (eval-after-load 'cperl-mode
   '(progn
      (define-key cperl-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
-     (cperl-set-style "K&R"))
+     (cperl-set-style "K&R")
+     (setq cperl-invalid-face nil 
+	   cperl-indent-parens-as-block t
+	   cperl-tab-always-indent nil)
+     )
   )
     
-(setq cperl-invalid-face nil) 
-(setq cperl-indent-parens-as-block t)
-(setq cperl-tab-always-indent nil)
-
 ;; usual programming
 
 (global-set-key (kbd "M-2") 'hippie-expand)
@@ -134,7 +119,20 @@
      "Smart shell start"
      (interactive "sShell name: ")
      (shell name)
+     (set-process-query-on-exit-flag (get-process "shell") nil)
      )
+
+;; set scheme
+
+;; (setq scheme-program-name "scheme")
+(add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
+(defun scheme-exit-hook ()
+  (set-process-query-on-exit-flag (get-process "scheme") nil)
+)
+
+;; External libraries 
+
+(add-to-list 'load-path "~/.emacs.d/plugins")
 
 ;; External libraries (with el-get)
 
@@ -144,17 +142,26 @@
  el-get-sources
  '(el-get
    autopair
+   quack
    )
 )
 (el-get 'sync)
+
+;; Autopair
+
+(require 'autopair)
+(autopair-global-mode 1)
+
+;; Quack
+
+(setq quack-fontify-style 'emacs
+      quack-default-program "scheme"
+      quack-newline-behavior 'newline
+      quack-run-scheme-prompt-defaults-to-last-p nil
+      quack-run-scheme-always-prompts-p nil)
+
 
 ;; add yasnippet
 
 ;;(add-to-list 'load-path "~/.emacs.d/plugins")
 ;;(require 'yasnippet-bundle)
-
-;; configure autopair
-
-(require 'autopair)
-(autopair-global-mode 1)
-
