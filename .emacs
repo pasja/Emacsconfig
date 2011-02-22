@@ -18,6 +18,8 @@
 (setq linum-format "%d ")
 (size-indication-mode t)
 (setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
+(global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
+(global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
 
 ;; Useful aliases
 
@@ -52,6 +54,15 @@
   confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
   ido-everywhere t
   ido-create-new-buffer 'always)
+
+;; increase minibuffer size when ido completion is active
+
+(add-hook 'ido-minibuffer-setup-hook
+  (function
+    (lambda ()
+      (make-local-variable 'resize-minibuffer-window-max-height)
+      (setq resize-minibuffer-window-max-height 1))))
+
 (ido-mode 1)
 
 ;; ibuffer
@@ -71,15 +82,15 @@
 ;; windmove
 
 (require 'windmove)
-(global-set-key (kbd "A-<left>") 'windmove-left)
-(global-set-key (kbd "A-<right>") 'windmove-right)
-(global-set-key (kbd "A-<up>") 'windmove-up)
-(global-set-key (kbd "A-<down>") 'windmove-down)
+(global-set-key (kbd "M-<left>") 'windmove-left)
+(global-set-key (kbd "M-<right>") 'windmove-right)
+(global-set-key (kbd "M-<up>") 'windmove-up)
+(global-set-key (kbd "M-<down>") 'windmove-down)
 
 ;; buffer change
 
 (global-set-key (kbd "C-<left>") 'next-buffer)
-(global-set-key (kbd "C-<right>") 'previous-buffer) ;
+(global-set-key (kbd "C-<right>") 'previous-buffer)
 
 ;; clipboard settings
 
@@ -124,7 +135,6 @@
 
 ;; set scheme
 
-;; (setq scheme-program-name "scheme")
 (add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
 (defun scheme-exit-hook ()
   (set-process-query-on-exit-flag (get-process "scheme") nil)
@@ -142,8 +152,7 @@
  el-get-sources
  '(el-get
    autopair
-   quack
-   )
+  )
 )
 (el-get 'sync)
 
@@ -152,16 +161,5 @@
 (require 'autopair)
 (autopair-global-mode 1)
 
-;; Quack
-
-(setq quack-fontify-style 'emacs
-      quack-default-program "scheme"
-      quack-newline-behavior 'newline
-      quack-run-scheme-prompt-defaults-to-last-p nil
-      quack-run-scheme-always-prompts-p nil)
-
-
 ;; add yasnippet
 
-;;(add-to-list 'load-path "~/.emacs.d/plugins")
-;;(require 'yasnippet-bundle)
