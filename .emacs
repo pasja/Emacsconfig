@@ -152,6 +152,7 @@
  el-get-sources
  '(el-get
    autopair
+   git-emacs
   )
 )
 (el-get 'sync)
