@@ -6,13 +6,14 @@
 
 ;; Proper start
 
-(setq initial-scratch-message nil
-  inhibit-startup-message t
-  inhibit-startup-echo-area-message t
-  default-major-mode 'text-mode
-  confirm-nonexistent-file-or-buffer nil)
+(setq initial-scratch-message nil)
+(setq inhibit-startup-message t)
+(setq-default major-mode 'text-mode)
+(setq confirm-nonexistent-file-or-buffer nil)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 (show-paren-mode 1)
-(visual-line-mode 1)
+(global-visual-line-mode 1)
 (column-number-mode 1)
 (global-linum-mode 1)
 (setq linum-format "%d ")
@@ -140,6 +141,21 @@
   (set-process-query-on-exit-flag (get-process "scheme") nil)
 )
 
+;;Configure dired
+
+(add-hook 'dired-mode-hook ;same buffer for all directories
+ (lambda ()
+  (define-key dired-mode-map (kbd "<return>")
+    'dired-find-alternate-file) ; was dired-advertised-find-file
+  (define-key dired-mode-map (kbd "^")
+    (lambda () (interactive) (find-alternate-file "..")))
+  ; was dired-up-directory
+ ))
+
+(setq dired-recursive-copies 'always ; recursive copy/delete
+      dired-recursive-deletes 'top
+      dired-dwim-target t)
+
 ;; External libraries 
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
@@ -153,6 +169,7 @@
  '(el-get
    autopair
    git-emacs
+   dired+
   )
 )
 (el-get 'sync)
@@ -163,4 +180,3 @@
 (autopair-global-mode 1)
 
 ;; add yasnippet
-
