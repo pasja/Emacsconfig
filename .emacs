@@ -174,6 +174,10 @@
 )
 (el-get 'sync)
 
+;; git-emacs
+
+(require 'git-status)
+
 ;; Autopair
 
 (require 'autopair)
