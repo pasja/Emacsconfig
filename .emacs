@@ -50,7 +50,7 @@
   ido-use-filename-at-point nil    ; don't use filename at point (annoying)
   ido-use-url-at-point nil         ; don't use url at point (annoying)
   ido-enable-flex-matching t       ; try to be too smart :-)
-  ido-max-prospects 8              ; don't spam my minibuffer
+  ido-max-prospects 16              ; don't spam my minibuffer
   ido-confirm-unique-completion t ; wait for RET, even with unique completion
   confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
   ido-everywhere t
@@ -170,6 +170,7 @@
    autopair
    git-emacs
    dired+
+   icomplete+
   )
 )
 (el-get 'sync)
