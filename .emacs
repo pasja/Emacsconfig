@@ -143,14 +143,7 @@
 
 ;;Configure dired
 
-(add-hook 'dired-mode-hook ;same buffer for all directories
- (lambda ()
-  (define-key dired-mode-map (kbd "<return>")
-    'dired-find-alternate-file) ; was dired-advertised-find-file
-  (define-key dired-mode-map (kbd "^")
-    (lambda () (interactive) (find-alternate-file "..")))
-  ; was dired-up-directory
- ))
+(toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
 
 (setq dired-recursive-copies 'always ; recursive copy/delete
       dired-recursive-deletes 'top
