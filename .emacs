@@ -6,10 +6,11 @@
 
 ;; Proper start
 
-(setq initial-scratch-message nil)
-(setq inhibit-startup-message t)
+(setq initial-scratch-message nil
+      inhibit-startup-message t
+      confirm-nonexistent-file-or-buffer nil
+      vc-follow-symlinks t) ; auto-follow version controlled symlinks
 (setq-default major-mode 'text-mode)
-(setq confirm-nonexistent-file-or-buffer nil)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (show-paren-mode 1)
@@ -17,7 +18,7 @@
 (global-linum-mode 1)
 (setq linum-format "%d ")
 (size-indication-mode t)
-(setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
+
 (global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
@@ -144,26 +145,31 @@
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
-(setq
- el-get-sources
+(setq el-get-sources
  '(el-get
    icomplete+
    (:name git-emacs
-	  :after (lambda()
-		   (require 'git-status)))
+	  :after (lambda ()
+		   (require 'git-status)
+		   ))
    (:name dired+
-	  :after (lambda()
+	  :after (lambda ()
 		   (require 'dired+)
 		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
 		   (setq dired-recursive-copies 'always ; recursive copy/delete
 			 dired-recursive-deletes 'top
-			 dired-dwim-target t)))
+			 dired-dwim-target t)
+		   ))
    (:name autopair
-	  :after (lambda()
+	  :after (lambda ()
 		   (require 'autopair)
-		   (autopair-global-mode 1)))
-   )
-)
+		   (autopair-global-mode 1)
+		   ))
+   ))
 (el-get 'sync)
 
-;; add yasnippet
+;; dired config (toggle-dired-find-file-reuse-dir is not enough)
+
+(define-key dired-mode-map (kbd "^")
+    (lambda ()
+      (interactive) (find-alternate-file "..")))
