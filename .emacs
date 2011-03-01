@@ -13,7 +13,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (show-paren-mode 1)
-(global-visual-line-mode 1)
+(visual-line-mode 1)
 (column-number-mode 1)
 (global-linum-mode 1)
 (setq linum-format "%d ")
@@ -21,6 +21,7 @@
 (setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
 (global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
+(global-set-key (kbd "M-2") 'hippie-expand)
 
 ;; Useful aliases
 
@@ -120,11 +121,6 @@
      )
   )
     
-;; usual programming
-
-(global-set-key (kbd "M-2") 'hippie-expand)
-(global-set-key (kbd "M-3") 'comment-dwim)
-
 ;; smart shell start
 
 (defun sh (name)
@@ -141,14 +137,6 @@
   (set-process-query-on-exit-flag (get-process "scheme") nil)
 )
 
-;;Configure dired
-
-(toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
-
-(setq dired-recursive-copies 'always ; recursive copy/delete
-      dired-recursive-deletes 'top
-      dired-dwim-target t)
-
 ;; External libraries 
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
@@ -160,21 +148,21 @@
 (setq
  el-get-sources
  '(el-get
-   autopair
-   git-emacs
-   dired+
    icomplete+
-  )
+   (:name git-emacs
+	  :after (lambda()(require 'git-status)))
+   (:name dired+
+	  :after (lambda() (require 'dired+)
+		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
+
+		   (setq dired-recursive-copies 'always ; recursive copy/delete
+			 dired-recursive-deletes 'top
+			 dired-dwim-target t)))
+   (:name autopair
+	  :after (lambda()(require 'autopair)
+		   (autopair-global-mode 1)))
+   )
 )
 (el-get 'sync)
-
-;; git-emacs
-
-(require 'git-status)
-
-;; Autopair
-
-(require 'autopair)
-(autopair-global-mode 1)
 
 ;; add yasnippet
