@@ -13,7 +13,6 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (show-paren-mode 1)
-(visual-line-mode 1)
 (column-number-mode 1)
 (global-linum-mode 1)
 (setq linum-format "%d ")
@@ -150,16 +149,18 @@
  '(el-get
    icomplete+
    (:name git-emacs
-	  :after (lambda()(require 'git-status)))
+	  :after (lambda()
+		   (require 'git-status)))
    (:name dired+
-	  :after (lambda() (require 'dired+)
+	  :after (lambda()
+		   (require 'dired+)
 		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
-
 		   (setq dired-recursive-copies 'always ; recursive copy/delete
 			 dired-recursive-deletes 'top
 			 dired-dwim-target t)))
    (:name autopair
-	  :after (lambda()(require 'autopair)
+	  :after (lambda()
+		   (require 'autopair)
 		   (autopair-global-mode 1)))
    )
 )
