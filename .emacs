@@ -130,6 +130,9 @@
      (set-process-query-on-exit-flag (get-process "shell") nil)
      )
 
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 ;; set scheme
 
 (add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
@@ -148,6 +151,11 @@
 (setq el-get-sources
  '(el-get
    icomplete+
+   color-theme
+   ; color-theme-zenburn
+   ; color-theme-ir-black
+   ; color-theme-twilight
+   ; color-theme-zen-and-art
    (:name git-emacs
 	  :after (lambda ()
 		   (require 'git-status)
@@ -166,6 +174,7 @@
 		   (autopair-global-mode 1)
 		   ))
    ))
+
 (el-get 'sync)
 
 ;; dired config (toggle-dired-find-file-reuse-dir is not enough)
@@ -173,3 +182,6 @@
 (define-key dired-mode-map (kbd "^")
     (lambda ()
       (interactive) (find-alternate-file "..")))
+
+;; set color-theme
+(color-theme-taming-mr-arneson)
