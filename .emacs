@@ -23,6 +23,14 @@
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
 
+;; Boostrap el-get
+
+(url-retrieve
+ "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+ (lambda (s)
+   (end-of-buffer)
+   (eval-print-last-sexp)))
+
 ;; Useful aliases
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -96,9 +104,9 @@
 
 ;; clipboard settings
 
-(setq x-select-enable-primary nil  ; stops killing/yanking interacting with primary X11 selection
-  x-select-enable-clipboard t  ; makes killing/yanking interact with clipboard X11 selection
-  yank-pop-change-selection t)  ; makes rotating the kill ring change the X11 clipboard.
+(setq x-select-enable-primary t  ; killing/yanking interacting with primary X11 selection
+      x-select-enable-clipboard t  ; killing/yanking interact with clipboard X11 selection
+      yank-pop-change-selection t)  ; rotating the kill ring change the X11 clipboard.
 
 ;; zone-mode for .hu
 
