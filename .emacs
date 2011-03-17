@@ -25,11 +25,11 @@
 
 ;; Boostrap el-get
 
-(url-retrieve
- "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
- (lambda (s)
-   (end-of-buffer)
-   (eval-print-last-sexp)))
+;; (url-retrieve
+;;  "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+;;  (lambda (s)
+;;    (end-of-buffer)
+;;    (eval-print-last-sexp)))
 
 ;; Useful aliases
 
@@ -125,7 +125,8 @@
      (cperl-set-style "K&R")
      (setq cperl-invalid-face nil 
 	   cperl-indent-parens-as-block t
-	   cperl-tab-always-indent nil)
+	   cperl-tab-always-indent nil
+	   cperl-highlight-variables-indiscriminately t)
      )
   )
     
@@ -160,10 +161,6 @@
  '(el-get
    icomplete+
    color-theme
-   ; color-theme-zenburn
-   ; color-theme-ir-black
-   ; color-theme-twilight
-   ; color-theme-zen-and-art
    (:name git-emacs
 	  :after (lambda ()
 		   (require 'git-status)
