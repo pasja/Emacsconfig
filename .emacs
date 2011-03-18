@@ -25,11 +25,11 @@
 
 ;; Boostrap el-get
 
-;; (url-retrieve
-;;  "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-;;  (lambda (s)
-;;    (end-of-buffer)
-;;    (eval-print-last-sexp)))
+(url-retrieve
+ "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+ (lambda (s)
+   (end-of-buffer)
+   (eval-print-last-sexp)))
 
 ;; Useful aliases
 
