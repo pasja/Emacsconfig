@@ -9,7 +9,9 @@
 (setq initial-scratch-message nil
       inhibit-startup-message t
       confirm-nonexistent-file-or-buffer nil
-      vc-follow-symlinks t) ; auto-follow version controlled symlinks
+      vc-follow-symlinks t ; auto-follow version controlled symlinks
+      display-time-day-and-date t
+      display-time-24hr-format t) 
 (setq-default major-mode 'text-mode)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -18,6 +20,7 @@
 (global-linum-mode 1)
 (setq linum-format "%d ")
 (size-indication-mode t)
+(display-time)
 
 (global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
@@ -41,7 +44,6 @@
 
 (setq cua-enable-cua-keys nil) 
 (cua-mode t)
-(global-set-key (kbd "C-c m") 'cua-set-rectangle-mark)
 
 ;; ido mode 
 
@@ -167,7 +169,7 @@
 		   ))
    (:name dired+
 	  :after (lambda ()
-		   (require 'dired+)
+		   (rcequire 'dired+)
 		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
 		   (setq dired-recursive-copies 'always ; recursive copy/delete
 			 dired-recursive-deletes 'top
@@ -178,7 +180,17 @@
 		   (require 'autopair)
 		   (autopair-global-mode 1)
 		   ))
-   ))
+   (:name mode-compile
+	  :after (lambda()
+		   (autoload 'mode-compile "mode-compile"
+		     "Command to compile current buffer file based on the major mode" t)
+		   (global-set-key "\C-cc" 'mode-compile)
+		   (autoload 'mode-compile-kill "mode-compile"
+		     "Command to kill a compilation launched by `mode-compile'" t)
+		   (global-set-key "\C-ck" 'mode-compile-kill)
+		   ))
+   )
+)
 
 (el-get 'sync)
 
