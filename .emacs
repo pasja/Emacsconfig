@@ -8,6 +8,7 @@
 
 (setq initial-scratch-message nil
       inhibit-startup-message t
+      inhibit-startup-echo-area-message t
       confirm-nonexistent-file-or-buffer nil
       vc-follow-symlinks t ; auto-follow version controlled symlinks
       display-time-day-and-date t
@@ -162,18 +163,24 @@
 (setq el-get-sources
  '(el-get
    icomplete+
-   color-theme
+   (:name color-theme
+	  :after (lambda()
+		    (color-theme-taming-mr-arneson)
+		    ))
    (:name git-emacs
 	  :after (lambda ()
 		   (require 'git-status)
 		   ))
    (:name dired+
 	  :after (lambda ()
-		   (rcequire 'dired+)
+		   (require 'dired+)
 		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
 		   (setq dired-recursive-copies 'always ; recursive copy/delete
 			 dired-recursive-deletes 'top
 			 dired-dwim-target t)
+		   (define-key dired-mode-map (kbd "^")
+		     (lambda ()
+		       (interactive) (find-alternate-file "..")))
 		   ))
    (:name autopair
 	  :after (lambda ()
@@ -184,21 +191,12 @@
 	  :after (lambda()
 		   (autoload 'mode-compile "mode-compile"
 		     "Command to compile current buffer file based on the major mode" t)
-		   (global-set-key "\C-cc" 'mode-compile)
+		   (global-set-key (kbd "C-c c") 'mode-compile)
 		   (autoload 'mode-compile-kill "mode-compile"
 		     "Command to kill a compilation launched by `mode-compile'" t)
-		   (global-set-key "\C-ck" 'mode-compile-kill)
+		   (global-set-key (kbd "C-c k") 'mode-compile-kill)
 		   ))
    )
 )
 
 (el-get 'sync)
-
-;; dired config (toggle-dired-find-file-reuse-dir is not enough)
-
-(define-key dired-mode-map (kbd "^")
-    (lambda ()
-      (interactive) (find-alternate-file "..")))
-
-;; set color-theme
-(color-theme-taming-mr-arneson)
