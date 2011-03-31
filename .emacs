@@ -12,7 +12,7 @@
       confirm-nonexistent-file-or-buffer nil
       vc-follow-symlinks t ; auto-follow version controlled symlinks
       display-time-day-and-date t
-      display-time-24hr-format t) 
+      display-time-24hr-format t)
 (setq-default major-mode 'text-mode)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -26,6 +26,13 @@
 (global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
+(require 'windmove) ; windmove
+(global-set-key (kbd "M-<left>") 'windmove-left)
+(global-set-key (kbd "M-<right>") 'windmove-right)
+(global-set-key (kbd "M-<up>") 'windmove-up)
+(global-set-key (kbd "M-<down>") 'windmove-down)
+(global-set-key (kbd "C-<left>") 'next-buffer) ; buffer change
+(global-set-key (kbd "C-<right>") 'previous-buffer)
 
 ;; Boostrap el-get
 
@@ -43,13 +50,13 @@
 
 ;; rectangles
 
-(setq cua-enable-cua-keys nil) 
+(setq cua-enable-cua-keys nil)
 (cua-mode t)
 
-;; ido mode 
+;; ido mode
 
-(require 'ido) 
-(setq 
+(require 'ido)
+(setq
   ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
   ido-ignore-buffers ; ignore these guys
   '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
@@ -68,9 +75,7 @@
   ido-everywhere t
   ido-create-new-buffer 'always)
 
-;; increase minibuffer size when ido completion is active
-
-(add-hook 'ido-minibuffer-setup-hook
+(add-hook 'ido-minibuffer-setup-hook ; increase minibuffer size when ido completion is active
   (function
     (lambda ()
       (make-local-variable 'resize-minibuffer-window-max-height)
@@ -86,24 +91,18 @@
 
 (icomplete-mode t)
 
+;; savehist: save some history
+(setq savehist-additional-variables    ; also save...
+  '(search ring regexp-search-ring)    ; ... my search entries
+  savehist-autosave-interval 60        ; save every minute (default: 5 min)
+  savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
+(savehist-mode t)                      ; do customization before activation
+
 ;; autokill shell
 
 (setq kill-buffer-query-functions
   (remq 'process-kill-buffer-query-function
          kill-buffer-query-functions))
-
-;; windmove
-
-(require 'windmove)
-(global-set-key (kbd "M-<left>") 'windmove-left)
-(global-set-key (kbd "M-<right>") 'windmove-right)
-(global-set-key (kbd "M-<up>") 'windmove-up)
-(global-set-key (kbd "M-<down>") 'windmove-down)
-
-;; buffer change
-
-(global-set-key (kbd "C-<left>") 'next-buffer)
-(global-set-key (kbd "C-<right>") 'previous-buffer)
 
 ;; clipboard settings
 
@@ -115,10 +114,11 @@
 
 (add-to-list 'auto-mode-alist '("\\.hu$" . zone-mode))
 
-;; auto chmod scripts
+;; save hooks
 
 (add-hook 'after-save-hook
-  'executable-make-buffer-file-executable-if-script-p)
+  'executable-make-buffer-file-executable-if-script-p) ; auto chmod scripts
+(add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
 ;; configure cperl
 
@@ -126,21 +126,19 @@
   '(progn
      (define-key cperl-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
      (cperl-set-style "K&R")
-     (setq cperl-invalid-face nil 
+     (setq cperl-invalid-face nil
 	   cperl-indent-parens-as-block t
 	   cperl-tab-always-indent nil
 	   cperl-highlight-variables-indiscriminately t)
-     )
-  )
-    
+     ))
+
 ;; smart shell start
 
 (defun sh (name)
      "Smart shell start"
      (interactive "sShell name: ")
      (shell name)
-     (set-process-query-on-exit-flag (get-process "shell") nil)
-     )
+     (set-process-query-on-exit-flag (get-process "shell") nil))
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -149,12 +147,12 @@
 
 (add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
 (defun scheme-exit-hook ()
-  (set-process-query-on-exit-flag (get-process "scheme") nil)
-)
+  (set-process-query-on-exit-flag (get-process "scheme") nil))
 
-;; External libraries 
+;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
+(load "cperl-mode.el")
 
 ;; External libraries (with el-get)
 
@@ -163,6 +161,7 @@
 (setq el-get-sources
  '(el-get
    icomplete+
+   yasnippet
    (:name color-theme
 	  :after (lambda()
 		    (color-theme-taming-mr-arneson)
@@ -196,7 +195,6 @@
 		     "Command to kill a compilation launched by `mode-compile'" t)
 		   (global-set-key (kbd "C-c k") 'mode-compile-kill)
 		   ))
-   )
-)
+   ))
 
 (el-get 'sync)
