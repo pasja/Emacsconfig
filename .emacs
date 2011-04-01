@@ -34,6 +34,11 @@
 (global-set-key (kbd "C-<left>") 'next-buffer) ; buffer change
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 
+(unless (file-exists-p "~/.emacs.d/plugins/") ; create default directories
+  (make-directory "~/.emacs.d/plugins/"))
+(unless (file-exists-p "~/.emacs.d/cache/")
+    (make-directory "~/.emacs.d/cache/"))
+
 ;; Boostrap el-get
 
 (url-retrieve
@@ -145,14 +150,14 @@
 
 ;; set scheme
 
-(add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
-(defun scheme-exit-hook ()
-  (set-process-query-on-exit-flag (get-process "scheme") nil))
+(add-hook 'inferior-scheme-mode-hook
+	  '(lambda ((set-process-query-on-exit-flag (get-process "scheme") nil))
 
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
-(load "cperl-mode.el")
+(when (file-exists-p "~/.emacs.d/plugins/cperl-mode.el")
+  (load "cperl-mode.el"))
 
 ;; External libraries (with el-get)
 
