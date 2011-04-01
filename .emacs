@@ -24,8 +24,10 @@
 (display-time)
 
 (global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
+(global-set-key (kbd "M-1") 'goto-line)    ; M-1  also 'goto-line
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
+
 (require 'windmove) ; windmove
 (global-set-key (kbd "M-<left>") 'windmove-left)
 (global-set-key (kbd "M-<right>") 'windmove-right)
@@ -39,17 +41,7 @@
 (unless (file-exists-p "~/.emacs.d/cache/")
     (make-directory "~/.emacs.d/cache/"))
 
-;; Boostrap el-get
-
-(url-retrieve
- "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
- (lambda (s)
-   (end-of-buffer)
-   (eval-print-last-sexp)))
-
-;; Useful aliases
-
-(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p) ; Useful aliases
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
@@ -135,6 +127,9 @@
 	   cperl-indent-parens-as-block t
 	   cperl-tab-always-indent nil
 	   cperl-highlight-variables-indiscriminately t)
+     (add-hook 'cperl-mode-hook
+               (lambda ()
+		 (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|XXX\\)" 1 font-lock-warning-face t)))))
      ))
 
 ;; smart shell start
@@ -150,14 +145,23 @@
 
 ;; set scheme
 
-(add-hook 'inferior-scheme-mode-hook
-	  '(lambda ((set-process-query-on-exit-flag (get-process "scheme") nil))
+(add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
+(defun scheme-exit-hook ()
+  (set-process-query-on-exit-flag (get-process "scheme") nil))
 
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (when (file-exists-p "~/.emacs.d/plugins/cperl-mode.el")
   (load "cperl-mode.el"))
+
+;; Boostrap el-get
+
+(url-retrieve
+ "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+ (lambda (s)
+   (end-of-buffer)
+   (eval-print-last-sexp)))
 
 ;; External libraries (with el-get)
 
@@ -203,3 +207,16 @@
    ))
 
 (el-get 'sync)
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(font-lock-warning-face ((t (:foreground "Yellow" :weight extra-bold)))))
