@@ -78,7 +78,9 @@
       (make-local-variable 'resize-minibuffer-window-max-height)
       (setq resize-minibuffer-window-max-height 1))))
 
-(ido-mode 1)
+;; (ido-mode 1)
+
+(add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
 
 ;; ibuffer
 
@@ -137,17 +139,10 @@
 (defun sh (name)
      "Smart shell start"
      (interactive "sShell name: ")
-     (shell name)
-     (set-process-query-on-exit-flag (get-process "shell") nil))
+     (shell name))
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;; set scheme
-
-(add-hook 'inferior-scheme-mode-hook 'scheme-exit-hook)
-(defun scheme-exit-hook ()
-  (set-process-query-on-exit-flag (get-process "scheme") nil))
 
 ;; External libraries
 
@@ -185,7 +180,8 @@
 		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
 		   (setq dired-recursive-copies 'always ; recursive copy/delete
 			 dired-recursive-deletes 'top
-			 dired-dwim-target t)
+			 dired-dwim-target t
+			 dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 		   (define-key dired-mode-map (kbd "^")
 		     (lambda ()
 		       (interactive) (find-alternate-file "..")))
