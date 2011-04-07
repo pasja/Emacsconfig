@@ -97,7 +97,7 @@
   savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
 (savehist-mode t)                      ; do customization before activation
 
-;; autokill shell
+;; autokill attached processess
 
 (setq kill-buffer-query-functions
   (remq 'process-kill-buffer-query-function
@@ -148,7 +148,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (when (file-exists-p "~/.emacs.d/plugins/cperl-mode.el")
-  (load "cperl-mode.el"))
+  (unless (file-exists-p "~/.emacs.d/plugins/cperl-mode.elc")
+    (byte-compile-file "~/.emacs.d/plugins/cperl-mode.el"))
+  (load "~/.emacs.d/plugins/cperl-mode"))
 
 ;; Boostrap el-get
 
