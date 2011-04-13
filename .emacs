@@ -144,6 +144,14 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; Configure tramp
+
+;; we need a bit more funky pattern, as tramp will start $SHELL
+;; (sudo -s), ie., zsh for root user
+(setq shell-prompt-pattern "^[^a-zA-Z].*[#$%>] *"
+      tramp-default-method "ssh"
+      tramp-persistency-file-name "~/.emacs.d/cache/tramp")
+
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
