@@ -45,6 +45,15 @@
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
+;; scrolling
+
+(setq
+  scroll-margin 0                        ; do smooth scrolling, ...
+  scroll-conservatively 100000           ; ... the defaults ...
+  scroll-up-aggressively 0               ; ... are very ...
+  scroll-down-aggressively 0             ; ... annoying
+  scroll-preserve-screen-position t)     ; preserve screen pos with C-v/M-v
+
 ;; rectangles
 
 (setq cua-enable-cua-keys nil)
@@ -148,7 +157,7 @@
 
 ;; we need a bit more funky pattern, as tramp will start $SHELL
 ;; (sudo -s), ie., zsh for root user
-(setq shell-prompt-pattern "^[^a-zA-Z].*[#$%>] *"
+(setq shell-prompt-pattern "^[^a-zA-Z].*[~#$%>] *"
       tramp-default-method "ssh"
       tramp-persistency-file-name "~/.emacs.d/cache/tramp")
 
