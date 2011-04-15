@@ -46,6 +46,10 @@
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
+;; icomplete
+
+(icomplete-mode t)
+
 ;; scrolling
 
 (setq
@@ -76,8 +80,8 @@
   ido-use-filename-at-point nil    ; don't use filename at point (annoying)
   ido-use-url-at-point nil         ; don't use url at point (annoying)
   ido-enable-flex-matching t       ; try to be too smart :-)
-  ido-max-prospects 16              ; don't spam my minibuffer
-  ido-confirm-unique-completion t ; wait for RET, even with unique completion
+  ido-max-prospects 16             ; don't spam my minibuffer
+  ido-confirm-unique-completion t  ; wait for RET, even with unique completion
   confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
   ido-everywhere t
   ido-create-new-buffer 'always)
@@ -93,11 +97,11 @@
 (add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
 
 ;; savehist: save some history
-(setq savehist-additional-variables    ; also save...
-  '(search ring regexp-search-ring)    ; ... my search entries
-  savehist-autosave-interval 60        ; save every minute (default: 5 min)
+(setq savehist-additional-variables   ; also save...
+  '(search ring regexp-search-ring)   ; ... my search entries
+  savehist-autosave-interval 60       ; save every minute (default: 5 min)
   savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
-(savehist-mode t)                      ; do customization before activation
+(savehist-mode t)                     ; do customization before activation
 
 ;; autokill attached processess
 
@@ -107,8 +111,8 @@
 
 ;; clipboard settings
 
-(setq x-select-enable-primary t  ; killing/yanking interacting with primary X11 selection
-      x-select-enable-clipboard t  ; killing/yanking interact with clipboard X11 selection
+(setq x-select-enable-primary t     ; killing/yanking interacting with primary X11 selection
+      x-select-enable-clipboard t   ; killing/yanking interact with clipboard X11 selection
       yank-pop-change-selection t)  ; rotating the kill ring change the X11 clipboard.
 
 ;; zone-mode for .hu
@@ -118,7 +122,7 @@
 ;; save hooks
 
 (add-hook 'after-save-hook
-  'executable-make-buffer-file-executable-if-script-p) ; auto chmod scripts
+  'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
 ;; configure cperl
@@ -176,6 +180,7 @@
 (require 'el-get)
 (setq el-get-sources
  '(el-get
+   icomplete+
    (:name smex
 	  :after (lambda ()
 		   (global-set-key (kbd "M-x") 'smex)
@@ -231,4 +236,5 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(font-lock-warning-face ((t (:foreground "Yellow" :weight extra-bold)))))
+ '(cperl-nonoverridable-face ((t (:foreground "brown"))))
+ '(font-lock-preprocessor-face ((t (:foreground "brown")))))
