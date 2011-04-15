@@ -35,6 +35,7 @@
 (global-set-key (kbd "M-<down>") 'windmove-down)
 (global-set-key (kbd "C-<left>") 'next-buffer) ; buffer change
 (global-set-key (kbd "C-<right>") 'previous-buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (unless (file-exists-p "~/.emacs.d/plugins/") ; create default directories
   (make-directory "~/.emacs.d/plugins/"))
@@ -90,14 +91,6 @@
 ;; (ido-mode 1)
 
 (add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
-
-;; ibuffer
-
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; help for minibuffer
-
-(icomplete-mode t)
 
 ;; savehist: save some history
 (setq savehist-additional-variables    ; also save...
@@ -183,10 +176,14 @@
 (require 'el-get)
 (setq el-get-sources
  '(el-get
-   icomplete+
+   (:name smex
+	  :after (lambda ()
+		   (global-set-key (kbd "M-x") 'smex)
+		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+		   ))
    yasnippet
    (:name color-theme
-	  :after (lambda()
+	  :after (lambda ()
 		    (color-theme-taming-mr-arneson)
 		    ))
    (:name git-emacs
@@ -211,7 +208,7 @@
 		   (autopair-global-mode 1)
 		   ))
    (:name mode-compile
-	  :after (lambda()
+	  :after (lambda ()
 		   (autoload 'mode-compile "mode-compile"
 		     "Command to compile current buffer file based on the major mode" t)
 		   (global-set-key (kbd "C-c c") 'mode-compile)
