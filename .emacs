@@ -24,7 +24,6 @@
 (display-time)
 
 (global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
-(global-set-key (kbd "M-1") 'goto-line)    ; M-1  also 'goto-line
 (global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
 
@@ -158,6 +157,21 @@
       tramp-default-method "ssh"
       tramp-persistency-file-name "~/.emacs.d/cache/tramp")
 
+;; Copy/Paste one line without selecting it
+
+(defadvice kill-ring-save (before slick-copy activate compile) "When called
+  interactively with no active region, copy a single line instead."
+  (interactive (if mark-active (list (region-beginning) (region-end)) (message
+  "Copied line") (list (line-beginning-position) (line-beginning-position
+  2)))))
+
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+    (if mark-active (list (region-beginning) (region-end))
+      (list (line-beginning-position)
+        (line-beginning-position 2)))))
+
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
@@ -185,6 +199,7 @@
 	  :after (lambda ()
 		   (global-set-key (kbd "M-x") 'smex)
 		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+		   (setq smex-save-file "~/.emacs.d/cache/smex-items")
 		   ))
    yasnippet
    (:name color-theme
@@ -236,5 +251,5 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(cperl-nonoverridable-face ((t (:foreground "brown"))))
- '(font-lock-preprocessor-face ((t (:foreground "brown")))))
+ '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2"))))
+ '(font-lock-warning-face ((t (:foreground "yellow" :weight extra-bold)))))
