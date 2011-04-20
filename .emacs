@@ -28,11 +28,8 @@
 (global-set-key (kbd "M-2") 'hippie-expand)
 
 (require 'windmove) ; windmove
-(global-set-key (kbd "M-<left>") 'windmove-left)
-(global-set-key (kbd "M-<right>") 'windmove-right)
-(global-set-key (kbd "M-<up>") 'windmove-up)
-(global-set-key (kbd "M-<down>") 'windmove-down)
-(global-set-key (kbd "C-<left>") 'next-buffer) ; buffer change
+(windmove-default-keybindings 'meta)
+(global-set-key (kbd "C-<left>") 'next-buffer) ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -44,10 +41,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p) ; Useful aliases
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
-
-;; icomplete
-
-(icomplete-mode t)
 
 ;; scrolling
 
@@ -91,8 +84,35 @@
       (make-local-variable 'resize-minibuffer-window-max-height)
       (setq resize-minibuffer-window-max-height 1))))
 
-;; (ido-mode 1)
+;; super-supercharge ido
 
+(defvar ido-enable-replace-completing-read t
+  "If t, use ido-completing-read instead of completing-read if possible.
+
+    Set it to nil using let in around-advice for functions where the
+    original completing-read is required.  For example, if a function
+    foo absolutely must use the original completing-read, define some
+    advice like this:
+
+    (defadvice foo (around original-completing-read-only activate)
+      (let (ido-enable-replace-completing-read) ad-do-it))")
+
+;; Replace completing-read wherever possible, unless directed otherwise
+(defadvice completing-read
+  (around use-ido-when-possible activate)
+  (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
+	  (and (boundp 'ido-cur-list)
+	       ido-cur-list)) ; Avoid infinite loop from ido calling this
+      ad-do-it
+    (let ((allcomp (all-completions "" collection predicate)))
+      (if allcomp
+	  (setq ad-return-value
+		(ido-completing-read prompt
+				     allcomp
+				     nil require-match initial-input hist def))
+	ad-do-it))))
+
+;; (ido-mode 1)
 (add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
 
 ;; savehist: save some history
@@ -151,9 +171,7 @@
 
 ;; Configure tramp
 
-;; we need a bit more funky pattern, as tramp will start $SHELL
-;; (sudo -s), ie., zsh for root user
-(setq shell-prompt-pattern "^[^a-zA-Z].*[~#$%>] *"
+(setq shell-prompt-pattern "^[^a-zA-Z].*[~#$%>] *" ; we need a bit more funky pattern, as tramp will start $SHELL (sudo -s), ie., zsh for root user
       tramp-default-method "ssh"
       tramp-persistency-file-name "~/.emacs.d/cache/tramp")
 
@@ -194,13 +212,12 @@
 (require 'el-get)
 (setq el-get-sources
  '(el-get
-   icomplete+
    (:name smex
-	  :after (lambda ()
-		   (global-set-key (kbd "M-x") 'smex)
-		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-		   (setq smex-save-file "~/.emacs.d/cache/smex-items")
-		   ))
+   	  :after (lambda ()
+   		   (global-set-key (kbd "M-x") 'smex)
+   		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+   		   (setq smex-save-file "~/.emacs.d/cache/smex-items")
+   		   ))
    yasnippet
    (:name color-theme
 	  :after (lambda ()
@@ -221,6 +238,8 @@
 		   (define-key dired-mode-map (kbd "^")
 		     (lambda ()
 		       (interactive) (find-alternate-file "..")))
+		   (add-hook 'dired-mode-hook
+			     '(lambda () (setq ido-enable-replace-completing-read nil)))
 		   ))
    (:name autopair
 	  :after (lambda ()
