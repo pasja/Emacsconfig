@@ -33,9 +33,7 @@
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(unless (file-exists-p "~/.emacs.d/plugins/") ; create default directories
-  (make-directory "~/.emacs.d/plugins/"))
-(unless (file-exists-p "~/.emacs.d/cache/")
+(unless (file-exists-p "~/.emacs.d/cache/") ; create default cache directory
     (make-directory "~/.emacs.d/cache/"))
 
 (defalias 'yes-or-no-p 'y-or-n-p) ; Useful aliases
@@ -97,8 +95,7 @@
     (defadvice foo (around original-completing-read-only activate)
       (let (ido-enable-replace-completing-read) ad-do-it))")
 
-;; Replace completing-read wherever possible, unless directed otherwise
-(defadvice completing-read
+(defadvice completing-read ; Replace completing-read wherever possible, unless directed otherwise
   (around use-ido-when-possible activate)
   (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
 	  (and (boundp 'ido-cur-list)
@@ -111,6 +108,9 @@
 				     allcomp
 				     nil require-match initial-input hist def))
 	ad-do-it))))
+
+(add-hook 'dired-mode-hook            ; bugfix for dired
+	  '(lambda () (setq ido-enable-replace-completing-read nil)))
 
 ;; (ido-mode 1)
 (add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
@@ -144,6 +144,12 @@
   'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
+;; Highlight some words in text mode
+
+(add-hook 'text-mode-hook
+	  (lambda ()
+	    (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|XXX\\)" 1 font-lock-warning-face t)))))
+
 ;; configure cperl
 
 (eval-after-load 'cperl-mode
@@ -154,11 +160,7 @@
 	   cperl-indent-parens-as-block t
 	   cperl-tab-always-indent nil
 	   cperl-highlight-variables-indiscriminately t)
-     (add-hook 'cperl-mode-hook
-               (lambda ()
-		 (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|XXX\\)" 1 font-lock-warning-face t)))))
      ))
-
 ;; smart shell start
 
 (defun sh (name)
@@ -193,10 +195,9 @@
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
-(when (file-exists-p "~/.emacs.d/plugins/cperl-mode.el")
-  (unless (file-exists-p "~/.emacs.d/plugins/cperl-mode.elc")
-    (byte-compile-file "~/.emacs.d/plugins/cperl-mode.el"))
-  (load "~/.emacs.d/plugins/cperl-mode"))
+  (unless (file-exists-p "~/.emacs.d/plugins/cperl-mode.elc")  ; auto byte-compile all of them
+    (byte-recompile-directory "~/.emacs.d/plugins/" 0))
+  (load "~/.emacs.d/plugins/cperl-mode")
 
 ;; Boostrap el-get
 
@@ -238,8 +239,6 @@
 		   (define-key dired-mode-map (kbd "^")
 		     (lambda ()
 		       (interactive) (find-alternate-file "..")))
-		   (add-hook 'dired-mode-hook
-			     '(lambda () (setq ido-enable-replace-completing-read nil)))
 		   ))
    (:name autopair
 	  :after (lambda ()
@@ -271,4 +270,4 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2"))))
- '(font-lock-warning-face ((t (:foreground "yellow" :weight extra-bold)))))
+ '(font-lock-warning-face ((t (:background "dim gray" :foreground "yellow" :weight extra-bold)))))
