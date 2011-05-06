@@ -124,9 +124,12 @@
 
 ;; autokill attached processess
 
-(setq kill-buffer-query-functions
+(setq kill-buffer-query-functions     ; on buffers ...
   (remq 'process-kill-buffer-query-function
          kill-buffer-query-functions))
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate) ; ... and on quit
+  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+  (flet ((process-list ())) ad-do-it))
 
 ;; clipboard settings
 
@@ -144,23 +147,6 @@
   'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
-;; Highlight some words in text mode
-
-(add-hook 'text-mode-hook
-	  (lambda ()
-	    (font-lock-add-keywords nil '(("\\<\\(FIXME\\|TODO\\|XXX\\)" 1 font-lock-warning-face t)))))
-
-;; configure cperl
-
-(eval-after-load 'cperl-mode
-  '(progn
-     (define-key cperl-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
-     (cperl-set-style "K&R")
-     (setq cperl-invalid-face nil
-	   cperl-indent-parens-as-block t
-	   cperl-tab-always-indent nil
-	   cperl-highlight-variables-indiscriminately t)
-     ))
 ;; smart shell start
 
 (defun sh (name)
@@ -195,9 +181,22 @@
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
-  (unless (file-exists-p "~/.emacs.d/plugins/cperl-mode.elc")  ; auto byte-compile all of them
-    (byte-recompile-directory "~/.emacs.d/plugins/" 0))
-  (load "~/.emacs.d/plugins/cperl-mode")
+(byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
+(load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
+(load "~/.emacs.d/plugins/fixme-mode")  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
+(fixme-mode 1)
+
+;; configure cperl
+
+(eval-after-load 'cperl-mode
+  '(progn
+     (define-key cperl-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
+     (cperl-set-style "K&R")
+     (setq cperl-invalid-face nil
+	   cperl-indent-parens-as-block t
+	   cperl-tab-always-indent nil
+	   cperl-highlight-variables-indiscriminately t)
+     ))
 
 ;; Boostrap el-get
 
@@ -269,5 +268,4 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2"))))
- '(font-lock-warning-face ((t (:background "dim gray" :foreground "yellow" :weight extra-bold)))))
+ '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
