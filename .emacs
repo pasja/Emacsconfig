@@ -109,8 +109,8 @@
 				     nil require-match initial-input hist def))
 	ad-do-it))))
 
-(add-hook 'dired-mode-hook            ; bugfix for dired
-	  '(lambda () (setq ido-enable-replace-completing-read nil)))
+;; (add-hook 'dired-mode-hook            ; bugfix for dired (not good, does not set back after we quit dired)
+;; 	  '(lambda () (setq ido-enable-replace-completing-read nil)))
 
 ;; (ido-mode 1)
 (add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
