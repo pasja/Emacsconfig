@@ -110,7 +110,7 @@
 	ad-do-it))))
 
 ;; (add-hook 'dired-mode-hook            ; bugfix for dired (not good, does not set back after we quit dired)
-;; 	  '(lambda () (setq ido-enable-replace-completing-read nil)))
+;; 	  '(lambda () (setq ido-enable-replace-completing-read
 
 ;; (ido-mode 1)
 (add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
