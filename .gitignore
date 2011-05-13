@@ -1,2 +1,7 @@
 *.elc
 *~
+auto-save-list/
+cache/
+el-get/
+thumbs/
+url/
