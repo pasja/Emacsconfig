@@ -218,7 +218,18 @@
    		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
    		   (setq smex-save-file "~/.emacs.d/cache/smex-items")
    		   ))
-   yasnippet
+   (:name yasnippet
+	  :after (lambda ()
+		   (setq yas/root-directory
+			 '("~/.emacs.d/yas/")) ;; my own snippets
+		   (mapc 'yas/load-directory yas/root-directory)
+		   (setq yas/wrap-around-region t)
+		   (setq yas/prompt-functions
+			 '(yas/x-prompt yas/ido-prompt))
+		   (yas/global-mode 1) ;;  make it global
+		   (add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
+		   (yas/reload-all)
+		   ))
    (:name color-theme
 	  :after (lambda ()
 		    (color-theme-taming-mr-arneson)
