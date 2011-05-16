@@ -264,6 +264,10 @@
 		     "Command to kill a compilation launched by `mode-compile'" t)
 		   (global-set-key (kbd "C-c k") 'mode-compile-kill)
 		   ))
+   (:name auto-complete
+	  :after (lambda ()
+		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache")
+	     ))
    ))
 
 (el-get 'sync)
