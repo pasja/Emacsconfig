@@ -190,7 +190,7 @@
 
 (eval-after-load 'cperl-mode
   '(progn
-     (define-key cperl-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
+     (define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
      (cperl-set-style "K&R")
      (setq cperl-invalid-face nil
 	   cperl-indent-parens-as-block t
@@ -267,7 +267,8 @@
    (:name auto-complete
 	  :after (lambda ()
 		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache")
-	     ))
+		   (setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
+		   ))
    ))
 
 (el-get 'sync)
@@ -284,3 +285,5 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
+
+
