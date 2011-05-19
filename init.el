@@ -145,7 +145,7 @@
 
 (add-hook 'after-save-hook
   'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
-(add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
+; (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
 ;; smart shell start
 
@@ -230,6 +230,11 @@
 		   (add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
 		   (yas/reload-all)
 		   ))
+   (:name auto-complete
+	  :after (lambda ()
+		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache")
+		   (setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
+		   ))
    (:name color-theme
 	  :after (lambda ()
 		    (color-theme-taming-mr-arneson)
@@ -264,11 +269,6 @@
 		     "Command to kill a compilation launched by `mode-compile'" t)
 		   (global-set-key (kbd "C-c k") 'mode-compile-kill)
 		   ))
-   (:name auto-complete
-	  :after (lambda ()
-		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache")
-		   (setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-		   ))
    ))
 
 (el-get 'sync)
@@ -285,5 +285,4 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
-
 
