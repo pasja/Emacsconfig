@@ -24,7 +24,7 @@
                                   slime-mode common-lisp-mode c++-mode d-mode
                                   js2-mode haskell-mode tuareg-mode lua-mode
                                   pascal-mode fortran-mode prolog-mode asm-mode
-                                  csharp-mode sml-mode conf-mode)
+                                  csharp-mode sml-mode conf-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-ppd-mode)
   "The modes which fixme should apply to"
   :group 'fixme-mode)
 
