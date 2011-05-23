@@ -232,8 +232,10 @@
 		   ))
    (:name auto-complete
 	  :after (lambda ()
-		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache")
+		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
+			 ac-dwim t)
 		   (setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
+		   (ac-linum-workaround)
 		   ))
    (:name color-theme
 	  :after (lambda ()
@@ -285,4 +287,3 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
-
