@@ -34,7 +34,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (unless (file-exists-p "~/.emacs.d/cache/") ; create default cache directory
-    (make-directory "~/.emacs.d/cache/"))
+  (make-directory "~/.emacs.d/cache/"))
 
 (defalias 'yes-or-no-p 'y-or-n-p) ; Useful aliases
 (defalias 'perl-mode 'cperl-mode)
@@ -43,11 +43,11 @@
 ;; scrolling
 
 (setq
-  scroll-margin 0                        ; do smooth scrolling, ...
-  scroll-conservatively 100000           ; ... the defaults ...
-  scroll-up-aggressively 0               ; ... are very ...
-  scroll-down-aggressively 0             ; ... annoying
-  scroll-preserve-screen-position t)     ; preserve screen pos with C-v/M-v
+ scroll-margin 0                        ; do smooth scrolling, ...
+ scroll-conservatively 100000           ; ... the defaults ...
+ scroll-up-aggressively 0               ; ... are very ...
+ scroll-down-aggressively 0             ; ... annoying
+ scroll-preserve-screen-position t)     ; preserve screen pos with C-v/M-v
 
 ;; rectangles
 
@@ -58,29 +58,29 @@
 
 (require 'ido)
 (setq
-  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
-  ido-ignore-buffers ; ignore these guys
-  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+ ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
+ ido-ignore-buffers ; ignore these guys
+ '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
 
-     "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
-  ido-case-fold  t                 ; be case-insensitive
-  ido-enable-last-directory-history t ; remember last used dirs
-  ido-max-work-directory-list 30   ; should be enough
-  ido-max-work-file-list      50   ; remember many
-  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
-  ido-use-url-at-point nil         ; don't use url at point (annoying)
-  ido-enable-flex-matching t       ; try to be too smart :-)
-  ido-max-prospects 16             ; don't spam my minibuffer
-  ido-confirm-unique-completion t  ; wait for RET, even with unique completion
-  confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
-  ido-everywhere t
-  ido-create-new-buffer 'always)
+   "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+ ido-case-fold  t                 ; be case-insensitive
+ ido-enable-last-directory-history t ; remember last used dirs
+ ido-max-work-directory-list 30   ; should be enough
+ ido-max-work-file-list      50   ; remember many
+ ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+ ido-use-url-at-point nil         ; don't use url at point (annoying)
+ ido-enable-flex-matching t       ; try to be too smart :-)
+ ido-max-prospects 16             ; don't spam my minibuffer
+ ido-confirm-unique-completion t  ; wait for RET, even with unique completion
+ confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
+ ido-everywhere t
+ ido-create-new-buffer 'always)
 
 (add-hook 'ido-minibuffer-setup-hook ; increase minibuffer size when ido completion is active
-  (function
-    (lambda ()
-      (make-local-variable 'resize-minibuffer-window-max-height)
-      (setq resize-minibuffer-window-max-height 1))))
+	  (function
+	   (lambda ()
+	     (make-local-variable 'resize-minibuffer-window-max-height)
+	     (setq resize-minibuffer-window-max-height 1))))
 
 ;; super-supercharge ido
 
@@ -117,16 +117,16 @@
 
 ;; savehist: save some history
 (setq savehist-additional-variables   ; also save...
-  '(search ring regexp-search-ring)   ; ... my search entries
-  savehist-autosave-interval 60       ; save every minute (default: 5 min)
-  savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
+      '(search ring regexp-search-ring)   ; ... my search entries
+      savehist-autosave-interval 60       ; save every minute (default: 5 min)
+      savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
 (savehist-mode t)                     ; do customization before activation
 
 ;; autokill attached processess
 
 (setq kill-buffer-query-functions     ; on buffers ...
-  (remq 'process-kill-buffer-query-function
-         kill-buffer-query-functions))
+      (remq 'process-kill-buffer-query-function
+	    kill-buffer-query-functions))
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate) ; ... and on quit
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
@@ -144,15 +144,15 @@
 ;; save hooks
 
 (add-hook 'after-save-hook
-  'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
-; (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
+	  'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
+					; (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
 ;; smart shell start
 
 (defun sh (name)
-     "Smart shell start"
-     (interactive "sShell name: ")
-     (shell name))
+  "Smart shell start"
+  (interactive "sShell name: ")
+  (shell name))
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -167,16 +167,18 @@
 
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
-  (interactive (if mark-active (list (region-beginning) (region-end)) (message
-  "Copied line") (list (line-beginning-position) (line-beginning-position
-  2)))))
+  (interactive (if mark-active (list (region-beginning) (region-end))
+		 (message "Copied line")
+		 (list (line-beginning-position) 
+		       (line-beginning-position
+			2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
-    (if mark-active (list (region-beginning) (region-end))
-      (list (line-beginning-position)
-        (line-beginning-position 2)))))
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+	   (line-beginning-position 2)))))
 
 ;; External libraries
 
@@ -211,79 +213,79 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
 (setq el-get-sources
- '(el-get
-   (:name smex
-   	  :after (lambda ()
-   		   (global-set-key (kbd "M-x") 'smex)
-   		   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-   		   (setq smex-save-file "~/.emacs.d/cache/smex-items")
-   		   ))
-   (:name yasnippet
-	  :after (lambda ()
-		   (setq yas/root-directory
-			 '("~/.emacs.d/yas/")) ;; my own snippets
-		   (mapc 'yas/load-directory yas/root-directory)
-		   (setq yas/wrap-around-region t)
-		   (setq yas/prompt-functions
-			 '(yas/x-prompt yas/ido-prompt))
-		   (yas/global-mode 1) ;;  make it global
-		   (add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
-		   (yas/reload-all)
-		   ))
-   (:name auto-complete
-	  :after (lambda ()
-		   (setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
-			 ac-dwim t)
-		   (setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-		   (ac-linum-workaround)
-		   ))
-   (:name color-theme
-	  :after (lambda ()
-		    (color-theme-taming-mr-arneson)
-		    ))
-   (:name git-emacs
-	  :after (lambda ()
-		   (require 'git-status)
-		   ))
-   (:name dired+
-	  :after (lambda ()
-		   (require 'dired+)
-		   (toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
-		   (setq dired-recursive-copies 'always ; recursive copy/delete
-			 dired-recursive-deletes 'top
-			 dired-dwim-target t
-			 dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
-		   (define-key dired-mode-map (kbd "^")
-		     (lambda ()
-		       (interactive) (find-alternate-file "..")))
-		   ))
-   (:name autopair
-	  :after (lambda ()
-		   (require 'autopair)
-		   (autopair-global-mode 1)
-		   ))
-   (:name mode-compile
-	  :after (lambda ()
-		   (autoload 'mode-compile "mode-compile"
-		     "Command to compile current buffer file based on the major mode" t)
-		   (global-set-key (kbd "C-c c") 'mode-compile)
-		   (autoload 'mode-compile-kill "mode-compile"
-		     "Command to kill a compilation launched by `mode-compile'" t)
-		   (global-set-key (kbd "C-c k") 'mode-compile-kill)
-		   ))
-   ))
+      '(el-get
+	(:name smex
+	       :after (lambda ()
+			(global-set-key (kbd "M-x") 'smex)
+			(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+			(setq smex-save-file "~/.emacs.d/cache/smex-items")
+			))
+	(:name yasnippet
+	       :after (lambda ()
+			(setq yas/root-directory
+			      '("~/.emacs.d/yas/")) ;; my own snippets
+			(mapc 'yas/load-directory yas/root-directory)
+			(setq yas/wrap-around-region t)
+			(setq yas/prompt-functions
+			      '(yas/x-prompt yas/ido-prompt))
+			(yas/global-mode 1) ;;  make it global
+			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
+			(yas/reload-all)
+			))
+	(:name auto-complete
+	       :after (lambda ()
+			(setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
+			      ac-dwim t)
+			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
+			(ac-linum-workaround)
+			))
+	(:name color-theme
+	       :after (lambda ()
+			(color-theme-taming-mr-arneson)
+			))
+	(:name git-emacs
+	       :after (lambda ()
+			(require 'git-status)
+			))
+	(:name dired+
+	       :after (lambda ()
+			(require 'dired+)
+			(toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
+			(setq dired-recursive-copies 'always ; recursive copy/delete
+			      dired-recursive-deletes 'top
+			      dired-dwim-target t
+			      dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+			(define-key dired-mode-map (kbd "^")
+			  (lambda ()
+			    (interactive) (find-alternate-file "..")))
+			))
+	(:name autopair
+	       :after (lambda ()
+			(require 'autopair)
+			(autopair-global-mode 1)
+			))
+	(:name mode-compile
+	       :after (lambda ()
+			(autoload 'mode-compile "mode-compile"
+			  "Command to compile current buffer file based on the major mode" t)
+			(global-set-key (kbd "C-c c") 'mode-compile)
+			(autoload 'mode-compile-kill "mode-compile"
+			  "Command to kill a compilation launched by `mode-compile'" t)
+			(global-set-key (kbd "C-c k") 'mode-compile-kill)
+			))
+	))
 
 (el-get 'sync)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
