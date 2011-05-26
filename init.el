@@ -49,6 +49,16 @@
  scroll-down-aggressively 0             ; ... annoying
  scroll-preserve-screen-position t)     ; preserve screen pos with C-v/M-v
 
+;; some UTF-8 goodies
+
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-language-environment "UTF-8")       ; prefer utf-8 for language settings
+(set-input-method nil)                   ; no funky input for normal editing;
+
 ;; rectangles
 
 (setq cua-enable-cua-keys nil)
