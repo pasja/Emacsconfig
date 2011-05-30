@@ -194,9 +194,14 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
+
 (load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
+
 (load "~/.emacs.d/plugins/fixme-mode")  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
 (fixme-mode 1)
+
+(load "~/.emacs.d/plugins/autopair")    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
+(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
 ;; configure cperl
 
@@ -270,11 +275,11 @@
 			  (lambda ()
 			    (interactive) (find-alternate-file "..")))
 			))
-	(:name autopair
-	       :after (lambda ()
-			(require 'autopair)
-			(autopair-global-mode 1)
-			))
+	;; (:name autopair
+	;;        :after (lambda ()
+	;; 		(require 'autopair)
+	;; 		(autopair-global-mode 1)
+	;; 		))
 	(:name mode-compile
 	       :after (lambda ()
 			(autoload 'mode-compile "mode-compile"
