@@ -254,6 +254,7 @@
 			      ac-dwim t)
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
 			(ac-linum-workaround)
+			(define-key ac-mode-map (kbd "s-<tab>") 'auto-complete)
 			))
 	(:name color-theme
 	       :after (lambda ()
