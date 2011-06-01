@@ -290,6 +290,11 @@
 			  "Command to kill a compilation launched by `mode-compile'" t)
 			(global-set-key (kbd "C-c k") 'mode-compile-kill)
 			))
+	(:name anything
+	       :after (lambda ()
+			(require 'anything)
+			(require 'anything-match-plugin)
+			))
 	))
 
 (el-get 'sync)
