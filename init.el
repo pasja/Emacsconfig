@@ -203,6 +203,12 @@
 (load "~/.emacs.d/plugins/autopair")    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
+(load "~/.emacs.d/plugins/perl-completion") ; (http://www.emacswiki.org/emacs/PerlCompletion)
+(add-hook  'cperl-mode-hook                 ; configure perl-completion 
+           (lambda ()
+	     (setq ac-sources '(ac-source-perl-completion)
+		   plcmp-use-keymap nil)))
+
 ;; configure cperl
 
 (eval-after-load 'cperl-mode
