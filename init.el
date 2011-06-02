@@ -190,37 +190,6 @@
      (list (line-beginning-position)
 	   (line-beginning-position 2)))))
 
-;; External libraries
-
-(add-to-list 'load-path "~/.emacs.d/plugins")
-(byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
-
-(load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-
-(load "~/.emacs.d/plugins/fixme-mode")  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
-(fixme-mode 1)
-
-(load "~/.emacs.d/plugins/autopair")    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
-(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
-
-(load "~/.emacs.d/plugins/perl-completion") ; (http://www.emacswiki.org/emacs/PerlCompletion)
-(add-hook  'cperl-mode-hook                 ; configure perl-completion 
-           (lambda ()
-	     (setq ac-sources '(ac-source-perl-completion)
-		   plcmp-use-keymap nil)))
-
-;; configure cperl
-
-(eval-after-load 'cperl-mode
-  '(progn
-     (define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
-     (cperl-set-style "K&R")
-     (setq cperl-invalid-face nil
-	   cperl-indent-parens-as-block t
-	   cperl-tab-always-indent nil
-	   cperl-highlight-variables-indiscriminately t)
-     ))
-
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -304,6 +273,38 @@
 	))
 
 (el-get 'sync)
+
+;; External libraries
+
+(add-to-list 'load-path "~/.emacs.d/plugins")
+(byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
+
+(load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
+
+(load "~/.emacs.d/plugins/fixme-mode")  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
+(fixme-mode 1)
+
+(load "~/.emacs.d/plugins/autopair")    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
+(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
+
+(load "~/.emacs.d/plugins/perl-completion") ; (http://www.emacswiki.org/emacs/PerlCompletion)
+(add-hook  'cperl-mode-hook                 ; configure perl-completion 
+           (lambda ()
+	     (setq ac-sources '(ac-source-perl-completion)
+		   plcmp-use-keymap nil)))
+
+;; configure cperl
+
+(eval-after-load 'cperl-mode
+  '(progn
+     (define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
+     (cperl-set-style "K&R")
+     (setq cperl-invalid-face nil
+	   cperl-indent-parens-as-block t
+	   cperl-tab-always-indent nil
+	   cperl-highlight-variables-indiscriminately t)
+     ))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
