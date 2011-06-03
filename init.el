@@ -40,6 +40,8 @@
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
+(setq reb-re-syntax 'string)      ; set re-builder style
+
 ;; scrolling
 
 (setq
@@ -180,8 +182,7 @@
   (interactive (if mark-active (list (region-beginning) (region-end))
 		 (message "Copied line")
 		 (list (line-beginning-position) 
-		       (line-beginning-position
-			2)))))
+		       (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
@@ -251,11 +252,6 @@
 			  (lambda ()
 			    (interactive) (find-alternate-file "..")))
 			))
-	;; (:name autopair
-	;;        :after (lambda ()
-	;; 		(require 'autopair)
-	;; 		(autopair-global-mode 1)
-	;; 		))
 	(:name mode-compile
 	       :after (lambda ()
 			(autoload 'mode-compile "mode-compile"
@@ -279,19 +275,22 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 
-(load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-
-(load "~/.emacs.d/plugins/fixme-mode")  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
-(fixme-mode 1)
-
-(load "~/.emacs.d/plugins/autopair")    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
-(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
-
-(load "~/.emacs.d/plugins/perl-completion") ; (http://www.emacswiki.org/emacs/PerlCompletion)
+(require 'perl-completion) ; (http://www.emacswiki.org/emacs/PerlCompletion)
 (add-hook  'cperl-mode-hook                 ; configure perl-completion 
            (lambda ()
-	     (setq ac-sources '(ac-source-perl-completion)
-		   plcmp-use-keymap nil)))
+	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet)
+		   plcmp-method-inspecter 'class-inspector)
+	     (perl-completion-mode t)
+	     (define-key cperl-mode-map (kbd "C-<tab>") 'plcmp-cmd-smart-complete)
+	     ))
+
+(load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
+
+(require 'fixme-mode)  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
+(fixme-mode 1)
+
+(require 'autopair)    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
+(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
 ;; configure cperl
 
@@ -305,16 +304,5 @@
 	   cperl-highlight-variables-indiscriminately t)
      ))
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
