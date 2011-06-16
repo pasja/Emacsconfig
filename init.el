@@ -61,6 +61,11 @@
 (set-language-environment "UTF-8")       ; prefer utf-8 for language settings
 (set-input-method nil)                   ; no funky input for normal editing;
 
+;; spelling 
+
+(setq ispell-program-name "aspell"
+      ispell-dictionary "hungarian")
+
 ;; rectangles
 
 (setq cua-enable-cua-keys nil)
@@ -215,12 +220,12 @@
 	(:name yasnippet
 	       :after (lambda ()
 			(setq yas/root-directory
-			      '("~/.emacs.d/yas/")) ;; my own snippets
+			      '("~/.emacs.d/yas/")) ; my own snippets
 			(mapc 'yas/load-directory yas/root-directory)
 			(setq yas/wrap-around-region t)
 			(setq yas/prompt-functions
 			      '(yas/x-prompt yas/ido-prompt))
-			(yas/global-mode 1) ;;  make it global
+			(yas/global-mode 1) ; make it global
 			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
 			(yas/reload-all)
 			))
@@ -275,11 +280,12 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 
-(require 'perl-completion) ; (http://www.emacswiki.org/emacs/PerlCompletion)
-(add-hook  'cperl-mode-hook                 ; configure perl-completion 
+(require 'perl-completion)  ; (http://www.emacswiki.org/emacs/PerlCompletion)
+(add-hook  'cperl-mode-hook ; configure perl-completion 
            (lambda ()
 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet)
-		   plcmp-method-inspecter 'class-inspector)
+		   plcmp-method-inspecter 'class-inspector
+		   plcmp-use-keymap nil)
 	     (perl-completion-mode t)
 	     (define-key cperl-mode-map (kbd "C-<tab>") 'plcmp-cmd-smart-complete)
 	     ))
@@ -304,5 +310,25 @@
 	   cperl-highlight-variables-indiscriminately t)
      ))
 
+;; wanderlust
+
+(autoload 'wl "wl" "Wanderlust" t)
+(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+
+(autoload 'wl-user-agent-compose "wl-draft" nil t)
+(if (boundp 'mail-user-agent)
+    (setq mail-user-agent 'wl-user-agent))
+(if (fboundp 'define-mail-user-agent)
+    (define-mail-user-agent
+      'wl-user-agent
+      'wl-user-agent-compose
+      'wl-draft-send
+      'wl-draft-kill
+      'mail-send-hook))
+
+;;custom
+
 (custom-set-faces
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
+
