@@ -66,6 +66,23 @@
 (setq ispell-program-name "aspell"
       ispell-dictionary "hungarian")
 
+;; (setq ispell-program-name "ispell"
+;;       ispell-dictionary "magyar")
+
+;; (if (file-exists-p "/usr/bin/hunspell")                                         
+;;     (progn
+;;       (setq ispell-program-name "hunspell")
+;;       (eval-after-load "ispell"
+;;         '(progn (defun ispell-get-coding-system () 'utf-8)))))
+
+;; (setq ispell-program-name "hunspell"   ; export DICTIONARY=hu-HU && export DICPATH=/usr/share/hunspell
+;;       ispell-local-dictionary "hu_HU"
+;;       ispell-skip-html t
+;;       ispell-local-dictionary-alist
+;;       '(("hu_HU" "\[\[:alpha:\]\]" "[^[:alpha:]]" "[']" nil ("-d" "hu_HU") nil utf-8))
+;;       ispell-really-hunspell t)
+;; (setq ispell-dictionary "hu_HU")
+
 ;; rectangles
 
 (setq cua-enable-cua-keys nil)
@@ -121,9 +138,7 @@
     (let ((allcomp (all-completions "" collection predicate)))
       (if allcomp
 	  (setq ad-return-value
-		(ido-completing-read prompt
-				     allcomp
-				     nil require-match initial-input hist def))
+		(ido-completing-read prompt allcomp nil require-match initial-input hist def))
 	ad-do-it))))
 
 ;; (add-hook 'dired-mode-hook            ; bugfix for dired (not good, does not set back after we quit dired)
