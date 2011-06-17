@@ -10,7 +10,6 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message t
       confirm-nonexistent-file-or-buffer nil
-      vc-follow-symlinks t ; auto-follow version controlled symlinks
       display-time-day-and-date t
       display-time-24hr-format t)
 (setq-default major-mode 'text-mode)
@@ -210,6 +209,13 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
 	   (line-beginning-position 2)))))
+
+;; configure vc
+
+(setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
+(add-hook 'log-edit-mode 
+	  '(lambda ()
+	     (flyspell-mode -1)))
 
 ;; Boostrap el-get
 
