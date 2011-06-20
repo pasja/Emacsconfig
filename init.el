@@ -212,10 +212,12 @@
 
 ;; configure vc
 
-(setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
+(setq vc-follow-symlinks t ; auto-follow version controlled symlinks
+      git-state-modeline-decoration 'git-state-decoration-colored-letter)
+
 (add-hook 'log-edit-mode 
-	  '(lambda ()
-	     (flyspell-mode -1)))
+	  (lambda ()
+	    (flyspell-mode -1)))
 
 ;; Boostrap el-get
 
@@ -353,3 +355,5 @@
 (custom-set-faces
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
 
+(custom-set-variables
+)
