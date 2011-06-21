@@ -219,6 +219,10 @@
 	  (lambda ()
 	    (flyspell-mode -1)))
 
+;; configure ediff
+
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -350,7 +354,7 @@
       'wl-draft-kill
       'mail-send-hook))
 
-;;custom
+;; custom
 
 (custom-set-faces
  '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
