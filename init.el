@@ -213,7 +213,8 @@
 ;; configure vc
 
 (setq vc-follow-symlinks t ; auto-follow version controlled symlinks
-      git-state-modeline-decoration 'git-state-decoration-colored-letter)
+      git-state-modeline-decoration 'git-state-decoration-colored-letter
+      git--log-flyspell-mode nil)
 
 (add-hook 'log-edit-mode 
 	  (lambda ()
