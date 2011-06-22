@@ -74,7 +74,7 @@
 ;;       (eval-after-load "ispell"
 ;;         '(progn (defun ispell-get-coding-system () 'utf-8)))))
 
-;; (setq ispell-program-name "hunspell"   ; export DICTIONARY=hu-HU && export DICPATH=/usr/share/hunspell
+;; (setq ispell-program-name "hunspell"   ; export DICTIONARY=hu_HU && export DICPATH=/usr/share/hunspell
 ;;       ispell-local-dictionary "hu_HU"
 ;;       ispell-skip-html t
 ;;       ispell-local-dictionary-alist
@@ -212,10 +212,8 @@
 
 ;; configure vc
 
-(setq vc-follow-symlinks t ; auto-follow version controlled symlinks
-      git-state-modeline-decoration 'git-state-decoration-colored-letter
-      git--log-flyspell-mode nil)
-
+(setq vc-follow-symlinks t ); auto-follow version controlled symlinks
+      
 (add-hook 'log-edit-mode 
 	  (lambda ()
 	    (flyspell-mode -1)))
@@ -272,6 +270,8 @@
 	(:name git-emacs
 	       :after (lambda ()
 			(require 'git-status)
+			(setq git-state-modeline-decoration 'git-state-decoration-colored-letter
+			      git--log-flyspell-mode nil)
 			))
 	(:name dired+
 	       :after (lambda ()
