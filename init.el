@@ -164,9 +164,9 @@
 
 ;; clipboard settings
 
-(setq x-select-enable-primary t     ; killing/yanking interacting with primary X11 selection
-      x-select-enable-clipboard t   ; killing/yanking interact with clipboard X11 selection
-      yank-pop-change-selection t)  ; rotating the kill ring change the X11 clipboard.
+(setq x-select-enable-clipboard t        ;; copy-paste should work ...
+  interprogram-paste-function            ;; ...with...
+  'x-cut-buffer-or-selection-value)      ;; ...other X clients
 
 ;; zone-mode for .hu
 
@@ -176,7 +176,6 @@
 
 (add-hook 'after-save-hook
 	  'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
-					; (add-hook 'before-save-hook 'delete-trailing-whitespace) ; remove trailing whitespace
 
 ;; smart shell start
 
