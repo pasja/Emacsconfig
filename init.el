@@ -318,16 +318,7 @@
 	     ))
 
 (load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-
-(require 'fixme-mode)  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
-(fixme-mode 1)
-
-(require 'autopair)    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
-(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
-
-;; configure cperl
-
-(eval-after-load 'cperl-mode
+(eval-after-load 'cperl-mode ; configure cperl
   '(progn
      (define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
      (cperl-set-style "K&R")
@@ -336,6 +327,13 @@
 	   cperl-tab-always-indent nil
 	   cperl-highlight-variables-indiscriminately t)
      ))
+
+(require 'fixme-mode)  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
+(fixme-mode 1)
+
+(require 'autopair)    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
+(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
+
 
 ;; wanderlust
 
