@@ -307,8 +307,8 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 
-(require 'perl-completion)  ; (http://www.emacswiki.org/emacs/PerlCompletion)
-(add-hook  'cperl-mode-hook ; configure perl-completion 
+(require 'perl-completion)                         ; (https://github.com/imakado/perl-completion)
+(add-hook  'cperl-mode-hook                        ; configure perl-completion 
            (lambda ()
 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet)
 		   plcmp-method-inspecter 'class-inspector
@@ -318,7 +318,7 @@
 	     ))
 
 (load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-(eval-after-load 'cperl-mode ; configure cperl
+(eval-after-load 'cperl-mode            ; configure cperl
   '(progn
      (define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
      (cperl-set-style "K&R")
@@ -328,11 +328,11 @@
 	   cperl-highlight-variables-indiscriminately t)
      ))
 
-(require 'fixme-mode)  ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
+(require 'fixme-mode)    ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
 (fixme-mode 1)
 
-(require 'autopair)    ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
-(autopair-global-mode 1)                ; home-brew fix for auto-complete (comment out RET and return keybinding)
+(require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
+(autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
 
 ;; wanderlust
