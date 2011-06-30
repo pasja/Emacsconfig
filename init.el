@@ -24,24 +24,27 @@
 (size-indication-mode t)
 (display-time)
 
-(global-set-key (kbd "M-g") 'goto-line)    ; M-g  'goto-line
-(global-set-key (kbd "<delete>") 'delete-char)  ; delete == delete
+(global-set-key (kbd "M-g") 'goto-line)                    ; M-g  'goto-line
+(global-set-key (kbd "<delete>") 'delete-char)             ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
 
 (require 'windmove) ; windmove
 (windmove-default-keybindings 'meta)
-(global-set-key (kbd "C-<left>") 'next-buffer) ; buffer move
+(global-set-key (kbd "C-<left>") 'next-buffer)             ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(unless (file-exists-p "~/.emacs.d/cache/") ; create default cache directory
+(global-set-key (kbd "C-c E")                              ; open ~/.emacs.d/init.el
+  (lambda()(interactive)(find-file "~/.emacs.d/init.el")))
+
+(unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
   (make-directory "~/.emacs.d/cache/"))
 
-(defalias 'yes-or-no-p 'y-or-n-p) ; Useful aliases
+(defalias 'yes-or-no-p 'y-or-n-p)                          ; Useful aliases
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
-(setq reb-re-syntax 'string)      ; set re-builder style
+(setq reb-re-syntax 'string)                               ; set re-builder style
 
 ;; scrolling
 
