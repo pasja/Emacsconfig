@@ -340,6 +340,7 @@
 (require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
+(require 'dired-tar)     ; dired-tar (http://www.emacswiki.org/emacs/DiredPower)
 
 ;; wanderlust
 
