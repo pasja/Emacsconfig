@@ -97,19 +97,19 @@
 (require 'ido)
 (setq
  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
- ido-ignore-buffers ; ignore these guys
+ ido-ignore-buffers                  ; ignore these guys
  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
 
    "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
- ido-case-fold  t                 ; be case-insensitive
+ ido-case-fold  t                    ; be case-insensitive
  ido-enable-last-directory-history t ; remember last used dirs
- ido-max-work-directory-list 30   ; should be enough
- ido-max-work-file-list      50   ; remember many
- ido-use-filename-at-point nil    ; don't use filename at point (annoying)
- ido-use-url-at-point nil         ; don't use url at point (annoying)
- ido-enable-flex-matching t       ; try to be too smart :-)
- ido-max-prospects 16             ; don't spam my minibuffer
- ido-confirm-unique-completion t  ; wait for RET, even with unique completion
+ ido-max-work-directory-list 30      ; should be enough
+ ido-max-work-file-list      50      ; remember many
+ ido-use-filename-at-point nil       ; don't use filename at point (annoying)
+ ido-use-url-at-point nil            ; don't use url at point (annoying)
+ ido-enable-flex-matching t          ; try to be too smart :-)
+ ido-max-prospects 16                ; don't spam my minibuffer
+ ido-confirm-unique-completion t     ; wait for RET, even with unique completion
  confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
  ido-everywhere t
  ido-create-new-buffer 'always)
@@ -133,11 +133,11 @@
     (defadvice foo (around original-completing-read-only activate)
       (let (ido-enable-replace-completing-read) ad-do-it))")
 
-(defadvice completing-read ; Replace completing-read wherever possible, unless directed otherwise
+(defadvice completing-read                         ; Replace completing-read wherever possible, unless directed otherwise
   (around use-ido-when-possible activate)
   (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
 	  (and (boundp 'ido-cur-list)
-	       ido-cur-list)) ; Avoid infinite loop from ido calling this
+	       ido-cur-list))                      ; Avoid infinite loop from ido calling this
       ad-do-it
     (let ((allcomp (all-completions "" collection predicate)))
       (if allcomp
@@ -149,29 +149,30 @@
 ;; 	  '(lambda () (setq ido-enable-replace-completing-read nil)))
 
 ;; (ido-mode 1)
-(add-hook 'term-setup-hook 'ido-mode) ; TRAMP bugfixing
+(add-hook 'term-setup-hook 'ido-mode)              ; TRAMP bugfixing
 
 ;; savehist: save some history
-(setq savehist-additional-variables   ; also save...
-      '(search ring regexp-search-ring)   ; ... my search entries
-      savehist-autosave-interval 60       ; save every minute (default: 5 min)
+(setq savehist-additional-variables                ; also save...
+      '(search ring regexp-search-ring)            ; ... my search entries
+      savehist-autosave-interval 60                ; save every minute (default: 5 min)
       savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
-(savehist-mode t)                     ; do customization before activation
+(savehist-mode t)                                  ; do customization before activation
 
 ;; autokill attached processess
 
-(setq kill-buffer-query-functions     ; on buffers ...
+(setq kill-buffer-query-functions                  ; on buffers ...
       (remq 'process-kill-buffer-query-function
 	    kill-buffer-query-functions))
-(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate) ; ... and on quit
+(defadvice save-buffers-kill-emacs
+  (around no-query-kill-emacs activate)            ; ... and on quit
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
 
 ;; clipboard settings
 
-(setq x-select-enable-clipboard t        ;; copy-paste should work ...
-  interprogram-paste-function            ;; ...with...
-  'x-cut-buffer-or-selection-value)      ;; ...other X clients
+(setq x-select-enable-clipboard t        ; copy-paste should work ...
+  interprogram-paste-function            ; ...with...
+  'x-cut-buffer-or-selection-value)      ; ...other X clients
 
 ;; zone-mode for .hu
 
@@ -216,7 +217,7 @@
 
 ;; configure vc
 
-(setq vc-follow-symlinks t ); auto-follow version controlled symlinks
+(setq vc-follow-symlinks t ) ; auto-follow version controlled symlinks
       
 (add-hook 'log-edit-mode 
 	  (lambda ()
@@ -255,7 +256,7 @@
 			(setq yas/wrap-around-region t)
 			(setq yas/prompt-functions
 			      '(yas/x-prompt yas/ido-prompt))
-			(yas/global-mode 1) ; make it global
+			(yas/global-mode 1)         ; make it global
 			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
 			(yas/reload-all)
 			))
