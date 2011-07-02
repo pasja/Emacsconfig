@@ -281,7 +281,7 @@
 	(:name dired+
 	       :after (lambda ()
 			(require 'dired+)
-			(toggle-dired-find-file-reuse-dir 1) ; reuse existing dired buffer
+			(toggle-diredp-find-file-reuse-dir 1) ; reuse existing dired buffer
 			(setq dired-recursive-copies 'always ; recursive copy/delete
 			      dired-recursive-deletes 'top
 			      dired-dwim-target t
