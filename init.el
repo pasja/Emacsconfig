@@ -28,7 +28,7 @@
 (global-set-key (kbd "<delete>") 'delete-char)             ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
 
-(require 'windmove) ; windmove
+(require 'windmove)                                        ; windmove
 (windmove-default-keybindings 'meta)
 (global-set-key (kbd "C-<left>") 'next-buffer)             ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
@@ -49,11 +49,11 @@
 ;; scrolling
 
 (setq
- scroll-margin 0                        ; do smooth scrolling, ...
- scroll-conservatively 100000           ; ... the defaults ...
- scroll-up-aggressively 0               ; ... are very ...
- scroll-down-aggressively 0             ; ... annoying
- scroll-preserve-screen-position t)     ; preserve screen pos with C-v/M-v
+ scroll-margin 0                         ; do smooth scrolling, ...
+ scroll-conservatively 100000            ; ... the defaults ...
+ scroll-up-aggressively 0                ; ... are very ...
+ scroll-down-aggressively 0              ; ... annoying
+ scroll-preserve-screen-position t)      ; preserve screen pos with C-v/M-v
 
 ;; some UTF-8 goodies
 
@@ -101,20 +101,20 @@
  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
 
    "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
- ido-case-fold  t                    ; be case-insensitive
- ido-enable-last-directory-history t ; remember last used dirs
- ido-max-work-directory-list 30      ; should be enough
- ido-max-work-file-list      50      ; remember many
- ido-use-filename-at-point nil       ; don't use filename at point (annoying)
- ido-use-url-at-point nil            ; don't use url at point (annoying)
- ido-enable-flex-matching t          ; try to be too smart :-)
- ido-max-prospects 16                ; don't spam my minibuffer
- ido-confirm-unique-completion t     ; wait for RET, even with unique completion
+ ido-case-fold  t                       ; be case-insensitive
+ ido-enable-last-directory-history t    ; remember last used dirs
+ ido-max-work-directory-list 30         ; should be enough
+ ido-max-work-file-list      50         ; remember many
+ ido-use-filename-at-point nil          ; don't use filename at point (annoying)
+ ido-use-url-at-point nil               ; don't use url at point (annoying)
+ ido-enable-flex-matching t             ; try to be too smart :-)
+ ido-max-prospects 16                   ; don't spam my minibuffer
+ ido-confirm-unique-completion t        ; wait for RET, even with unique completion
  confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
  ido-everywhere t
  ido-create-new-buffer 'always)
 
-(add-hook 'ido-minibuffer-setup-hook ; increase minibuffer size when ido completion is active
+(add-hook 'ido-minibuffer-setup-hook    ; increase minibuffer size when ido completion is active
 	  (function
 	   (lambda ()
 	     (make-local-variable 'resize-minibuffer-window-max-height)
