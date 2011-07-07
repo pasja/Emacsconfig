@@ -188,7 +188,8 @@
 (defun sh (name)
   "Smart shell start"
   (interactive "sShell name: ")
-  (shell name))
+  (shell name)
+  (delete-other-windows))
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
