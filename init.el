@@ -315,14 +315,14 @@
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 
 (require 'perl-completion)                         ; (https://github.com/imakado/perl-completion)
-(add-hook  'cperl-mode-hook                        ; configure perl-completion 
+(setq plcmp-method-inspecter 'class-inspector      ; configure perl-completion 
+      plcmp-use-keymap nil)
+
+(add-hook  'cperl-mode-hook                        
            (lambda ()
 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet)
-		   plcmp-method-inspecter 'class-inspector
-		   plcmp-use-keymap nil)
 	     (perl-completion-mode t)
-	     (define-key cperl-mode-map (kbd "C-<tab>") 'plcmp-cmd-smart-complete)
-	     ))
+	     (define-key cperl-mode-map (kbd "C-<tab>") 'plcmp-cmd-smart-complete))))
 
 (load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 (eval-after-load 'cperl-mode            ; configure cperl
