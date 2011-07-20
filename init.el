@@ -228,6 +228,10 @@
 
 (setq ediff-split-window-function 'split-window-horizontally)
 
+;; configure SQL
+
+(setq sql-sqlite-program "sqlite3")
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
