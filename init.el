@@ -309,8 +309,16 @@
 			(require 'anything)
 			(require 'anything-match-plugin)
 			))
+	(:name dired-tar
+	       :type "http"
+	       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
+	       :build ("gunzip -c dired-tar.el.gz > dired-tar.el")
+	       :load-path (".")
+	       :load    "dired-tar.el"
+	       :compile "dired-tar.el"
+	       :features "dired-tar"
+	       )
 	))
-
 (el-get 'sync)
 
 ;; External libraries
@@ -344,8 +352,6 @@
 
 (require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
-
-(require 'dired-tar)     ; dired-tar (http://www.emacswiki.org/emacs/DiredPower)
 
 ;; wanderlust
 
