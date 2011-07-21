@@ -34,7 +34,7 @@
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(global-set-key (kbd "C-c E")                              ; open ~/.emacs.d/init.el
+(global-set-key (kbd "<f5>")                              ; open ~/.emacs.d/init.el
   (lambda()(interactive)(find-file "~/.emacs.d/init.el")))
 
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
@@ -271,7 +271,7 @@
 			      ac-dwim t)
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
 			(ac-linum-workaround)
-			(define-key ac-mode-map (kbd "s-<tab>") 'auto-complete)
+			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
 			))
 	(:name color-theme
 	       :after (lambda ()
@@ -332,8 +332,7 @@
 (add-hook  'cperl-mode-hook                        
            (lambda ()
 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-	     (perl-completion-mode t)
-	     (define-key cperl-mode-map (kbd "C-<tab>") 'plcmp-cmd-smart-complete)))
+	     (perl-completion-mode t)))
 
 (load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 (eval-after-load 'cperl-mode            ; configure cperl
