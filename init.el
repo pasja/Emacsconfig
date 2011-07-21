@@ -271,7 +271,7 @@
 			      ac-dwim t)
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
 			(ac-linum-workaround)
-			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
+			(define-key ac-mode-map (kbd "s-<tab>") 'auto-complete)
 			))
 	(:name color-theme
 	       :after (lambda ()
@@ -332,7 +332,8 @@
 (add-hook  'cperl-mode-hook                        
            (lambda ()
 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-	     (perl-completion-mode t)))
+	     (perl-completion-mode t)
+	     (define-key cperl-mode-map (kbd "C-<tab>") 'plcmp-cmd-smart-complete)))
 
 (load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 (eval-after-load 'cperl-mode            ; configure cperl
