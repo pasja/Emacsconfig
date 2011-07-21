@@ -314,10 +314,9 @@
 	       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
 	       :build ("gunzip -c dired-tar.el.gz > dired-tar.el")
 	       :load-path (".")
-	       :load    "dired-tar.el"
-	       :compile "dired-tar.el"
-	       :features "dired-tar"
-	       )
+	       :features "dired-tar")
+	(:name info+
+	       :type emacswiki)
 	))
 (el-get 'sync)
 
