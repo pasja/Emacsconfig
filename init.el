@@ -317,6 +317,7 @@
 	       :features "dired-tar")
 	(:name info+
 	       :type emacswiki)
+
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
 	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
@@ -330,8 +331,23 @@
 			(setq cperl-invalid-face nil
 			      cperl-indent-parens-as-block t
 			      cperl-tab-always-indent nil
-			      cperl-highlight-variables-indiscriminately t)
-			))
+			      cperl-highlight-variables-indiscriminately t)))
+
+	(:name perl-completion
+	       :type "git"
+	       :url "https://github.com/imakado/perl-completion.git"
+	       :depends anything
+	       :load-path (".")
+	       :website "https://github.com/imakado/perl-completion"
+	       :before (lambda ()
+			 (setq plcmp-method-inspecter 'class-inspector       
+			       plcmp-use-keymap nil))
+	       :features "perl-completion"
+	       :after (lambda ()
+			(add-hook  'cperl-mode-hook                        
+				   (lambda ()
+				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
+				     (perl-completion-mode t)))))
 	))
 (el-get 'sync)
 
@@ -340,14 +356,14 @@
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 
-(setq plcmp-method-inspecter 'class-inspector      ; configure perl-completion 
-      plcmp-use-keymap nil)
-(require 'perl-completion)                         ; (https://github.com/imakado/perl-completion)
+;; (setq plcmp-method-inspecter 'class-inspector      ; configure perl-completion 
+;;       plcmp-use-keymap nil)
+;; (require 'perl-completion)                         ; (https://github.com/imakado/perl-completion)
 
-(add-hook  'cperl-mode-hook                        
-           (lambda ()
-	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-	     (perl-completion-mode t)))
+;; (add-hook  'cperl-mode-hook                        
+;;            (lambda ()
+;; 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
+;; 	     (perl-completion-mode t)))
 
 (require 'fixme-mode)    ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
 (fixme-mode 1)
