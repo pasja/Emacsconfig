@@ -35,7 +35,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (global-set-key (kbd "<f5>")                              ; open ~/.emacs.d/init.el
-  (lambda()(interactive)(find-file "~/.emacs.d/init.el")))
+		(lambda()(interactive)(find-file "~/.emacs.d/init.el")))
 
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
   (make-directory "~/.emacs.d/cache/"))
@@ -343,6 +343,7 @@
 	   cperl-indent-parens-as-block t
 	   cperl-tab-always-indent nil
 	   cperl-highlight-variables-indiscriminately t)
+     (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2")
      ))
 
 (require 'fixme-mode)    ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
@@ -350,6 +351,9 @@
 
 (require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
+
+;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
+;; (require 'icicles)
 
 ;; wanderlust
 
@@ -368,10 +372,3 @@
       'wl-draft-kill
       'mail-send-hook))
 
-;; custom
-
-(custom-set-faces
- '(cperl-nonoverridable-face ((t (:foreground "LightGoldenrod2")))))
-
-(custom-set-variables
-)
