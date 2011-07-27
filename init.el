@@ -317,6 +317,21 @@
 	       :features "dired-tar")
 	(:name info+
 	       :type emacswiki)
+	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
+	       :type "http"
+	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
+	       :load-path (".")
+	       :prepare (lambda ()
+			  (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2"))
+	       :features "cperl-mode"
+	       :after (lambda()
+			(define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
+			(cperl-set-style "K&R")
+			(setq cperl-invalid-face nil
+			      cperl-indent-parens-as-block t
+			      cperl-tab-always-indent nil
+			      cperl-highlight-variables-indiscriminately t)
+			))
 	))
 (el-get 'sync)
 
@@ -333,18 +348,6 @@
            (lambda ()
 	     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
 	     (perl-completion-mode t)))
-
-(load "~/.emacs.d/plugins/cperl-mode")  ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-(eval-after-load 'cperl-mode            ; configure cperl
-  '(progn
-     (define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
-     (cperl-set-style "K&R")
-     (setq cperl-invalid-face nil
-	   cperl-indent-parens-as-block t
-	   cperl-tab-always-indent nil
-	   cperl-highlight-variables-indiscriminately t)
-     (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2")
-     ))
 
 (require 'fixme-mode)    ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
 (fixme-mode 1)
