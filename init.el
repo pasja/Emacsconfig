@@ -348,6 +348,15 @@
 				   (lambda ()
 				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
 				     (perl-completion-mode t)))))
+	(:name fixme-mode
+	       :type emacswiki
+	       :before (lambda ()
+			 (setq fixme-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE" "XXX")
+			       fixme-modes '(erlang-mode java-mode c-mode emacs-lisp-mode jde-mode scheme-mode python-mode ruby-mode cperl-mode slime-mode common-lisp-mode c++-mode d-mode js2-mode haskell-mode tuareg-mode lua-mode pascal-mode fortran-mode prolog-mode asm-mode csharp-mode sml-mode conf-mode conf-ppd-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-javaprop-mode conf-xdefaults-mode)))
+	       :load-path (".")
+	       :features "fixme-mode"
+	       :after (lambda ()
+			(fixme-mode 1)))
 	))
 (el-get 'sync)
 
@@ -355,9 +364,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
-
-(require 'fixme-mode)    ; fixme mode (http://www.emacswiki.org/emacs/FixmeMode)
-(fixme-mode 1)
 
 (require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)

@@ -2,9 +2,9 @@
 ;; Filename: fixme-mode.el
 ;; Description: Makes source code warnings (FIXME, TODO, etc.) stand out
 ;; in a big way.
-;; Author: Bryan Waite, based on some code found at
+;; Author: Bryan Waite, based on some code found at 
 ;; http://c2.com/cgi/wiki?FixmeComment
-;; Copyright (C) 2009-2010, Bryan Waite
+;; Copyright (C) 2009-2010, Bryan Waite 
 ;; License: MIT License (not reproduced for space reasons)
 ;; Compatibility: Only tested under Emacs 23.1 on Ubuntu Linux.
 ;; Usage: Just add (require 'fixme-mode) to your .emacs file
@@ -24,11 +24,11 @@
                                   slime-mode common-lisp-mode c++-mode d-mode
                                   js2-mode haskell-mode tuareg-mode lua-mode
                                   pascal-mode fortran-mode prolog-mode asm-mode
-                                  csharp-mode sml-mode conf-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-ppd-mode)
+                                  csharp-mode sml-mode)
   "The modes which fixme should apply to"
   :group 'fixme-mode)
 
-(defcustom fixme-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE" "XXX")
+(defcustom fixme-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE")
   "Words to highlight"
   :group 'fixme-mode)
 
@@ -40,7 +40,7 @@
   "Font background color"
   :group 'fixme-mode)
 
-(defvar fixme-keyword-re-string ""
+(defvar fixme-keyword-re-string "" 
   "The regular expression to use for searching for fixme words. Generated with fixme-register-keyword-re")
 
 (defvar fixme-keyword-font-lock '()
@@ -124,7 +124,7 @@ to update the font-lock and searching variables"
   )
 
 ;;;###autoload(defvar fixme-mode nil)
-(define-minor-mode fixme-mode
+(define-minor-mode fixme-mode  
   "A minor mode for making FIXME and other warnings stand out"
   nil
   " Fixme"
