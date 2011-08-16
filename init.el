@@ -34,7 +34,7 @@
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(global-set-key (kbd "<f5>")                              ; open ~/.emacs.d/init.el
+(global-set-key (kbd "<f5>")                               ; open ~/.emacs.d/init.el
 		(lambda()(interactive)(find-file "~/.emacs.d/init.el")))
 
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
