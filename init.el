@@ -97,10 +97,10 @@
 (require 'ido)
 (setq
  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
- ido-ignore-buffers                  ; ignore these guys
+ ido-ignore-buffers                     ; ignore these guys
  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
-
    "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+
  ido-case-fold  t                       ; be case-insensitive
  ido-enable-last-directory-history t    ; remember last used dirs
  ido-max-work-directory-list 30         ; should be enough
@@ -287,7 +287,7 @@
 	       :after (lambda ()
 			(require 'dired+)
 			(toggle-diredp-find-file-reuse-dir 1) ; reuse existing dired buffer
-			(setq dired-recursive-copies 'always ; recursive copy/delete
+			(setq dired-recursive-copies 'always  ; recursive copy/delete
 			      dired-recursive-deletes 'top
 			      dired-dwim-target t
 			      dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
