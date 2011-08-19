@@ -29,7 +29,7 @@
 (global-set-key (kbd "M-2") 'hippie-expand)
 
 (require 'windmove)                                        ; windmove
-(windmove-default-keybindings 'meta)
+(windmove-default-keybindings 'super)
 (global-set-key (kbd "C-<left>") 'next-buffer)             ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -232,6 +232,11 @@
 
 (setq sql-sqlite-program "sqlite3")
 
+;; configure org-mode
+
+(setq org-link-abbrev-alist
+      '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s")))
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -368,8 +373,8 @@
 (require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
-;; (add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
-;; (require 'icicles)
+(add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
+(require 'icicles)
 
 ;; wanderlust
 
@@ -387,3 +392,4 @@
       'wl-draft-send
       'wl-draft-kill
       'mail-send-hook))
+ 
