@@ -44,8 +44,6 @@
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
 
-(setq reb-re-syntax 'string)                               ; set re-builder style
-
 ;; scrolling
 
 (setq
@@ -177,6 +175,10 @@
 
 (setq org-link-abbrev-alist
       '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s")))
+
+;; configure dired
+
+(setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 
 ;; Boostrap el-get
 
@@ -330,4 +332,3 @@
       'wl-draft-send
       'wl-draft-kill
       'mail-send-hook))
- 
