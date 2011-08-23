@@ -92,65 +92,6 @@
 (setq cua-enable-cua-keys nil)
 (cua-mode t)
 
-;; ido mode
-
-;; (require 'ido)
-;; (setq
-;;  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
-;;  ido-ignore-buffers                     ; ignore these guys
-;;  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
-;;    "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
-
-;;  ido-case-fold  t                       ; be case-insensitive
-;;  ido-enable-last-directory-history t    ; remember last used dirs
-;;  ido-max-work-directory-list 30         ; should be enough
-;;  ido-max-work-file-list      50         ; remember many
-;;  ido-use-filename-at-point nil          ; don't use filename at point (annoying)
-;;  ido-use-url-at-point nil               ; don't use url at point (annoying)
-;;  ido-enable-flex-matching t             ; try to be too smart :-)
-;;  ido-max-prospects 16                   ; don't spam my minibuffer
-;;  ido-confirm-unique-completion t        ; wait for RET, even with unique completion
-;;  confirm-nonexistent-file-or-buffer nil ; when using ido, the confirmation is rather annoying...
-;;  ido-everywhere t
-;;  ido-create-new-buffer 'always)
-
-;; (add-hook 'ido-minibuffer-setup-hook    ; increase minibuffer size when ido completion is active
-;; 	  (function
-;; 	   (lambda ()
-;; 	     (make-local-variable 'resize-minibuffer-window-max-height)
-;; 	     (setq resize-minibuffer-window-max-height 1))))
-
-;; ;; super-supercharge ido
-
-;; (defvar ido-enable-replace-completing-read t
-;;   "If t, use ido-completing-read instead of completing-read if possible.
-
-;;     Set it to nil using let in around-advice for functions where the
-;;     original completing-read is required.  For example, if a function
-;;     foo absolutely must use the original completing-read, define some
-;;     advice like this:
-
-;;     (defadvice foo (around original-completing-read-only activate)
-;;       (let (ido-enable-replace-completing-read) ad-do-it))")
-
-;; (defadvice completing-read                         ; Replace completing-read wherever possible, unless directed otherwise
-;;   (around use-ido-when-possible activate)
-;;   (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
-;; 	  (and (boundp 'ido-cur-list)
-;; 	       ido-cur-list))                      ; Avoid infinite loop from ido calling this
-;;       ad-do-it
-;;     (let ((allcomp (all-completions "" collection predicate)))
-;;       (if allcomp
-;; 	  (setq ad-return-value
-;; 		(ido-completing-read prompt allcomp nil require-match initial-input hist def))
-;; 	ad-do-it))))
-
-;; ;; (add-hook 'dired-mode-hook            ; bugfix for dired (not good, does not set back after we quit dired)
-;; ;; 	  '(lambda () (setq ido-enable-replace-completing-read nil)))
-
-;; ;; (ido-mode 1)
-;; (add-hook 'term-setup-hook 'ido-mode)              ; TRAMP bugfixing
-
 ;; savehist: save some history
 (setq savehist-additional-variables                ; also save...
       '(search ring regexp-search-ring)            ; ... my search entries
@@ -252,12 +193,6 @@
 (require 'el-get)
 (setq el-get-sources
       '(el-get
-	(:name smex
-	       :after (lambda ()
-			(global-set-key (kbd "M-x") 'smex)
-			(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-			(setq smex-save-file "~/.emacs.d/cache/smex-items")
-			))
 	(:name yasnippet
 	       :after (lambda ()
 			(setq yas/root-directory
