@@ -180,6 +180,10 @@
 
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 
+;; configure woman
+
+(setq woman-fontify t)
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -258,11 +262,18 @@
 	       :compile "dired-tar.el"
 	       :load-path (".")
 	       :features "dired-tar")
+
 	(:name info+
 	       :type emacswiki
 	       :load-path (".")
 	       :after (lambda () 
 			(eval-after-load "info" '(require 'info+))))
+
+	(:name replace+
+	       :type emacswiki
+	       :load-path (".")
+	       :after (lambda () 
+			(eval-after-load "replace" '(require 'replace+))))
 
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
