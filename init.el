@@ -181,8 +181,11 @@
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 
 ;; configure woman
-
 (setq woman-fontify t)
+(set-face-attribute 'woman-bold nil
+		    :inherit 'bold
+		    :slant 'italic)
+(require 'woman)
 
 ;; Boostrap el-get
 
