@@ -181,11 +181,11 @@
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 
 ;; configure woman
+(require 'woman)
 (setq woman-fontify t)
 (set-face-attribute 'woman-bold nil
 		    :inherit 'bold
 		    :slant 'italic)
-(require 'woman)
 
 ;; Boostrap el-get
 
@@ -330,6 +330,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
 (require 'icicles)
+(icy-mode)
 
 ;; wanderlust
 
