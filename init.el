@@ -182,7 +182,8 @@
 
 ;; configure woman
 (require 'woman)
-(setq woman-fontify t)
+(setq woman-fontify t
+      woman-fill-frame t)
 (set-face-attribute 'woman-bold nil
 		    :inherit 'bold
 		    :slant 'italic)
@@ -277,7 +278,12 @@
 	       :load-path (".")
 	       :after (lambda () 
 			(eval-after-load "replace" '(require 'replace+))))
-
+	(:name grep+
+	       :type emacswiki
+	       :load-path (".")
+	       :after (lambda () 
+			:features "grep+"))
+	
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
 	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
@@ -348,3 +354,4 @@
       'wl-draft-send
       'wl-draft-kill
       'mail-send-hook))
+ 
