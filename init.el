@@ -281,8 +281,14 @@
 	(:name grep+
 	       :type emacswiki
 	       :load-path (".")
+	       :features "grep+")
+
+	(:name ffap-
+	       :type emacswiki
+	       :load-path (".")
+	       :features "ffap-"
 	       :after (lambda () 
-			:features "grep+"))
+			(ffap-bindings)))
 	
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
@@ -336,7 +342,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
 (require 'icicles)
-(icy-mode)
+(icy-mode 1)
 
 ;; wanderlust
 
