@@ -290,9 +290,7 @@
 	(:name ffap-
 	       :type emacswiki
 	       :load-path (".")
-	       :features "ffap-"
-	       :after (lambda () 
-			()))
+	       :features "ffap-")
 	
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
