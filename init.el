@@ -91,6 +91,7 @@
 (cua-mode t)
 
 ;; savehist: save some history
+
 (setq savehist-additional-variables                ; also save...
       '(search ring regexp-search-ring)            ; ... my search entries
       savehist-autosave-interval 60                ; save every minute (default: 5 min)
@@ -133,7 +134,7 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; Configure tramp
+;; configure tramp
 
 (setq shell-prompt-pattern "^[^a-zA-Z].*[~#$%>] *" ; we need a bit more funky pattern, as tramp will start $SHELL (sudo -s), ie., zsh for root user
       tramp-default-method "ssh"
@@ -179,6 +180,9 @@
 ;; configure dired
 
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
+(eval-after-load "dired-aux" ; support .zip uncompress
+   '(add-to-list 'dired-compress-file-suffixes 
+                 '("\\.zip\\'" ".zip" "unzip")))
 
 ;; configure woman
 (require 'woman)
@@ -288,7 +292,7 @@
 	       :load-path (".")
 	       :features "ffap-"
 	       :after (lambda () 
-			(ffap-bindings)))
+			()))
 	
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
@@ -342,6 +346,16 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
 (require 'icicles)
+
+;; configure icicles
+
+(defun my-c-return ()
+  "When in minibuffer use `icicle-candidate-action', otherwise use `cua-set-rectangle-mark'."
+  (interactive)
+  (if (window-minibuffer-p (selected-window))
+      (call-interactively 'icicle-candidate-action)
+    (call-interactively 'cua-set-rectangle-mark)))
+
 (icy-mode 1)
 
 ;; wanderlust
@@ -360,4 +374,8 @@
       'wl-draft-send
       'wl-draft-kill
       'mail-send-hook))
+
+;; Customize
  
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
