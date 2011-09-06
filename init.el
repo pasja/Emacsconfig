@@ -358,6 +358,9 @@
       (call-interactively 'icicle-candidate-action)
     (call-interactively 'cua-set-rectangle-mark)))
 
+(setq icicle-mark-position-in-candidate 'input-end
+      icicle-point-position-in-candidate 'input-end)
+
 (icy-mode 1)
 
 ;; wanderlust
