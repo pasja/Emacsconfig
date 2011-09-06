@@ -192,6 +192,10 @@
 		    :inherit 'bold
 		    :slant 'italic)
 
+;; configure help 
+
+(setq help-window-select t)
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
