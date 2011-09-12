@@ -180,8 +180,9 @@
 
 ;; configure dired
 
+(setq dired-listing-switches "-alh")                   ; display size in human readable form
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
-(eval-after-load "dired-aux" ; support .zip uncompress
+(eval-after-load "dired-aux"                           ; support .zip uncompress
    '(add-to-list 'dired-compress-file-suffixes 
                  '("\\.zip\\'" ".zip" "unzip")))
 
