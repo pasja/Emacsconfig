@@ -202,9 +202,10 @@
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
 (unless (require 'el-get nil t)
   (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
    (lambda (s)
      (end-of-buffer)
      (eval-print-last-sexp))))
@@ -239,6 +240,10 @@
 			(color-theme-taming-mr-arneson)
 			))
 	(:name git-emacs
+	       :description "Yet another git emacs mode for newbies"
+	       :type git
+	       :url "https://github.com/tsgates/git-emacs.git"
+	       :features git-emacs
 	       :after (lambda ()
 			(require 'git-status)
 			(setq git-state-modeline-decoration 'git-state-decoration-colored-letter
@@ -303,7 +308,14 @@
 	       :type emacswiki
 	       :load-path (".")
 	       :features "lacarte")
-	
+
+	(:name icomplete+
+	       :type emacswiki
+	       :load-path (".")
+	       :features "icomplete+"
+	       :after (lambda ()
+			(icomplete-mode 1))
+	       
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
 	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
