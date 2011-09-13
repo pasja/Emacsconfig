@@ -17,6 +17,7 @@
 (setq-default major-mode 'text-mode)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+(menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode 1)
 (global-linum-mode 1)
@@ -297,6 +298,11 @@
 	       :type emacswiki
 	       :load-path (".")
 	       :features "ffap-")
+
+	(:name lacarte
+	       :type emacswiki
+	       :load-path (".")
+	       :features "lacarte")
 	
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
