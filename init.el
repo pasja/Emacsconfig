@@ -314,7 +314,7 @@
 	       :load-path (".")
 	       :features "icomplete+"
 	       :after (lambda ()
-			(icomplete-mode 1))
+			(icomplete-mode 1)))
 	       
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
