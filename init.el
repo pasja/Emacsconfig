@@ -228,6 +228,14 @@
 			(yas/reload-all)
 			))
 	(:name auto-complete
+	       :type git
+	       :url "https://github.com/pasja/auto-complete.git"
+	       :load-path (".")
+	       :features auto-complete
+	       :post-init (lambda ()
+		    (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
+		    (require 'auto-complete-config)
+		    (ac-config-default))
 	       :after (lambda ()
 			(setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
 			      ac-dwim t)
