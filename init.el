@@ -321,7 +321,7 @@
 	       :type "http"
 	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
 	       :load-path (".")
-	       :prepare (lambda ()
+	       :before (lambda ()
 			  (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2"))
 	       :features "cperl-mode"
 	       :after (lambda()
