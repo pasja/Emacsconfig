@@ -215,6 +215,7 @@
 (require 'el-get)
 (setq el-get-sources
       '(el-get
+
 	(:name yasnippet
 	       :after (lambda ()
 			(setq yas/root-directory
@@ -227,6 +228,7 @@
 			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
 			(yas/reload-all)
 			))
+
 	(:name auto-complete
 	       :type git
 	       :url "https://github.com/pasja/auto-complete.git"
@@ -243,10 +245,12 @@
 			(ac-linum-workaround)
 			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
 			))
+
 	(:name color-theme
 	       :after (lambda ()
 			(color-theme-taming-mr-arneson)
 			))
+
 	(:name git-emacs
 	       :description "Yet another git emacs mode for newbies"
 	       :type git
@@ -257,6 +261,7 @@
 			(setq git-state-modeline-decoration 'git-state-decoration-colored-letter
 			      git--log-flyspell-mode nil)
 			))
+
 	(:name dired+
 	       :after (lambda ()
 			(require 'dired+)
@@ -269,6 +274,7 @@
 			  (lambda ()
 			    (interactive) (find-alternate-file "..")))
 			))
+
 	(:name mode-compile
 	       :after (lambda ()
 			(autoload 'mode-compile "mode-compile"
@@ -278,11 +284,13 @@
 			  "Command to kill a compilation launched by `mode-compile'" t)
 			(global-set-key (kbd "C-c k") 'mode-compile-kill)
 			))
+
 	(:name anything
 	       :after (lambda ()
 			(require 'anything)
 			(require 'anything-match-plugin)
 			))
+
 	(:name dired-tar
 	       :type "http"
 	       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
@@ -302,6 +310,7 @@
 	       :load-path (".")
 	       :after (lambda () 
 			(eval-after-load "replace" '(require 'replace+))))
+
 	(:name grep+
 	       :type emacswiki
 	       :load-path (".")
@@ -347,6 +356,7 @@
 				   (lambda ()
 				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
 				     (perl-completion-mode t)))))
+
 	(:name fixme-mode
 	       :type emacswiki
 	       :before (lambda ()
