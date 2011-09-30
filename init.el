@@ -366,6 +366,24 @@
 	       :features "fixme-mode"
 	       :after (lambda ()
 			(fixme-mode 1)))
+
+	(:name icicles
+	       :type "http-tar"
+	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
+	       :options ("xzf")
+	       :load-path (".")
+	       :features "icicles"
+	       :after (lambda ()
+			(defun my-c-return ()
+			  "When in minibuffer use `icicle-candidate-action', otherwise use `cua-set-rectangle-mark'."
+			  (interactive)
+			  (if (window-minibuffer-p (selected-window))
+			      (call-interactively 'icicle-candidate-action)
+			    (call-interactively 'cua-set-rectangle-mark)))
+			(setq icicle-mark-position-in-candidate 'input-end
+			      icicle-point-position-in-candidate 'input-end)
+			(icy-mode 1)
+			))
 	))
 (el-get 'sync)
 
@@ -376,23 +394,6 @@
 
 (require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
 (autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
-
-(add-to-list 'load-path "~/.emacs.d/plugins/icicles/") ; test icicles
-(require 'icicles)
-
-;; configure icicles
-
-(defun my-c-return ()
-  "When in minibuffer use `icicle-candidate-action', otherwise use `cua-set-rectangle-mark'."
-  (interactive)
-  (if (window-minibuffer-p (selected-window))
-      (call-interactively 'icicle-candidate-action)
-    (call-interactively 'cua-set-rectangle-mark)))
-
-(setq icicle-mark-position-in-candidate 'input-end
-      icicle-point-position-in-candidate 'input-end)
-
-(icy-mode 1)
 
 ;; wanderlust
 
