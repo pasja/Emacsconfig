@@ -13,8 +13,10 @@
       inhibit-startup-echo-area-message t
       confirm-nonexistent-file-or-buffer nil
       display-time-day-and-date t
-      display-time-24hr-format t)
+      display-time-24hr-format t
+      redisplay-dont-pause t)
 (setq-default major-mode 'text-mode)
+
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
