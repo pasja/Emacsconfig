@@ -233,8 +233,7 @@
 
 	(:name auto-complete
 	       :type git
-	       :url "https://github.com/pasja/auto-complete.git"
-	       :branch "1.3"
+	       :url "https://github.com/m2ym/auto-complete.git"
 	       :features auto-complete
 	       :post-init (lambda ()
 		    (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
