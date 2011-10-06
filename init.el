@@ -233,6 +233,7 @@
 	       :type git
 	       :url "https://github.com/pasja/auto-complete.git"
 	       :load-path (".")
+	       :branch "1.3"
 	       :features auto-complete
 	       :post-init (lambda ()
 		    (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
@@ -242,7 +243,7 @@
 			(setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
 			      ac-dwim t)
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-			(ac-linum-workaround)
+			;(ac-linum-workaround)
 			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
 			))
 
