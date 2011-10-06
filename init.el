@@ -232,7 +232,6 @@
 	(:name auto-complete
 	       :type git
 	       :url "https://github.com/pasja/auto-complete.git"
-	       :load-path (".")
 	       :branch "1.3"
 	       :features auto-complete
 	       :post-init (lambda ()
@@ -297,40 +296,33 @@
 	       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
 	       :build ("gunzip -c dired-tar.el.gz > dired-tar.el")
 	       :compile "dired-tar.el"
-	       :load-path (".")
 	       :features "dired-tar")
 
 	(:name info+
 	       :type emacswiki
-	       :load-path (".")
 	       :after (lambda () 
 			(eval-after-load "info" '(require 'info+))))
 
 	(:name replace+
 	       :type emacswiki
-	       :load-path (".")
 	       :after (lambda () 
 			(eval-after-load "replace" '(require 'replace+))))
 
 	(:name grep+
 	       :type emacswiki
-	       :load-path (".")
 	       :features "grep+")
 
 	(:name ffap-
 	       :type emacswiki
-	       :load-path (".")
 	       :features "ffap-")
 
 	(:name lacarte
 	       :type emacswiki
-	       :load-path (".")
 	       :features "lacarte")
 	       
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
 	       :type "http"
 	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
-	       :load-path (".")
 	       :before (lambda ()
 			  (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2"))
 	       :features "cperl-mode"
@@ -346,7 +338,6 @@
 	       :type "git"
 	       :url "https://github.com/imakado/perl-completion.git"
 	       :depends anything
-	       :load-path (".")
 	       :website "https://github.com/imakado/perl-completion"
 	       :before (lambda ()
 			 (setq plcmp-method-inspecter 'class-inspector       
@@ -363,7 +354,6 @@
 	       :before (lambda ()
 			 (setq fixme-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE" "XXX")
 			       fixme-modes '(erlang-mode java-mode c-mode emacs-lisp-mode jde-mode scheme-mode python-mode ruby-mode cperl-mode slime-mode common-lisp-mode c++-mode d-mode js2-mode haskell-mode tuareg-mode lua-mode pascal-mode fortran-mode prolog-mode asm-mode csharp-mode sml-mode conf-mode conf-ppd-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-javaprop-mode conf-xdefaults-mode)))
-	       :load-path (".")
 	       :features "fixme-mode"
 	       :after (lambda ()
 			(fixme-mode 1)))
@@ -372,7 +362,6 @@
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
 	       :options ("xzf")
-	       :load-path (".")
 	       :features "icicles"
 	       :after (lambda ()
 			(defun my-c-return ()
