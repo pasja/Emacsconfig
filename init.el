@@ -96,11 +96,13 @@
 
 ;; savehist: save some history
 
-(setq savehist-additional-variables                ; also save...
-      '(search ring regexp-search-ring)            ; ... my search entries
-      savehist-autosave-interval 60                ; save every minute (default: 5 min)
-      savehist-file "~/.emacs.d/cache/savehist")   ; keep my home clean
-(savehist-mode t)                                  ; do customization before activation
+(setq savehist-additional-variables                      ; also save...
+      '(search ring regexp-search-ring                   ; ... my search entries ...
+	       icicle-previous-raw-file-name-inputs      ; ... and my icicle history
+	       icicle-previous-raw-non-file-name-inputs)
+      savehist-autosave-interval 60                      ; save every minute (default: 5 min)
+      savehist-file "~/.emacs.d/cache/savehist")         ; keep my home clean
+(savehist-mode t)                                        ; do customization before activation
 
 ;; autokill attached processess
 
@@ -243,7 +245,7 @@
 			(setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
 			      ac-dwim t)
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-			;(ac-linum-workaround)
+			(ac-linum-workaround)
 			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
 			))
 
