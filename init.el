@@ -14,7 +14,8 @@
       confirm-nonexistent-file-or-buffer nil
       display-time-day-and-date t
       display-time-24hr-format t
-      redisplay-dont-pause t)
+      redisplay-dont-pause t                 ; faster scrolling
+      sentence-end-double-space nil)         ; period single space ends sentence
 (setq-default major-mode 'text-mode)
 
 (scroll-bar-mode -1)
@@ -194,7 +195,8 @@
 ;; configure woman
 (require 'woman)
 (setq woman-fontify t
-      woman-fill-frame t)
+      woman-fill-frame t
+      woman-manpath '("/usr/share/man" "/usr/local/share/man" ("/bin" . "/usr/share/man") ("/usr/bin" . "/usr/share/man") ("/sbin" . "/usr/share/man") ("/usr/sbin" . "/usr/share/man") ("/usr/local/bin" . "/usr/local/man") ("/usr/local/bin" . "/usr/local/share/man") ("/usr/local/sbin" . "/usr/local/man") ("/usr/local/sbin" . "/usr/local/share/man") ("/usr/X11R6/bin" . "/usr/X11R6/man") ("/usr/bin/X11" . "/usr/X11R6/man") ("/usr/games" . "/usr/share/man") ("/opt/bin" . "/opt/man") ("/opt/sbin" . "/opt/man")))
 (set-face-attribute 'woman-bold nil
 		    :inherit 'bold
 		    :slant 'italic)
@@ -365,6 +367,7 @@
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
 	       :options ("xzf")
+	       :autoloads nil
 	       :features "icicles"
 	       :after (lambda ()
 			(defun my-c-return ()
@@ -377,6 +380,7 @@
 			      icicle-point-position-in-candidate 'input-end)
 			(icy-mode 1)
 			))
+
 	))
 (el-get 'sync)
 
