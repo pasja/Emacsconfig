@@ -18,8 +18,9 @@
       sentence-end-double-space nil)         ; period single space ends sentence
 (setq-default major-mode 'text-mode)
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+(if window-system
+    (scroll-bar-mode -1)
+  (tool-bar-mode -1))
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode 1)
