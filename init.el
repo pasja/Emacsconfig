@@ -220,7 +220,6 @@
 
 ;; External libraries (with el-get)
 
-(require 'el-get)
 (setq el-get-sources
       '(el-get
 
@@ -391,7 +390,7 @@
        '(el-get yasnippet auto-complete color-theme git-emacs
 		dired+ mode-compile anything dired-tar info+
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion
-		fixme-mode icicles)
+		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
