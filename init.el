@@ -18,7 +18,7 @@
       sentence-end-double-space nil)         ; period single space ends sentence
 (setq-default major-mode 'text-mode)
 
-(unless (eq window-system "x")
+(if (eq window-system "x")
   (progn (tool-bar-mode -1)
 	 (scroll-bar-mode -1)))
 (menu-bar-mode -1)
@@ -280,6 +280,9 @@
 			(define-key dired-mode-map (kbd "^")
 			  (lambda ()
 			    (interactive) (find-alternate-file "..")))
+			(add-hook 'dired-mode-hook
+				  (lambda ()
+				    (setq dired-omit-files-p t)))
 			))
 
 	(:name mode-compile
