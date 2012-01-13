@@ -18,9 +18,9 @@
       sentence-end-double-space nil)         ; period single space ends sentence
 (setq-default major-mode 'text-mode)
 
-(if (eq window-system "x")
-  (progn (tool-bar-mode -1)
-	 (scroll-bar-mode -1)))
+(unless (string= window-system "x")
+    (progn (tool-bar-mode -1)
+	   (scroll-bar-mode -1)))
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode 1)
@@ -183,7 +183,9 @@
 ;; configure org-mode
 
 (setq org-link-abbrev-alist
-      '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s")))
+      '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
+      org-return-follows-link t
+      org-CUA-compatible t)
 
 ;; configure dired
 
