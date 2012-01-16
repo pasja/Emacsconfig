@@ -226,6 +226,10 @@
       '(el-get
 
 	(:name yasnippet
+	       :type svn
+	       :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
+	       :features yasnippet
+	       :compile nil
 	       :after (lambda ()
 			(setq yas/root-directory
 			      '("~/.emacs.d/yas/")) ; my own snippets
