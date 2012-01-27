@@ -374,6 +374,14 @@
 	       :after (lambda ()
 			(fixme-mode 1)))
 
+	(:name bookmark+
+	       :type "http-tar"
+	       :url "https://users.itk.ppke.hu/~pasja/bookmarkplus.tar.gz"
+	       :options ("xzf")
+	       :compile nil	       
+	       :autoloads nil
+	       :features "bookmark+")
+
 	(:name icicles
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
@@ -397,7 +405,7 @@
 (setq my-packages
       (append 
        '(el-get yasnippet auto-complete color-theme git-emacs
-		dired+ mode-compile anything dired-tar info+
+		dired+ mode-compile anything dired-tar info+ bookmark+
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
        (mapcar 'el-get-source-name el-get-sources)))
