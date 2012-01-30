@@ -360,7 +360,7 @@
 			       plcmp-use-keymap nil))
 	       :features "perl-completion"
 	       :after (lambda ()
-			(add-hook  'cperl-mode-hook                        
+			(add-hook 'cperl-mode-hook                        
 				   (lambda ()
 				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
 				     (perl-completion-mode t)))))
@@ -386,6 +386,7 @@
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
 	       :options ("xzf")
+	       :compile nil
 	       :autoloads nil
 	       :features "icicles"
 	       :after (lambda ()
