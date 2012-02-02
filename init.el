@@ -175,6 +175,7 @@
 ;; configure ediff
 
 (setq ediff-split-window-function 'split-window-horizontally)
+(setq-default ediff-auto-refine 'on)
 
 ;; configure SQL
 
