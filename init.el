@@ -354,9 +354,10 @@
 
 	(:name perl-completion
 	       :type "git"
-	       :url "https://github.com/imakado/perl-completion.git"
+	       :url "https://github.com/pasja/perl-completion.git"
+	       :branch "fix-ac-expand"
 	       :depends anything
-	       :website "https://github.com/imakado/perl-completion"
+	       :website "https://github.com/pasja/perl-completion"
 	       :before (lambda ()
 			 (setq plcmp-method-inspecter 'class-inspector       
 			       plcmp-use-keymap nil))
