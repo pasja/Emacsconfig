@@ -267,8 +267,12 @@
 
 	(:name magit
 	       :after (lambda ()
-			(global-set-key (kbd "C-x g") 'magit-status)))
-	       
+			(global-set-key (kbd "C-x g")
+					(lambda ()
+					  (interactive)
+					  (magit-status default-directory)
+					  (delete-other-windows)))))
+
 	(:name dired+
 	       :after (lambda ()
 			(require 'dired+)
