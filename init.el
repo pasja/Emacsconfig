@@ -265,18 +265,10 @@
 			(color-theme-taming-mr-arneson)
 			))
 
-	(:name git-emacs
-	       :description "Yet another git emacs mode for newbies"
-	       :type git
-	       :url "https://github.com/tsgates/git-emacs.git"
-	       :features git-emacs
+	(:name magit
 	       :after (lambda ()
-			(require 'git-status)
-			(setq git-state-modeline-decoration 'git-state-decoration-colored-letter
-			      git--log-flyspell-mode nil
-			      git--use-ido nil)
-			))
-
+			(global-set-key (kbd "C-x g") 'magit-status)))
+	       
 	(:name dired+
 	       :after (lambda ()
 			(require 'dired+)
@@ -408,7 +400,7 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete color-theme git-emacs
+       '(el-get yasnippet auto-complete color-theme magit
 		dired+ mode-compile anything dired-tar info+ bookmark+
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
