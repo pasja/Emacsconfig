@@ -335,8 +335,9 @@
 	       :features "lacarte")
 	       
 	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-	       :type "http"
-	       :url "https://raw.github.com/jrockway/cperl-mode/mx-declare/cperl-mode.el"
+	       :type "git"
+	       :url "https://github.com/jrockway/cperl-mode.git"
+	       :branch "mx-declare"
 	       :before (lambda ()
 			  (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2"))
 	       :features "cperl-mode"
