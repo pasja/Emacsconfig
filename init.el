@@ -380,7 +380,12 @@
 	       :options ("xzf")
 	       :compile nil	       
 	       :autoloads nil
-	       :features "bookmark+")
+	       :features "bookmark+"
+	       :after (lambda ()
+			(setq bookmark-default-file "~/.emacs.d/cache/.emacs.bmk"
+			      bmkp-bmenu-commands-file "~/.emacs.d/cache/.emacs-bmk-bmenu-commands.el"
+			      bmkp-bmenu-state-file "~/.emacs.d/cache/.emacs-bmk-bmenu-state.el"
+			      bmkp-last-as-first-bookmark-file nil)))
 
 	(:name icicles
 	       :type "http-tar"
