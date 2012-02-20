@@ -197,6 +197,7 @@
                  '("\\.zip\\'" ".zip" "unzip")))
 
 ;; configure woman
+
 (require 'woman)
 (setq woman-fontify t
       woman-fill-frame t
