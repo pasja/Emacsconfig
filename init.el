@@ -43,6 +43,8 @@
 		(lambda ()
 		  (interactive)(find-file "~/.emacs.d/init.el")))
 
+(global-set-key (kbd "<f9>") 'save-buffers-kill-emacs)     ; hotkey for quit
+
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
   (make-directory "~/.emacs.d/cache/"))
 
