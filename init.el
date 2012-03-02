@@ -417,7 +417,8 @@
 		dired+ mode-compile anything dired-tar info+ bookmark+
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
-       (mapcar 'el-get-source-name el-get-sources)))
+       (eval-after-load "el-get"
+	 '(mapcar 'el-get-source-name el-get-sources))))
 
 (el-get 'sync my-packages)
 
