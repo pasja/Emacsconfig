@@ -34,7 +34,7 @@
 (global-set-key (kbd "M-2") 'hippie-expand)
 
 (require 'windmove)                                        ; windmove
-(windmove-default-keybindings 'super)
+(windmove-default-keybindings 'shift)
 (global-set-key (kbd "C-<left>") 'next-buffer)             ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
