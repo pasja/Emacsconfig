@@ -367,6 +367,11 @@
 				   (lambda ()
 				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
 				     (perl-completion-mode t)))))
+	(:name twiki-mode
+	       :type "git"
+	       :url "https://github.com/christopherjwhite/emacs-twiki-mode.git"
+	       :website "https://github.com/christopherjwhite/emacs-twiki-mode"
+	       :features "twiki")
 
 	(:name fixme-mode
 	       :type emacswiki
@@ -413,7 +418,7 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete color-theme magit
+       '(el-get yasnippet auto-complete color-theme magit twiki-mode
 		dired+ mode-compile anything dired-tar info+ bookmark+
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
