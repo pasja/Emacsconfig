@@ -368,10 +368,10 @@
 				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
 				     (perl-completion-mode t)))))
 	(:name twiki-mode
-	       :type "git"
-	       :url "https://github.com/christopherjwhite/emacs-twiki-mode.git"
-	       :website "https://github.com/christopherjwhite/emacs-twiki-mode"
-	       :features "twiki")
+	       :type "http"
+	       :url "http://www.neilvandyke.org/erin-twiki-emacs/erin.el"
+	       :website "http://www.neilvandyke.org/erin-twiki-emacs/"
+	       :features "erin")
 
 	(:name fixme-mode
 	       :type emacswiki
