@@ -37,7 +37,6 @@
 (windmove-default-keybindings 'shift)
 (global-set-key (kbd "C-<left>") 'next-buffer)             ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (global-set-key (kbd "<f5>")                               ; open ~/.emacs.d/init.el
 		(lambda ()
@@ -51,6 +50,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)                          ; Useful aliases
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
+(defalias 'buffer-menu 'ibuffer)
 
 ;; scrolling
 
