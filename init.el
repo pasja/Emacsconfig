@@ -415,7 +415,7 @@
 	       :autoloads nil
 	       :features "bookmark+"
 	       :after (lambda ()
-			(setq bookmark-default-file "~/.emacs.d/cache/.emacs.bmk"
+			(setq-default bookmark-default-file "~/.emacs.d/cache/.emacs.bmk"
 			      bmkp-bmenu-commands-file "~/.emacs.d/cache/.emacs-bmk-bmenu-commands.el"
 			      bmkp-bmenu-state-file "~/.emacs.d/cache/.emacs-bmk-bmenu-state.el"
 			      bmkp-last-as-first-bookmark-file nil)))
