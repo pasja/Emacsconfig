@@ -50,7 +50,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)                          ; Useful aliases
 (defalias 'perl-mode 'cperl-mode)
 (defalias 'eb 'eval-buffer)
-(defalias 'buffer-menu 'ibuffer)
+(defalias 'list-buffers 'ibuffer)
 
 ;; scrolling
 
@@ -143,6 +143,26 @@
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;; configure ibuffer
+
+(require 'ibuffer)
+(setq ibuffer-saved-filter-groups
+      (quote (("Default"
+                   ("Dired" (mode . dired-mode))
+                   ("Perl" (mode . cperl-mode))
+		   ("Org" (mode . org-mode))
+		   ("Emacs" (or
+                             (name . "^\\*scratch\\*$")
+                             (name . "^\\*Messages\\*$")
+			     (name . "^\\*Completions\\*$")
+			     (name . "^init.el$")
+			     (name . "^\\*Compile-Log\\*$")
+			     (name . "^\\*Help\\*$")))))))
+
+(add-hook 'ibuffer-mode-hook
+  (lambda ()
+    (ibuffer-switch-to-saved-filter-groups "Default")))
 
 ;; configure tramp
 
