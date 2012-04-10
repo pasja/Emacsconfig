@@ -420,6 +420,17 @@
 			      bmkp-bmenu-state-file "~/.emacs.d/cache/.emacs-bmk-bmenu-state.el"
 			      bmkp-last-as-first-bookmark-file nil)))
 
+	(:name dired-sort-menu
+	       :type emacswiki
+	       :features "dired-sort-menu"
+	       :after (lambda ()
+			(add-hook 'dired-load-hook
+				  (lambda () (require 'dired-sort-menu)))))
+
+	(:name dired-sort-menu+
+	       :type emacswiki
+	       :features "dired-sort-menu+")
+
 	(:name icicles
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
@@ -444,8 +455,8 @@
 (setq my-packages
       (append 
        '(el-get yasnippet auto-complete color-theme magit twiki-mode
-		dired+ mode-compile anything dired-tar info+ bookmark+
-		replace+ grep+ ffap- lacarte cperl-mode perl-completion
+		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
+		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
