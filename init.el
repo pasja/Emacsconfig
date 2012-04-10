@@ -286,7 +286,8 @@
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
 			(ac-linum-workaround)
 			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
-			))
+			(define-key ac-completing-map [return] 'ac-complete) ; fixes for autopairs
+			(pushnew 'autopair-backspace ac-trigger-commands-on-completing)))
 
 	(:name color-theme
 	       :after (lambda ()
