@@ -431,6 +431,11 @@
 	       :type emacswiki
 	       :features "dired-sort-menu+")
 
+	(:name undo-tree
+	       :features "undo-tree"
+	       :after (lambda ()
+			(global-undo-tree-mode)))
+
 	(:name icicles
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
@@ -454,7 +459,7 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete color-theme magit twiki-mode
+       '(el-get yasnippet auto-complete color-theme magit twiki-mode undo-tree
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
