@@ -437,6 +437,11 @@
 	       :after (lambda ()
 			(global-undo-tree-mode)))
 
+	(:name autopair
+	       :features "autopair"
+	       :after (lambda ()
+			(autopair-global-mode 1)))
+
 	(:name icicles
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
@@ -460,7 +465,7 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete color-theme magit twiki-mode undo-tree
+       '(el-get yasnippet auto-complete color-theme magit twiki-mode undo-tree autopair
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
@@ -473,9 +478,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
-
-(require 'autopair)      ; autopair mode (http://code.google.com/p/autopair/source/browse/trunk/autopair.el r42) 
-(autopair-global-mode 1) ; home-brew fix for auto-complete (comment out RET and return keybinding)
 
 ;; Customize
  
