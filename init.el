@@ -152,13 +152,20 @@
                    ("Dired" (mode . dired-mode))
                    ("Perl" (mode . cperl-mode))
 		   ("Org" (mode . org-mode))
-		   ("Emacs" (or
+		   ("Magit" (name . "^\\*magit*"))
+		   ("Documentation" (or
+				     (name . "^\\*WoMan*")
+				     (mode . Info-mode)
+				     (name . "^\\*Man*")
+				     (name . "^\\*Help\\*$")))
+		   ("Elisp" (or
+			     (mode . emacs-lisp-mode)))
+		   ("System" (or
                              (name . "^\\*scratch\\*$")
                              (name . "^\\*Messages\\*$")
 			     (name . "^\\*Completions\\*$")
-			     (name . "^init.el$")
-			     (name . "^\\*Compile-Log\\*$")
-			     (name . "^\\*Help\\*$")))))))
+			     (mode . compilation-mode)
+			     (name . "^\\*Shell*")))))))
 
 (add-hook 'ibuffer-mode-hook
   (lambda ()
