@@ -151,7 +151,8 @@
       (quote (("Default"
                    ("Dired" (mode . dired-mode))
                    ("Perl" (mode . cperl-mode))
-		   ("Org" (mode . org-mode))
+		   ("Org" (or (mode . org-mode)
+			      (name . "^\\*Calendar\\*$")))
 		   ("Magit" (name . "^\\*magit*"))
 		   ("Documentation" (or
 				     (name . "^\\*WoMan*")
