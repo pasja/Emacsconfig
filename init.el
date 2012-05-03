@@ -166,7 +166,8 @@
                              (name . "^\\*Messages\\*$")
 			     (name . "^\\*Completions\\*$")
 			     (mode . compilation-mode)
-			     (name . "^\\*Shell*")))))))
+			     (name . "^\\*Shell*")
+			     (mode . Custom-mode)))))))
 
 (add-hook 'ibuffer-mode-hook
   (lambda ()
