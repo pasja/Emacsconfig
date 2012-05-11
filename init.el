@@ -477,7 +477,7 @@
        '(el-get yasnippet auto-complete color-theme magit twiki-mode undo-tree autopair
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
-		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode)
+		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
