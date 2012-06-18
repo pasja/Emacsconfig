@@ -449,7 +449,7 @@
 	(:name undo-tree
 	       :features "undo-tree"
 	       :after (lambda ()
-			(global-undo-tree-mode)))
+			(global-undo-tree-mode 1)))
 
 	(:name autopair
 	       :features "autopair"
