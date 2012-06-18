@@ -195,6 +195,12 @@
      (list (line-beginning-position)
 	   (line-beginning-position 2)))))
 
+;; configure undo
+
+(setq undo-limit 800000
+      undo-strong-limit 1200000
+      undo-outer-limit 120000000)
+
 ;; configure vc
 
 (setq vc-follow-symlinks t ) ; auto-follow version controlled symlinks
