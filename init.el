@@ -285,9 +285,14 @@
 			(yas/reload-all)
 			))
 
+	(:name popup-el
+	       :type git
+	       :url "https://github.com/m2ym/popup-el.git")
+
 	(:name auto-complete
 	       :type git
 	       :url "https://github.com/pasja/auto-complete.git"
+	       :depends popup-el
 	       :branch "expand"
 	       :features auto-complete
 	       :post-init (lambda ()
