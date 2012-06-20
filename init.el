@@ -235,6 +235,10 @@
 		  (interactive)
 		  (insert(format-time-string "%Y-%m-%d"))))
 
+(if (file-readable-p "~/org/rovancs.org")
+  (find-file "~/org/rovancs.org"))
+
+file-exists-p
 ;; configure dired
 
 (setq dired-listing-switches "-alhX")                   ; display size in human readable form
