@@ -133,6 +133,22 @@
 (add-hook 'after-save-hook
 	  'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
 
+;; configure autosave
+
+(setq
+   backup-by-copying t           ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.autosaves"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)            ; use versioned backups
+
+(defun force-backup-of-buffer ()
+    (setq buffer-backed-up nil))
+
+(add-hook 'before-save-hook  'force-backup-of-buffer)
+
 ;; smart shell start
 
 (defun sh (name)
