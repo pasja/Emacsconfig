@@ -338,6 +338,13 @@
 			(color-theme-taming-mr-arneson)
 			))
 
+	(:name rainbow-delimiters
+	       :type git
+	       :url "https://github.com/jlr/rainbow-delimiters.git"
+	       :features rainbow-delimiters
+	       :after (lambda ()
+			(global-rainbow-delimiters-mode 1)))
+
 	(:name magit
 	       :after (lambda ()
 			(global-set-key (kbd "C-x g")
@@ -512,7 +519,8 @@
        '(el-get yasnippet auto-complete color-theme magit twiki-mode undo-tree autopair
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
-		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode)
+		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode
+		rainbow-delimiters)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
