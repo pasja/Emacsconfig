@@ -255,7 +255,8 @@
 		  (insert(format-time-string "%Y-%m-%d"))))
 
 (if (file-readable-p "~/org/rovancs.org")
-  (find-file "~/org/rovancs.org"))
+    (progn  '((unless (get-buffer "rovancs.org"))
+	      (find-file "~/org/rovancs.org"))))
 
 ;; configure dired
 
