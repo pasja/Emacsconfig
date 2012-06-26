@@ -135,6 +135,9 @@
 
 ;; configure autosave
 
+(unless (file-exists-p "~/.autosaves")
+  (make-directory "~/.autosaves"))
+
 (setq
    backup-by-copying t           ; don't clobber symlinks
    backup-directory-alist
