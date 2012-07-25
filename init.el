@@ -259,6 +259,9 @@
 		  (interactive)
 		  (find-file "~/org/rovancs.org")))
 
+(add-hook 'org-mode-hook '(lambda ()
+			     (rainbow-delimiters-mode -1)))
+
 ;; configure dired
 
 (setq dired-listing-switches "-alhX")                   ; display size in human readable form
