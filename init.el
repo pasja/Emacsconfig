@@ -285,6 +285,36 @@
 
 (setq help-window-select t)
 
+;; configure erc
+
+(require 'tls)
+(require 'erc)
+
+(setq erc-modules '(autojoin button completion irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track log truncate))
+(erc-update-modules)
+
+(setq erc-timestamp-only-if-changed-flag nil
+      erc-timestamp-format "%H:%M "
+      erc-fill-prefix "      "
+      erc-insert-timestamp-function 'erc-insert-timestamp-left
+      erc-auto-query 'bury
+      erc-track-shorten-names nil
+      erc-current-nick-highlight-type 'nick-or-keyword
+      erc-max-buffer-size 3000000)
+
+(setq erc-log-channels-directory "~/irclog"
+      erc-save-buffer-on-part nil
+      erc-save-queries-on-quit nil
+      erc-log-write-after-send t
+      erc-log-write-after-insert t
+      erc-log-file-coding-system 'utf-8
+      erc-log-insert-log-on-open nil
+      erc-enable-logging 'erc-log-all-but-server-buffers)
+
+(add-to-list 'load-path "~/.emacs.d/")
+(unless (and (functionp 'server-running-p)(server-running-p "irc"))
+    (require 'ercidentities))
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
