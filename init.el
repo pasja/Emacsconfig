@@ -310,8 +310,7 @@
       erc-log-write-after-send t
       erc-log-write-after-insert t
       erc-log-file-coding-system 'utf-8
-      erc-log-insert-log-on-open nil
-      erc-enable-logging 'erc-log-all-but-server-buffers)
+      erc-log-insert-log-on-open nil)
 
 (add-to-list 'load-path "~/.emacs.d/")
 (unless (and (functionp 'server-running-p)(server-running-p "irc"))
