@@ -313,8 +313,9 @@
       erc-log-insert-log-on-open nil)
 
 (add-to-list 'load-path "~/.emacs.d/")
+(require 'server)
 (unless (and (functionp 'server-running-p)(server-running-p "irc"))
-    (require 'ercidentities))
+  (require 'ercidentities))
 
 ;; Boostrap el-get
 
