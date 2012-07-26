@@ -180,6 +180,8 @@
 				     (name . "^\\*Help\\*$")))
 		   ("Elisp" (or
 			     (mode . emacs-lisp-mode)))
+		   ("ERC" (or
+			     (mode . erc-mode)))
 		   ("System" (or
                              (name . "^\\*scratch\\*$")
                              (name . "^\\*Messages\\*$")
