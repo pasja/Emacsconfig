@@ -292,7 +292,7 @@
 (require 'tls)
 (require 'erc)
 
-(setq erc-modules '(autojoin button completion irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track log truncate))
+(setq erc-modules '(autojoin button completion irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track log truncate scrolltobottom))
 (erc-update-modules)
 
 (setq erc-timestamp-only-if-changed-flag nil
