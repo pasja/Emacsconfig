@@ -312,7 +312,19 @@
       erc-log-file-coding-system 'utf-8
       erc-log-insert-log-on-open nil)
 
-(add-to-list 'load-path "~/.emacs.d/")
+(require 'erc-goodies)                                          ; colorize
+(set-face-attribute 'erc-current-nick-face nil
+		    :foreground "yellow"
+		    :weight 'bold)
+
+(set-face-attribute 'erc-input-face nil
+		    :foreground "indian red")
+
+(setq erc-keywords nil
+      erc-keyword-highlight-type 'all
+      erc-interpret-mirc-color t)
+
+(add-to-list 'load-path "~/.emacs.d/")                          ; autojoin
 (require 'server)
 (unless (and (functionp 'server-running-p)(server-running-p "irc"))
   (require 'ercidentities))
