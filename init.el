@@ -383,7 +383,9 @@
 	       :url "https://github.com/jlr/rainbow-delimiters.git"
 	       :features rainbow-delimiters
 	       :after (lambda ()
-			(global-rainbow-delimiters-mode 1)))
+			(global-rainbow-delimiters-mode 1)
+			(add-hook 'erc-mode-hook '(lambda ()
+			     (rainbow-delimiters-mode -1)))))
 
 	(:name magit
 	       :after (lambda ()
