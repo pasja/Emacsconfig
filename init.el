@@ -295,7 +295,7 @@
 (setq erc-modules '(autojoin button completion irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track log truncate scrolltobottom))
 (erc-update-modules)
 
-(setq erc-timestamp-only-if-changed-flag nil
+(setq erc-timestamp-only-if-changed-flag nil                    ; general settings
       erc-timestamp-format "%H:%M "
       erc-fill-prefix "      "
       erc-insert-timestamp-function 'erc-insert-timestamp-left
@@ -304,7 +304,7 @@
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-max-buffer-size 3000000)
 
-(setq erc-log-channels-directory "~/irclog"
+(setq erc-log-channels-directory "~/irclog"                     ; logging
       erc-save-buffer-on-part nil
       erc-save-queries-on-quit nil
       erc-log-write-after-send t
