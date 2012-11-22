@@ -415,6 +415,7 @@
 
 	(:name magit
 	       :after (lambda ()
+			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false"))
 			(global-set-key (kbd "C-x g")
 					(lambda ()
 					  (interactive)
