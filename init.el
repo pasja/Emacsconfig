@@ -364,7 +364,7 @@
 	       :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
 	       :features yasnippet
 	       :compile nil
-	       :after (lambda ()
+	       :after (progn
 			(setq yas/root-directory
 			      '("~/.emacs.d/yas/")) ; my own snippets
 			(mapc 'yas/load-directory yas/root-directory)
@@ -382,11 +382,11 @@
 	       :depends popup
 	       :branch "expand"
 	       :features auto-complete
-	       :post-init (lambda ()
+	       :post-init (progn
 		    (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
 		    (require 'auto-complete-config)
 		    (ac-config-default))
-	       :after (lambda ()
+	       :after (progn
 			(setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
 			      ac-dwim t)
 			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
@@ -399,13 +399,13 @@
 	       :type git
 	       :url "https://github.com/jlr/rainbow-delimiters.git"
 	       :features rainbow-delimiters
-	       :after (lambda ()
+	       :after (progn
 			(global-rainbow-delimiters-mode 1)
 			(add-hook 'erc-mode-hook '(lambda ()
 			     (rainbow-delimiters-mode -1)))))
 
 	(:name magit
-	       :after (lambda ()
+	       :after (progn
 			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false"))
 			(global-set-key (kbd "C-x g")
 					(lambda ()
@@ -414,7 +414,7 @@
 					  (delete-other-windows)))))
 
 	(:name dired+
-	       :after (lambda ()
+	       :after (progn
 			(require 'dired+)
 			(toggle-diredp-find-file-reuse-dir 1) ; reuse existing dired buffer
 			(setq dired-recursive-copies 'always  ; recursive copy/delete
@@ -430,7 +430,7 @@
 			))
 
 	(:name mode-compile
-	       :after (lambda ()
+	       :after (progn
 			(autoload 'mode-compile "mode-compile"
 			  "Command to compile current buffer file based on the major mode" t)
 			(global-set-key (kbd "C-c c") 'mode-compile)
@@ -440,7 +440,7 @@
 			))
 
 	(:name anything
-	       :after (lambda ()
+	       :after (progn
 			(require 'anything)
 			(require 'anything-match-plugin)
 			))
@@ -454,12 +454,12 @@
 
 	(:name info+
 	       :type emacswiki
-	       :after (lambda () 
+	       :after (progn
 			(eval-after-load "info" '(require 'info+))))
 
 	(:name replace+
 	       :type emacswiki
-	       :after (lambda () 
+	       :after (progn
 			(eval-after-load "replace" '(require 'replace+))))
 
 	(:name grep+
@@ -479,7 +479,7 @@
 	       :url "https://github.com/jrockway/cperl-mode.git"
 	       :branch "mx-declare"
 	       :features "cperl-mode"
-	       :after (lambda()
+	       :after (progn
 			(define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
 			(cperl-set-style "K&R")
 			(setq cperl-invalid-face nil
@@ -493,11 +493,11 @@
 	       :branch "fix-ac-expand"
 	       :depends anything
 	       :website "https://github.com/pasja/perl-completion"
-	       :before (lambda ()
+	       :before (progn
 			 (setq plcmp-method-inspecter 'class-inspector       
 			       plcmp-use-keymap nil))
 	       :features "perl-completion"
-	       :after (lambda ()
+	       :after (progn
 			(add-hook 'cperl-mode-hook                        
 				   (lambda ()
 				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
@@ -510,11 +510,11 @@
 
 	(:name fixme-mode
 	       :type emacswiki
-	       :before (lambda ()
+	       :before (progn
 			 (setq fixme-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE" "XXX")
 			       fixme-modes '(erlang-mode java-mode c-mode emacs-lisp-mode jde-mode scheme-mode python-mode ruby-mode cperl-mode slime-mode common-lisp-mode c++-mode d-mode js2-mode haskell-mode tuareg-mode lua-mode pascal-mode fortran-mode prolog-mode asm-mode csharp-mode sml-mode conf-mode conf-ppd-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-javaprop-mode conf-xdefaults-mode)))
 	       :features "fixme-mode"
-	       :after (lambda ()
+	       :after (progn
 			(fixme-mode 1)))
 
 	(:name bookmark+
@@ -524,7 +524,7 @@
 	       :compile nil	       
 	       :autoloads nil
 	       :features "bookmark+"
-	       :after (lambda ()
+	       :after (progn
 			(setq-default bookmark-default-file "~/.emacs.d/cache/.emacs.bmk"
 			      bmkp-bmenu-commands-file "~/.emacs.d/cache/.emacs-bmk-bmenu-commands.el"
 			      bmkp-bmenu-state-file "~/.emacs.d/cache/.emacs-bmk-bmenu-state.el"
@@ -533,7 +533,7 @@
 	(:name dired-sort-menu
 	       :type emacswiki
 	       :features "dired-sort-menu"
-	       :after (lambda ()
+	       :after (progn
 			(add-hook 'dired-load-hook
 				  (lambda () (require 'dired-sort-menu)))))
 
@@ -543,12 +543,12 @@
 
 	(:name undo-tree
 	       :features "undo-tree"
-	       :after (lambda ()
+	       :after (progn
 			(global-undo-tree-mode 1)))
 
 	(:name autopair
 	       :features "autopair"
-	       :after (lambda ()
+	       :after (progn
 			(autopair-global-mode 1)))
 
 	(:name icicles
@@ -558,7 +558,7 @@
 	       :compile nil
 	       :autoloads nil
 	       :features "icicles"
-	       :after (lambda ()
+	       :after (progn
 			(defun my-c-return ()
 			  "When in minibuffer use `icicle-candidate-action', otherwise use `cua-set-rectangle-mark'."
 			  (interactive)
