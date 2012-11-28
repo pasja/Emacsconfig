@@ -478,8 +478,6 @@
 	       :type "git"
 	       :url "https://github.com/jrockway/cperl-mode.git"
 	       :branch "mx-declare"
-	       :before (lambda ()
-			  (set-face-foreground 'cperl-nonoverridable-face "LightGoldenrod2"))
 	       :features "cperl-mode"
 	       :after (lambda()
 			(define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
