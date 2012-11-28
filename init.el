@@ -395,11 +395,6 @@
 			(define-key ac-completing-map [return] 'ac-complete) ; fixes for autopairs
 			(pushnew 'autopair-backspace ac-trigger-commands-on-completing)))
 
-	(:name color-theme
-	       :after (lambda ()
-			(color-theme-taming-mr-arneson)
-			))
-
 	(:name rainbow-delimiters
 	       :type git
 	       :url "https://github.com/jlr/rainbow-delimiters.git"
