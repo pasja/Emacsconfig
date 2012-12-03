@@ -239,6 +239,10 @@
 	  (lambda ()
 	    (flyspell-mode -1)))
 
+;; configure diff
+
+(setq diff-switches "-u")
+
 ;; configure ediff
 
 (setq ediff-split-window-function 'split-window-horizontally)
