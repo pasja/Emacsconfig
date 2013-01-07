@@ -150,6 +150,8 @@
 
 (global-set-key (kbd "S-<insert>") 'insert-from-primary-clipboard)
 
+(setq mouse-yank-at-point t)
+
 ;; zone-mode for .hu
 
 (add-to-list 'auto-mode-alist '("\\.hu$" . zone-mode))
