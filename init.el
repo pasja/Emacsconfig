@@ -603,15 +603,23 @@
 			(icy-mode 1)
 			))
 
+	(:name solarized-theme
+	       :type github
+	       :pkgname "sellout/emacs-color-theme-solarized"
+	       :description "Solarized themes for Emacs"
+	       :prepare (add-to-list 'custom-theme-load-path default-directory)
+	       :after (progn
+			(load-theme 'solarized-dark t)))
+
 	))
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete color-theme magit twiki-mode undo-tree autopair
+       '(el-get yasnippet auto-complete magit twiki-mode undo-tree autopair
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode
-		rainbow-delimiters csv-mode popup color-theme-solarized)
+		rainbow-delimiters csv-mode popup solarized-theme)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
