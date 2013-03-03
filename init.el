@@ -314,6 +314,9 @@
    '(add-to-list 'dired-compress-file-suffixes 
                  '("\\.zip\\'" ".zip" "unzip")))
 
+(setq dired-guess-shell-alist-user
+      '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mplayer" "vlc")))
+
 ;; configure woman
 
 (require 'woman)
