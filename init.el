@@ -369,11 +369,6 @@
       erc-keyword-highlight-type 'all
       erc-interpret-mirc-color t)
 
-(add-to-list 'load-path "~/.emacs.d/")                          ; autojoin
-(require 'server)
-(unless (and (functionp 'server-running-p)(server-running-p "irc"))
-  (require 'ercidentities))
-
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -640,6 +635,51 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
+
+;; circe
+
+(setq circe-reduce-lurker-spam t
+      circe-active-users-timeout 43200
+      circe-color-nicks-everywhere t
+      circe-highlight-nick-type 'occurence
+      circe-server-max-reconnect-attempts nil
+      circe-format-server-topic "*** Topic change by {origin}: {topic-diff}"
+      circe-format-self-say "<{nick}> {body}"
+      circe-new-buffer-behavior 'ignore)
+
+(require 'circe-color-nicks)
+(enable-circe-color-nicks)
+
+(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+(defun my-circe-prompt ()
+  (lui-set-prompt
+   (concat (propertize (concat (buffer-name) "")
+                       'face 'circe-prompt-face)
+           " ")))
+
+(require 'circe-lagmon)
+(circe-lagmon-mode)
+
+(require 'lui-autopaste)
+(add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
+
+(require 'lui-logging)
+(setq lui-logging-directory "~/irclog"
+      lui-logging-file-format "{buffer}@{network}"
+      lui-logging-format "[%Y-%m-%d %T] {text}")
+(add-hook 'circe-channel-mode-hook 'enable-lui-logging)
+
+(add-hook 'circe-channel-mode-hook '(linum-mode -1))
+
+(setq
+ lui-time-stamp-position 'left
+ lui-time-stamp-format "%H:%M "
+ lui-fill-type nil)
+
+(add-to-list 'load-path "~/.emacs.d/")                          ; autojoin
+(require 'server)
+(unless (and (functionp 'server-running-p)(server-running-p "irc"))
+  (require 'ercidentities))
 
 ;; Customize
  
