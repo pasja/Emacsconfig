@@ -609,6 +609,7 @@
 	(:name solarized-theme
 	       :type github
 	       :pkgname "sellout/emacs-color-theme-solarized"
+	       :branch "unified"
 	       :description "Solarized themes for Emacs"
 	       :prepare (add-to-list 'custom-theme-load-path default-directory)
 	       :after (progn
