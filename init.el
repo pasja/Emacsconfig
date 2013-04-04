@@ -667,9 +667,9 @@
 (setq lui-logging-directory "~/irclog"
       lui-logging-file-format "{buffer}@{network}"
       lui-logging-format "[%Y-%m-%d %T] {text}")
-(add-hook 'circe-channel-mode-hook 'enable-lui-logging)
+(add-hook 'circe-chat-mode-hook 'enable-lui-logging)
 
-(add-hook 'circe-channel-mode-hook '(linum-mode -1))
+(add-hook 'circe-chat-mode-hook '(linum-mode -1))
 
 (setq
  lui-time-stamp-position 'left
