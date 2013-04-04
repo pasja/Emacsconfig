@@ -615,6 +615,13 @@
 	       :after (progn
 			(load-theme 'solarized-dark t)))
 
+	(:name circe
+	       :website "https://github.com/jorgenschaefer/circe/wiki"
+	       :description "Circe is yet another client for IRC in Emacs. It provides most features one would expect from an IRC client, with sane defaults to start from."
+	       :type github
+	       :pkgname "jorgenschaefer/circe"
+	       :load-path ("lisp"))
+
 	))
 
 (setq my-packages
@@ -623,7 +630,7 @@
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode
-		rainbow-delimiters csv-mode popup solarized-theme)
+		rainbow-delimiters csv-mode popup solarized-theme circe)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
