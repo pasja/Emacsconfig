@@ -332,6 +332,10 @@
 
 (setq help-window-select t)
 
+;; configure prog-mode
+(add-hook 'prog-mode-hook 'subword-mode)
+(add-hook 'prog-mode-hook 'glasses-mode)
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
