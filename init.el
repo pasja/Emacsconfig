@@ -627,6 +627,15 @@
 	       :type http
 	       :url "http://elpa.gnu.org/packages/csv-mode-1.2.el")
 
+	(:name haskell-mode
+	       :description "A Haskell editing mode"
+	       :type github
+	       :pkgname "haskell/haskell-mode"
+	       :build ("make all")
+	       :post-init (progn
+			    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+			    (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)))
+
 	))
 
 (setq my-packages
