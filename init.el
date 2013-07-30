@@ -645,6 +645,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
+(mapc 'load-file
+      (directory-files "~/Emacsconfig/plugins" t ".elc$")) ; load them all!
 
 ;; circe
 
