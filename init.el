@@ -340,6 +340,11 @@
 
 (winner-mode 1)
 
+;; configure uniquify
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
