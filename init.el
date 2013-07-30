@@ -673,7 +673,7 @@
       lui-logging-format "[%Y-%m-%d %T] {text}")
 (add-hook 'circe-chat-mode-hook 'enable-lui-logging)
 
-(add-hook 'circe-chat-mode-hook '(linum-mode -1))
+(add-hook 'circe-chat-mode-hook '(lambda ()(linum-mode -1)))
 
 (setq
  lui-time-stamp-position 'left
