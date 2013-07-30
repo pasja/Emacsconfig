@@ -617,6 +617,12 @@
 	       :pkgname "jorgenschaefer/circe"
 	       :load-path ("lisp"))
 
+	(:name csv-mode
+	       :website "http://www.emacswiki.org/emacs/CsvMode"
+	       :description "Major mode for editing CSV (comma separated value) files."
+	       :type http
+	       :url "http://elpa.gnu.org/packages/csv-mode-1.2.el")
+
 	))
 
 (setq my-packages
