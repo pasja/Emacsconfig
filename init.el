@@ -391,21 +391,19 @@
       '(el-get
 
 	(:name yasnippet
-	       :type svn
-	       :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
+	       :type github
+	       :website "https://github.com/capitaomorte/yasnippet.git"
+	       :description "YASnippet is a template system for Emacs."
+	       :pkgname "capitaomorte/yasnippet"
 	       :features yasnippet
-	       :compile nil
+	       :compile "yasnippet.el"
 	       :after (progn
-			(setq yas/root-directory
-			      '("~/.emacs.d/yas/")) ; my own snippets
-			(mapc 'yas/load-directory yas/root-directory)
-			(setq yas/wrap-around-region t)
-			(setq yas/prompt-functions
-			      '(yas/x-prompt yas/ido-prompt))
-			(yas/global-mode 1)         ; make it global
+			(setq yas-snippet-dirs
+			      '("~/.emacs.d/yas/") ; my own snippets
+			      yas/wrap-around-region t
+			      yas-use-menu nil)
 			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
-			(yas/reload-all)
-			))
+			(yas/global-mode 1)))         ; make it global
 
 	(:name auto-complete
 	       :type git
