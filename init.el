@@ -641,6 +641,22 @@
 			    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 			    (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)))
 
+	(:name org-mode
+	       :website "http://orgmode.org/"
+	       :description "Org-mode is for keeping notes, maintaining ToDo lists, doing project planning, and authoring with a fast and effective plain-text system."
+	       :type git
+	       :url "git://orgmode.org/org-mode.git"
+	       :info "doc"
+	       :build/berkeley-unix `,(mapcar
+				       (lambda (target)
+					 (list "gmake" target (concat "EMACS=" (shell-quote-argument el-get-emacs))))
+				       '("oldorg"))
+	       :build `,(mapcar
+			 (lambda (target)
+			   (list "make" target (concat "EMACS=" (shell-quote-argument el-get-emacs))))
+			 '("oldorg"))
+	       :load-path ("." "lisp" "contrib/lisp"))
+
 	))
 
 (setq my-packages
@@ -649,7 +665,7 @@
 		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode
-		rainbow-delimiters csv-mode popup solarized-theme circe)
+		rainbow-delimiters csv-mode popup solarized-theme circe org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
