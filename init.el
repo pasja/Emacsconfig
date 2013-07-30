@@ -332,43 +332,6 @@
 
 (setq help-window-select t)
 
-;; configure erc
-
-(require 'tls)
-(require 'erc)
-
-(setq erc-modules '(autojoin button completion irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring stamp track log truncate scrolltobottom))
-(erc-update-modules)
-
-(setq erc-timestamp-only-if-changed-flag nil                    ; general settings
-      erc-timestamp-format "%H:%M "
-      erc-fill-prefix "      "
-      erc-insert-timestamp-function 'erc-insert-timestamp-left
-      erc-auto-query 'bury
-      erc-track-shorten-names nil
-      erc-current-nick-highlight-type 'nick-or-keyword
-      erc-max-buffer-size 3000000)
-
-(setq erc-log-channels-directory "~/irclog"                     ; logging
-      erc-save-buffer-on-part nil
-      erc-save-queries-on-quit nil
-      erc-log-write-after-send t
-      erc-log-write-after-insert t
-      erc-log-file-coding-system 'utf-8
-      erc-log-insert-log-on-open nil)
-
-(require 'erc-goodies)                                          ; colorize
-(set-face-attribute 'erc-current-nick-face nil
-		    :foreground "yellow"
-		    :weight 'bold)
-
-(set-face-attribute 'erc-input-face nil
-		    :foreground "indian red")
-
-(setq erc-keywords nil
-      erc-keyword-highlight-type 'all
-      erc-interpret-mirc-color t)
-
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
