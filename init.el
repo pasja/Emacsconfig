@@ -336,6 +336,10 @@
 (add-hook 'prog-mode-hook 'subword-mode)
 (add-hook 'prog-mode-hook 'glasses-mode)
 
+;; configure winner-mode
+
+(winner-mode 1)
+
 ;; Boostrap el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
