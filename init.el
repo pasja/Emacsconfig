@@ -600,13 +600,19 @@
 			))
 
 	(:name solarized-theme
-	       :type github
-	       :pkgname "sellout/emacs-color-theme-solarized"
+	       :type git
+	       :url "https://github.com/sellout/emacs-color-theme-solarized.git"
 	       :branch "unified"
+	       :autoloads nil
 	       :description "Solarized themes for Emacs"
 	       :prepare (add-to-list 'custom-theme-load-path default-directory)
 	       :after (progn
-			(load-theme 'solarized-dark t)))
+			(add-hook 'after-make-frame-functions
+				  (lambda (frame)
+				    (set-frame-parameter frame
+							 'background-mode
+							 'dark)))
+			(load-theme 'solarized t)))
 
 	(:name circe
 	       :website "https://github.com/jorgenschaefer/circe/wiki"
