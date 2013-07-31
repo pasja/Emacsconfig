@@ -351,7 +351,6 @@
 
 ;; configure prog-mode
 (add-hook 'prog-mode-hook 'subword-mode)
-(add-hook 'prog-mode-hook 'glasses-mode)
 
 ;; configure winner-mode
 
