@@ -281,30 +281,12 @@
 
 (setq sql-sqlite-program "sqlite3")
 
-;; configure org-mode
-
-(setq org-link-abbrev-alist
-      '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
-      org-return-follows-link t
-      org-CUA-compatible t)
-
-(add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
-(add-hook 'org-shiftleft-final-hook 'windmove-left)
-(add-hook 'org-shiftdown-final-hook 'windmove-down)
-(add-hook 'org-shiftright-final-hook 'windmove-right)
+;; insert today
 
 (global-set-key (kbd "M-3")                             ; easy timestamp for rovancs.org
 		(lambda ()
 		  (interactive)
 		  (insert(format-time-string "%Y-%m-%d"))))
-
-(global-set-key (kbd "<f6>")
-		(lambda ()
-		  (interactive)
-		  (find-file "~/org/rovancs.org")))
-
-(add-hook 'org-mode-hook '(lambda ()
-			     (rainbow-delimiters-mode -1)))
 
 ;; configure dired
 
@@ -423,6 +405,8 @@
 	       :after (progn
 			(global-rainbow-delimiters-mode 1)
 			(add-hook 'erc-mode-hook '(lambda ()
+			     (rainbow-delimiters-mode -1)))
+			(add-hook 'org-mode-hook '(lambda ()
 			     (rainbow-delimiters-mode -1)))))
 
 	(:name magit
@@ -655,7 +639,39 @@
 			 (lambda (target)
 			   (list "make" target (concat "EMACS=" (shell-quote-argument el-get-emacs))))
 			 '("oldorg"))
-	       :load-path ("." "lisp" "contrib/lisp"))
+	       :load-path ("." "lisp" "contrib/lisp")
+	       :features "org"
+	       :after (progn
+			(setq org-link-abbrev-alist
+			      '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
+			      org-return-follows-link t
+			      org-CUA-compatible t)
+
+			(add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
+			(add-hook 'org-shiftleft-final-hook 'windmove-left)
+			(add-hook 'org-shiftdown-final-hook 'windmove-down)
+			(add-hook 'org-shiftright-final-hook 'windmove-right)
+
+			(global-set-key (kbd "<f6>")
+					(lambda ()
+					  (interactive)
+					  (find-file "~/org/rovancs.org")))
+
+			(defun myorg-update-parent-cookie ()
+			  (when (equal major-mode 'org-mode)
+			    (save-excursion
+			      (ignore-errors
+				(org-back-to-heading)
+				(org-update-parent-todo-statistics)))))
+
+			(defadvice org-kill-line (after fix-cookies activate)
+			  (myorg-update-parent-cookie))
+
+			(defadvice kill-whole-line (after fix-cookies activate)
+			  (myorg-update-parent-cookie))
+			(eval-after-load 'org '(progn
+						  (setq org-default-notes-file (concat org-directory "/notes.org"))
+						  (define-key global-map (kbd "<f8>") 'org-capture)))))
 
 	))
 
