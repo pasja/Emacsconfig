@@ -627,8 +627,35 @@
 			(defadvice kill-whole-line (after fix-cookies activate)
 			  (myorg-update-parent-cookie))
 			(eval-after-load 'org '(progn
-						  (setq org-default-notes-file (concat org-directory "/notes.org"))
-						  (define-key global-map (kbd "<f8>") 'org-capture)))))
+						 (setq org-default-notes-file (concat org-directory "/notes.org"))
+						 (define-key global-map (kbd "<f8>") 'org-capture)))))
+	(:name emms
+	       :description "The Emacs Multimedia System"
+	       :type git
+	       :url "git://git.sv.gnu.org/emms.git"
+	       :info "doc"
+	       :load-path ("./lisp")
+	       :features emms-setup
+	       :build `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
+			("make" ,(format "EMACS=%s" el-get-emacs)
+			 ,(format "SITEFLAG=\\\"--no-site-file -L %s/emacs-w3m/ \\\""
+				  el-get-dir)
+			 "autoloads" "lisp" "docs"))
+	       :build/berkeley-unix `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
+				      ("gmake" ,(format "EMACS=%s" el-get-emacs)
+				       ,(format "SITEFLAG=\\\"--no-site-file -L %s/emacs-w3m/ \\\""
+						el-get-dir)
+				       "autoloads" "lisp" "docs"))
+	       :after (progn
+			(emms-all)
+			(emms-mode-line 1)
+			(require 'emms-player-mpd)
+			(setq emms-player-mpd-music-directory "~/Zene/"
+			      emms-player-mpd-server-name "localhost"
+			      emms-player-mpd-server-port "6600")
+			(add-to-list 'emms-info-functions 'emms-info-mpd)
+			(add-to-list 'emms-player-list 'emms-player-mpd)
+			(emms-player-mpd-connect)))
 
 	))
 
