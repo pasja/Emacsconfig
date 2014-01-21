@@ -457,12 +457,6 @@
 			(global-set-key (kbd "C-c k") 'mode-compile-kill)
 			))
 
-	(:name anything
-	       :after (progn
-			(require 'anything)
-			(require 'anything-match-plugin)
-			))
-
 	(:name dired-tar
 	       :type "http"
 	       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
@@ -505,21 +499,6 @@
 			      cperl-tab-always-indent nil
 			      cperl-highlight-variables-indiscriminately t)))
 
-	(:name perl-completion
-	       :type "git"
-	       :url "https://github.com/pasja/perl-completion.git"
-	       :branch "fix-ac-expand"
-	       :depends anything
-	       :website "https://github.com/pasja/perl-completion"
-	       :before (progn
-			 (setq plcmp-method-inspecter 'class-inspector       
-			       plcmp-use-keymap nil))
-	       :features "perl-completion"
-	       :after (progn
-			(add-hook 'cperl-mode-hook                        
-				   (lambda ()
-				     (setq ac-sources '(ac-source-perl-completion ac-source-words-in-buffer ac-source-yasnippet))
-				     (perl-completion-mode t)))))
 	(:name twiki-mode
 	       :type "http"
 	       :url "http://www.neilvandyke.org/erin-twiki-emacs/erin.el"
@@ -678,8 +657,8 @@
 (setq my-packages
       (append 
        '(el-get yasnippet auto-complete magit twiki-mode undo-tree autopair
-		dired+ mode-compile anything dired-tar info+ bookmark+ dired-sort-menu
-		replace+ grep+ ffap- lacarte cperl-mode perl-completion dired-sort-menu+
+		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu
+		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+
 		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode
 		rainbow-delimiters csv-mode popup solarized-theme circe org-mode)
        (eval-after-load "el-get"
