@@ -71,28 +71,6 @@
 (set-language-environment "UTF-8")       ; prefer utf-8 for language settings
 (set-input-method nil)                   ; no funky input for normal editing;
 
-;; spelling 
-
-(setq ispell-program-name "aspell"
-      ispell-dictionary "hungarian")
-
-;; (setq ispell-program-name "ispell"
-;;       ispell-dictionary "magyar")
-
-;; (if (file-exists-p "/usr/bin/hunspell")                                         
-;;     (progn
-;;       (setq ispell-program-name "hunspell")
-;;       (eval-after-load "ispell"
-;;         '(progn (defun ispell-get-coding-system () 'utf-8)))))
-
-;; (setq ispell-program-name "hunspell"   ; export DICTIONARY=hu_HU && export DICPATH=/usr/share/hunspell
-;;       ispell-local-dictionary "hu_HU"
-;;       ispell-skip-html t
-;;       ispell-local-dictionary-alist
-;;       '(("hu_HU" "\[\[:alpha:\]\]" "[^[:alpha:]]" "[']" nil ("-d" "hu_HU") nil utf-8))
-;;       ispell-really-hunspell t)
-;; (setq ispell-dictionary "hu_HU")
-
 ;; rectangles
 
 (setq cua-enable-cua-keys nil)
@@ -672,6 +650,11 @@
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 (mapc 'load-file
       (directory-files "~/Emacsconfig/plugins" t ".elc$")) ; load them all!
+
+;; spelling
+
+(setq-default ispell-program-name "hunspell")
+(ispell-change-dictionary "hu_HU" t)
 
 ;; circe
 
