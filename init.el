@@ -696,10 +696,13 @@
  lui-time-stamp-format "%H:%M "
  lui-fill-type nil)
 
-(add-to-list 'load-path "~/.emacs.d/")                          ; autojoin
-(require 'server)
-(unless (and (functionp 'server-running-p)(server-running-p "irc"))
-  (require 'ercidentities))
+(when (string= (chomp (hostname-to-string)) "midgard") ; autojoin
+  (progn (add-to-list 'load-path "~/.emacs.d/")                          
+	 (require 'server)
+	 (functionp 'server-running-p)
+	 (if (and (not (server-running-p "irc"))
+		  (string= server-name "irc"))
+	     (require 'ercidentities))))
 
 ;; Customize
  
