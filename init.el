@@ -409,6 +409,13 @@
 			(eval-after-load 'magit
 			  '(define-key magit-status-mode-map (kbd "q") 'magit-quit-session))))
 
+	(:name git-modes
+	       :website "https://github.com/magit/git-modes"
+	       :description "Emacs modes for various Git-related files"
+	       :type github
+	       :autoloads nil
+	       :pkgname "magit/git-modes")
+
 	(:name dired+
 	       :after (progn
 			(require 'dired+)
