@@ -388,6 +388,7 @@
 			     (rainbow-delimiters-mode -1)))))
 
 	(:name magit
+	       :autoloads nil
 	       :after (progn
 			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false"))
 			(global-set-key (kbd "C-x g")
