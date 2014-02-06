@@ -656,7 +656,6 @@
 				       "autoloads" "lisp" "docs"))
 	       :after (progn
 			(emms-all)
-			(emms-mode-line 1)
 			(setq emms-cache-file "~/.emacs.d/cache/emms-cache")
 			(require 'emms-player-mpd)
 			(setq emms-player-mpd-music-directory "~/Zene/"
