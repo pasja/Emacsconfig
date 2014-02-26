@@ -667,7 +667,8 @@
 			(add-to-list 'emms-player-list 'emms-player-mpd)
 			(emms-player-mpd-connect)
 			(if (file-readable-p "~/.emacs.d/cache/emms-cache")
-			    (emms-cache-restore))))
+			      (emms-cache-restore)
+			      (setq emms-cache-dirty nil))))
 
 	))
 
