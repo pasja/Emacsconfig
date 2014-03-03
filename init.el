@@ -661,7 +661,7 @@
 			      emms-info-auto-update nil
 			      emms-playlist-buffer-name "EMMS Playlist")
 			(if (file-readable-p "~/.emacs.d/cache/emms-cache")
-			      (emms-cache-restore)
+			      (emms-cache-restore))
 			(require 'emms-player-mpd)
 			(setq emms-player-mpd-music-directory "~/Zene/"
 			      emms-player-mpd-server-name "localhost"
