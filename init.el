@@ -695,10 +695,10 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete magit twiki-mode undo-tree autopair
-		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu
+       '(el-get yasnippet auto-complete magit twiki-mode undo-tree smartparens
+		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu mu4e
 		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+
-		fixme-mode icicles apache-mode nxhtml nyan-mode yaml-mode haskell-mode
+		fixme-mode icicles apache-mode nyan-mode yaml-mode haskell-mode
 		rainbow-delimiters csv-mode popup solarized-theme circe org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
