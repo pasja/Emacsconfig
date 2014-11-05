@@ -641,7 +641,22 @@
 			  (myorg-update-parent-cookie))
 			(eval-after-load 'org '(progn
 						 (setq org-default-notes-file (concat org-directory "/notes.org"))
-						 (define-key global-map (kbd "<f8>") 'org-capture)))))
+						 (define-key global-map (kbd "<f8>") 'org-capture)))
+			;; plantuml
+
+			;; active Org-babel languages
+			(org-babel-do-load-languages
+			 'org-babel-load-languages
+			 '(;; other Babel languages
+			   (plantuml . t)))
+
+			(setq org-plantuml-jar-path
+			      (expand-file-name "~/bin/plantuml.jar"))
+
+			(defun my-org-confirm-babel-evaluate (lang body)
+			  (not (string= lang "plantuml")))  ; don't ask for plantuml
+			(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)))
+
 	(:name emms
 	       :description "The Emacs Multimedia System"
 	       :type git
