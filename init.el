@@ -534,10 +534,10 @@
 	       :after (progn
 			(global-undo-tree-mode 1)))
 
-	(:name autopair
-	       :features "autopair"
+	(:name smartparens
 	       :after (progn
-			(autopair-global-mode 1)))
+			(require 'smartparens-config)
+			(smartparens-global-mode 1)))
 
 	(:name icicles
 	       :type "http-tar"
