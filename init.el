@@ -382,11 +382,11 @@
 			(pushnew 'autopair-backspace ac-trigger-commands-on-completing)))
 
 	(:name rainbow-delimiters
-	       :type git
-	       :url "https://github.com/jlr/rainbow-delimiters.git"
+	       :type github
+	       :pkgname "Fanael/rainbow-delimiters"
 	       :features rainbow-delimiters
 	       :after (progn
-			(global-rainbow-delimiters-mode 1)
+			(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 			(add-hook 'erc-mode-hook '(lambda ()
 			     (rainbow-delimiters-mode -1)))
 			(add-hook 'org-mode-hook '(lambda ()
@@ -477,9 +477,9 @@
 	       :type emacswiki
 	       :features "lacarte")
 	       
-	(:name cperl-mode   ; newer cperl mode (https://github.com/jrockway/cperl-mode/tree/mx-declare)
-	       :type "git"
-	       :url "https://github.com/jrockway/cperl-mode.git"
+	(:name cperl-mode
+	       :type github
+	       :pkgname "jrockway/cperl-mode"
 	       :branch "mx-declare"
 	       :features "cperl-mode"
 	       :after (progn
@@ -559,8 +559,8 @@
 			))
 
 	(:name solarized-theme
-	       :type git
-	       :url "https://github.com/sellout/emacs-color-theme-solarized.git"
+	       :type github
+	       :pkgname "sellout/emacs-color-theme-solarized"
 	       :branch "unified"
 	       :autoloads nil
 	       :description "Solarized themes for Emacs"
