@@ -358,25 +358,6 @@
 			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
 			(yas/global-mode 1)))         ; make it global
 
-	(:name auto-complete
-	       :type git
-	       :url "https://github.com/pasja/auto-complete.git"
-	       :depends popup
-	       :branch "expand"
-	       :features auto-complete
-	       :post-init (progn
-		    (add-to-list 'ac-dictionary-directories (expand-file-name "dict" pdir))
-		    (require 'auto-complete-config)
-		    (ac-config-default))
-	       :after (progn
-			(setq ac-comphist-file "~/.emacs.d/cache/ac.cache"
-			      ac-dwim t)
-			(setq-default ac-sources '(ac-source-words-in-same-mode-buffers ac-source-words-in-buffer ac-source-yasnippet))
-			(ac-linum-workaround)
-			(define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
-			(define-key ac-completing-map [return] 'ac-complete) ; fixes for autopairs
-			(pushnew 'autopair-backspace ac-trigger-commands-on-completing)))
-
 	(:name rainbow-delimiters
 	       :type github
 	       :pkgname "Fanael/rainbow-delimiters"
@@ -686,7 +667,7 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet magit undo-tree smartparens
+       '(el-get yasnippet magit undo-tree smartparens company-mode
 		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu mu4e
 		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+
 		fixme-mode icicles apache-mode nyan-mode yaml-mode haskell-mode
