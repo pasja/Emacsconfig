@@ -15,7 +15,8 @@
       display-time-day-and-date t
       display-time-24hr-format t
       redisplay-dont-pause t                 ; faster scrolling
-      sentence-end-double-space nil)         ; period single space ends sentence
+      sentence-end-double-space nil          ; period single space ends sentence
+      load-prefer-new t)
 (setq-default major-mode 'text-mode)
 
 (unless (string= window-system "x")
@@ -58,8 +59,8 @@
 (setq
  scroll-margin 0                         ; do smooth scrolling, ...
  scroll-conservatively 100000            ; ... the defaults ...
- scroll-up-aggressively 0                ; ... are very ...
- scroll-down-aggressively 0              ; ... annoying
+ scroll-up-aggressively 0.0              ; ... are very ...
+ scroll-down-aggressively 0.0            ; ... annoying
  scroll-preserve-screen-position t)      ; preserve screen pos with C-v/M-v
 
 ;; some UTF-8 goodies
@@ -74,8 +75,7 @@
 
 ;; rectangles
 
-(setq cua-enable-cua-keys nil)
-(cua-mode t)
+(global-set-key (kbd "C-<return>") 'cua-rectangle-mark-mode)
 
 ;; savehist: save some history
 
@@ -312,15 +312,11 @@
 
 ;; configure prog-mode
 (add-hook 'prog-mode-hook 'subword-mode)
+(add-hook 'prog-mode-hook 'prettify-symbols-mode)
 
 ;; configure winner-mode
 
 (winner-mode 1)
-
-;; configure uniquify
-
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward)
 
 ;; configure calendar
 
@@ -393,7 +389,7 @@
 			     (rainbow-delimiters-mode -1)))))
 
 	(:name magit
-	       :autoloads nil
+	       :features "magit"
 	       :after (progn
 			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false"))
 			(global-set-key (kbd "C-x g")
@@ -423,8 +419,9 @@
 	       :pkgname "magit/git-modes")
 
 	(:name dired+
+	       :features "dired+"
+	       :before (progn (setq diredp-hide-details-initially-flag nil))
 	       :after (progn
-			(require 'dired+)
 			(toggle-diredp-find-file-reuse-dir 1) ; reuse existing dired buffer
 			(setq dired-recursive-copies 'always  ; recursive copy/delete
 			      dired-recursive-deletes 'top
@@ -490,12 +487,6 @@
 			      cperl-tab-always-indent nil
 			      cperl-highlight-variables-indiscriminately t)))
 
-	(:name twiki-mode
-	       :type "http"
-	       :url "http://www.neilvandyke.org/erin-twiki-emacs/erin.el"
-	       :website "http://www.neilvandyke.org/erin-twiki-emacs/"
-	       :features "erin")
-
 	(:name fixme-mode
 	       :type emacswiki
 	       :before (progn
@@ -552,7 +543,7 @@
 			  (interactive)
 			  (if (window-minibuffer-p (selected-window))
 			      (call-interactively 'icicle-candidate-action)
-			    (call-interactively 'cua-set-rectangle-mark)))
+			    (call-interactively 'cua-rectangle-mark-mode)))
 			(setq icicle-mark-position-in-candidate 'input-end
 			      icicle-point-position-in-candidate 'input-end)
 			(icy-mode 1)
@@ -695,7 +686,7 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet auto-complete magit twiki-mode undo-tree smartparens
+       '(el-get yasnippet magit undo-tree smartparens
 		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu mu4e
 		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+
 		fixme-mode icicles apache-mode nyan-mode yaml-mode haskell-mode
