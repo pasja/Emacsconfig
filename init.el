@@ -75,7 +75,8 @@
 
 ;; rectangles
 
-(global-set-key (kbd "C-<return>") 'cua-rectangle-mark-mode)
+(setq cua-enable-cua-keys nil)
+(cua-mode t)
 
 ;; savehist: save some history
 
@@ -524,7 +525,7 @@
 			  (interactive)
 			  (if (window-minibuffer-p (selected-window))
 			      (call-interactively 'icicle-candidate-action)
-			    (call-interactively 'cua-rectangle-mark-mode)))
+			    (call-interactively 'cua-set-rectangle-mark)))
 			(setq icicle-mark-position-in-candidate 'input-end
 			      icicle-point-position-in-candidate 'input-end)
 			(icy-mode 1)
