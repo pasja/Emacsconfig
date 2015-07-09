@@ -374,32 +374,14 @@
 	(:name magit
 	       :features "magit"
 	       :after (progn
-			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false"))
+			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false")
+                              magit-restore-window-configuration t
+                              magit-status-buffer-switch-function
+                              (lambda (buffer) ; there might already be an Emacs function which does this
+                                (pop-to-buffer buffer)
+                                (delete-other-windows)))
 			(global-set-key (kbd "C-x g")
-					(lambda ()
-					  (interactive)
-					  (magit-status default-directory)))
-
-			(defadvice magit-status (around magit-fullscreen activate) ; full screen magit-status
-			  (window-configuration-to-register :magit-fullscreen)
-			  ad-do-it
-			  (delete-other-windows))
-
-			(defun magit-quit-session ()
-			  "Restores the previous window configuration and kills the magit buffer"
-			  (interactive)
-			  (kill-buffer)
-			  (jump-to-register :magit-fullscreen))
-
-			(eval-after-load 'magit
-			  '(define-key magit-status-mode-map (kbd "q") 'magit-quit-session))))
-
-	(:name git-modes
-	       :website "https://github.com/magit/git-modes"
-	       :description "Emacs modes for various Git-related files"
-	       :type github
-	       :autoloads nil
-	       :pkgname "magit/git-modes")
+                                        'magit-status)))
 
 	(:name dired+
 	       :features "dired+"
