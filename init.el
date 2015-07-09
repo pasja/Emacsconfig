@@ -23,7 +23,7 @@
     (progn (tool-bar-mode -1)
 	   (scroll-bar-mode -1)))
 (menu-bar-mode -1)
-(set-fringe-mode  '(0 .  0))
+(set-fringe-mode  '(0 . 0))
 (show-paren-mode 1)
 (column-number-mode 1)
 (global-linum-mode 1)
@@ -158,7 +158,7 @@
 (defun force-backup-of-buffer ()
     (setq buffer-backed-up nil))
 
-(add-hook 'before-save-hook  'force-backup-of-buffer)
+(add-hook 'before-save-hook 'force-backup-of-buffer)
 
 ;; smart shell start
 
