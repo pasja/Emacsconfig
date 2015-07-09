@@ -497,7 +497,8 @@
 
 	(:name company-mode
 	       :after (progn
-			(global-company-mode)))
+                        (global-company-mode)
+                        (add-to-list 'company-dabbrev-code-modes 'cperl-mode)))
 
 	(:name icicles
 	       :type "http-tar"
