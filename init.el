@@ -17,7 +17,8 @@
       redisplay-dont-pause t                 ; faster scrolling
       sentence-end-double-space nil          ; period single space ends sentence
       load-prefer-new t)
-(setq-default major-mode 'text-mode)
+(setq-default major-mode 'text-mode
+	      indent-tabs-mode nil)
 
 (unless (string= window-system "x")
     (progn (tool-bar-mode -1)
