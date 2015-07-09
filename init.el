@@ -673,7 +673,6 @@
 
 ;; spelling
 
-(load-file "/usr/share/emacs/24.4/lisp/textmodes/ispell.elc")
 (setq-default ispell-program-name "hunspell")
 (ispell-change-dictionary "hu_HU" t)
 
