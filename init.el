@@ -495,6 +495,10 @@
 			(require 'smartparens-config)
 			(smartparens-global-mode 1)))
 
+	(:name company-mode
+	       :after (progn
+			(global-company-mode)))
+
 	(:name icicles
 	       :type "http-tar"
 	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
