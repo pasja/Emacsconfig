@@ -718,7 +718,7 @@
  lui-fill-type nil)
 
 (when (string= (chomp (hostname-to-string)) "midgard") ; autojoin
-  (progn (add-to-list 'load-path "~/.emacs.d/")                          
+  (progn (add-to-list 'load-path "~/.emacs.d/secrets/")
 	 (require 'server)
 	 (functionp 'server-running-p)
 	 (if (and (not (server-running-p "irc"))

@@ -6,5 +6,5 @@ el-get/
 thumbs/
 url/
 image-dired/
-/ercidentities.el
 elpa/
+/secrets/ercidentities.el
