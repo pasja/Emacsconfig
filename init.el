@@ -442,7 +442,6 @@
 	(:name cperl-mode
 	       :type github
 	       :pkgname "jrockway/cperl-mode"
-	       :branch "mx-declare"
 	       :features "cperl-mode"
 	       :after (progn
 			(define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
