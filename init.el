@@ -654,8 +654,8 @@
 
 (setq my-packages
       (append 
-       '(el-get yasnippet magit undo-tree smartparens company-mode
-		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu mu4e
+       '(el-get yasnippet magit undo-tree smartparens company-mode s web-mode
+		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+
 		fixme-mode icicles apache-mode nyan-mode yaml-mode haskell-mode
 		rainbow-delimiters csv-mode popup solarized-theme circe org-mode)
