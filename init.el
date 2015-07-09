@@ -449,7 +449,8 @@
 			(setq cperl-invalid-face nil
 			      cperl-indent-parens-as-block t
 			      cperl-tab-always-indent nil
-			      cperl-highlight-variables-indiscriminately t)))
+			      cperl-highlight-variables-indiscriminately t)
+			(define-key cperl-mode-map "{" 'nil)))
 
 	(:name fixme-mode
 	       :type emacswiki
