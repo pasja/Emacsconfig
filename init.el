@@ -698,7 +698,7 @@
 (add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
 
 (require 'lui-logging)
-(setq lui-logging-directory "~/irclog"
+(setq lui-logging-directory "~/irclog/"
       lui-logging-file-format "{buffer}@{network}"
       lui-logging-format "[%Y-%m-%d %T] {text}")
 (add-hook 'circe-chat-mode-hook 'enable-lui-logging)
