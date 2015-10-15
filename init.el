@@ -533,13 +533,6 @@
 							 'dark)))
 			(load-theme 'solarized t)))
 
-	(:name circe
-	       :website "https://github.com/jorgenschaefer/circe/wiki"
-	       :description "Circe is yet another client for IRC in Emacs. It provides most features one would expect from an IRC client, with sane defaults to start from."
-	       :type github
-	       :pkgname "jorgenschaefer/circe"
-	       :load-path ("lisp"))
-
 	(:name csv-mode
 	       :website "http://www.emacswiki.org/emacs/CsvMode"
 	       :description "Major mode for editing CSV (comma separated value) files."
