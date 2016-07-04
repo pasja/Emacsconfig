@@ -325,6 +325,8 @@
 (setq calendar-week-start-day 1)
 
 ;; Boostrap el-get
+;; preinstall the following debian packages:
+;; apt install hunspell hunspell-hu texinfo build-essentials
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
