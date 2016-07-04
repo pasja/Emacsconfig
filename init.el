@@ -390,9 +390,15 @@
 			      dired-recursive-deletes 'top
 			      dired-dwim-target t
 			      dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
-			(define-key dired-mode-map (kbd "^")
-			  (lambda ()
-			    (interactive) (find-alternate-file "..")))
+
+                        (define-key dired-mode-map (kbd "^") 'pasja-goto-up-in-dired)
+
+                        (defun pasja-goto-up-in-dired ()
+                          (interactive)
+                          (let ((pasja-prev-dir-name (file-truename default-directory)))
+                            (find-alternate-file "..")
+                            (dired-goto-file pasja-prev-dir-name)))
+
 			(add-hook 'dired-mode-hook
 				  (lambda ()
 				    (setq dired-omit-files-p t)))
