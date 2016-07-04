@@ -376,12 +376,8 @@
 	(:name magit
 	       :features "magit"
 	       :after (progn
-			(setq magit-git-standard-options '("--no-pager" "-c" "core.quotepath=false")
-                              magit-restore-window-configuration t
-                              magit-status-buffer-switch-function
-                              (lambda (buffer) ; there might already be an Emacs function which does this
-                                (pop-to-buffer buffer)
-                                (delete-other-windows)))
+			(setq magit-git-global-arguments '("--no-pager" "-c" "core.quotepath=false")
+                              magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
 			(global-set-key (kbd "C-x g")
                                         'magit-status)))
 
