@@ -324,6 +324,17 @@
 
 (setq calendar-week-start-day 1)
 
+;; BB spec stuff
+
+;; browse kayako from BOSS folder
+(defun browse-url-kayako ()
+  (interactive)
+  (let* ((baseurl "https://support.balabit.com/staff/index.php?/Tickets/Ticket/View/")
+         (url (concat baseurl (thing-at-point 'filename t))))
+    (browse-url url)))
+
+(global-set-key (kbd "<f8>") 'browse-url-kayako)
+
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essentials
