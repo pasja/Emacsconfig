@@ -504,25 +504,6 @@
                         (global-company-mode)
                         (add-to-list 'company-dabbrev-code-modes 'cperl-mode)))
 
-	(:name icicles
-	       :type "http-tar"
-	       :url "https://users.itk.ppke.hu/~pasja/icicles.tar.gz"
-	       :options ("xzf")
-	       :compile nil
-	       :autoloads nil
-	       :features "icicles"
-	       :after (progn
-			(defun my-c-return ()
-			  "When in minibuffer use `icicle-candidate-action', otherwise use `cua-set-rectangle-mark'."
-			  (interactive)
-			  (if (window-minibuffer-p (selected-window))
-			      (call-interactively 'icicle-candidate-action)
-			    (call-interactively 'cua-set-rectangle-mark)))
-			(setq icicle-mark-position-in-candidate 'input-end
-			      icicle-point-position-in-candidate 'input-end)
-			(icy-mode 1)
-			))
-
 	(:name solarized-theme
 	       :type github
 	       :pkgname "sellout/emacs-color-theme-solarized"
@@ -655,7 +636,7 @@
        '(el-get yasnippet magit undo-tree smartparens company-mode s web-mode
 		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu
 		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+ auctex
-		fixme-mode icicles apache-mode nyan-mode yaml-mode haskell-mode
+		fixme-mode apache-mode nyan-mode yaml-mode haskell-mode
 		rainbow-delimiters csv-mode popup solarized-theme circe org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
