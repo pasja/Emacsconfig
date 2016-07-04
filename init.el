@@ -631,6 +631,14 @@
 
 	))
 
+
+(el-get-bundle swiper
+  (ivy-mode 1))
+
+(el-get-bundle markdown-mode)
+
+(el-get-bundle php-mode)
+
 (setq my-packages
       (append 
        '(el-get yasnippet magit undo-tree smartparens company-mode s web-mode
