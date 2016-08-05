@@ -378,48 +378,6 @@
 			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
 			(yas/global-mode 1)))         ; make it global
 
-	(:name rainbow-delimiters
-	       :type github
-	       :pkgname "Fanael/rainbow-delimiters"
-	       :features rainbow-delimiters
-	       :after (progn
-			(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-			(add-hook 'erc-mode-hook '(lambda ()
-			     (rainbow-delimiters-mode -1)))
-			(add-hook 'org-mode-hook '(lambda ()
-			     (rainbow-delimiters-mode -1)))))
-
-	(:name magit
-	       :features "magit"
-	       :after (progn
-			(setq magit-git-global-arguments '("--no-pager" "-c" "core.quotepath=false")
-                              magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-			(global-set-key (kbd "C-x g")
-                                        'magit-status)))
-
-	(:name dired+
-	       :features "dired+"
-	       :before (progn (setq diredp-hide-details-initially-flag nil))
-	       :after (progn
-			(toggle-diredp-find-file-reuse-dir 1) ; reuse existing dired buffer
-			(setq dired-recursive-copies 'always  ; recursive copy/delete
-			      dired-recursive-deletes 'top
-			      dired-dwim-target t
-			      dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
-
-                        (define-key dired-mode-map (kbd "^") 'pasja-goto-up-in-dired)
-
-                        (defun pasja-goto-up-in-dired ()
-                          (interactive)
-                          (let ((pasja-prev-dir-name (file-truename default-directory)))
-                            (find-alternate-file "..")
-                            (dired-goto-file pasja-prev-dir-name)))
-
-			(add-hook 'dired-mode-hook
-				  (lambda ()
-				    (setq dired-omit-files-p t)))
-			))
-
 	(:name mode-compile
 	       :after (progn
 			(autoload 'mode-compile "mode-compile"
@@ -437,11 +395,6 @@
 	       :compile "dired-tar.el"
 	       :features "dired-tar")
 
-	(:name info+
-	       :type emacswiki
-	       :after (progn
-			(eval-after-load "info" '(require 'info+))))
-
 	(:name replace+
 	       :type emacswiki
 	       :after (progn
@@ -455,23 +408,6 @@
 	       :type emacswiki
 	       :features "ffap-")
 
-	(:name lacarte
-	       :type emacswiki
-	       :features "lacarte")
-	       
-	(:name cperl-mode
-	       :type github
-	       :pkgname "jrockway/cperl-mode"
-	       :features "cperl-mode"
-	       :after (progn
-			(define-key cperl-mode-map (kbd "C-j") 'reindent-then-newline-and-indent)
-			(cperl-set-style "K&R")
-			(setq cperl-invalid-face nil
-			      cperl-indent-parens-as-block t
-			      cperl-tab-always-indent nil
-			      cperl-highlight-variables-indiscriminately t)
-			(define-key cperl-mode-map "{" 'nil)))
-
 	(:name fixme-mode
 	       :type emacswiki
 	       :before (progn
@@ -480,19 +416,6 @@
 	       :features "fixme-mode"
 	       :after (progn
 			(fixme-mode 1)))
-
-	(:name bookmark+
-	       :type "http-tar"
-	       :url "https://users.itk.ppke.hu/~pasja/bookmarkplus.tar.gz"
-	       :options ("xzf")
-	       :compile nil	       
-	       :autoloads nil
-	       :features "bookmark+"
-	       :after (progn
-			(setq-default bookmark-default-file "~/.emacs.d/cache/.emacs.bmk"
-			      bmkp-bmenu-commands-file "~/.emacs.d/cache/.emacs-bmk-bmenu-commands.el"
-			      bmkp-bmenu-state-file "~/.emacs.d/cache/.emacs-bmk-bmenu-state.el"
-			      bmkp-last-as-first-bookmark-file nil)))
 
 	(:name dired-sort-menu
 	       :type emacswiki
@@ -504,52 +427,6 @@
 	(:name dired-sort-menu+
 	       :type emacswiki
 	       :features "dired-sort-menu+")
-
-	(:name undo-tree
-	       :features "undo-tree"
-	       :after (progn
-			(global-undo-tree-mode 1)))
-
-	(:name smartparens
-	       :after (progn
-			(require 'smartparens-config)
-			(smartparens-global-mode 1)))
-
-	(:name company-mode
-	       :after (progn
-                        (global-company-mode)
-                        (add-to-list 'company-dabbrev-code-modes 'cperl-mode)))
-
-	(:name solarized-theme
-	       :type github
-	       :pkgname "sellout/emacs-color-theme-solarized"
-	       :autoloads nil
-	       :description "Solarized themes for Emacs"
-	       :prepare (add-to-list 'custom-theme-load-path default-directory)
-	       :after (progn
-			(add-hook 'after-make-frame-functions
-				  (lambda (frame)
-				    (set-frame-parameter frame
-							 'background-mode
-							 'dark)))
-			(load-theme 'solarized t)))
-
-	(:name csv-mode
-	       :website "http://www.emacswiki.org/emacs/CsvMode"
-	       :description "Major mode for editing CSV (comma separated value) files."
-	       :type http
-	       :url "http://elpa.gnu.org/packages/csv-mode-1.2.el")
-
-	(:name haskell-mode
-	       :description "A Haskell editing mode"
-	       :type github
-	       :pkgname "haskell/haskell-mode"
-	       :build ("make all")
-	       :post-init (progn
-			    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-			    (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-			    (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-			    (setq haskell-process-type 'cabal-repl)))
 
 	(:name org-mode
 	       :website "http://orgmode.org/"
@@ -644,9 +521,75 @@
 			(setq emms-info-functions 'emms-info-mpd)
 			(add-to-list 'emms-player-list 'emms-player-mpd)
 			(emms-player-mpd-connect)))
+        ))
 
-	))
+(el-get-bundle cperl-mode
+  (progn (cperl-set-style "BSD")
+         (setq cperl-invalid-face nil
+               cperl-indent-parens-as-block t
+               cperl-tab-always-indent nil
+               cperl-highlight-variables-indiscriminately t)
+         ; smartparens fixup
+         (define-key cperl-mode-map "{" 'nil)))
 
+(el-get-bundle haskell-mode
+  (progn (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+         (setq haskell-process-type 'cabal-repl)))
+
+(el-get-bundle info+
+    (eval-after-load "info" '(require 'info+)))
+
+(el-get-bundle solarized-theme
+  :type github
+  :pkgname "sellout/emacs-color-theme-solarized"
+  :description "Solarized themes for Emacs"
+  :prepare (add-to-list 'custom-theme-load-path default-directory)
+  (progn (add-hook 'after-make-frame-functions
+                   (lambda (frame)
+                     (set-frame-parameter frame
+                                          'background-mode
+                                          'dark)))
+         (load-theme 'solarized t)))
+
+(el-get-bundle dired+
+  :before (setq diredp-hide-details-initially-flag nil)
+  (progn (diredp-toggle-find-file-reuse-dir 1) ; reuse existing dired buffer
+         (setq dired-recursive-copies 'always  ; recursive copy/delete
+               dired-recursive-deletes 'top
+               dired-dwim-target t
+               dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+
+         (define-key dired-mode-map (kbd "^") 'pasja-goto-up-in-dired)
+
+         (defun pasja-goto-up-in-dired ()
+           (interactive)
+           (let ((pasja-prev-dir-name (file-truename default-directory)))
+             (find-alternate-file "..")
+             (dired-goto-file pasja-prev-dir-name)))
+
+         (add-hook 'dired-mode-hook
+                   (lambda ()
+                     (setq dired-omit-mode t)))))
+
+(el-get-bundle rainbow-delimiters
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(el-get-bundle company-mode
+  (global-company-mode)
+  (add-to-list 'company-dabbrev-code-modes 'cperl-mode))
+
+(el-get-bundle magit
+  (setq magit-git-global-arguments '("--no-pager" "-c" "core.quotepath=false")
+        magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (global-set-key (kbd "C-x g")
+                  'magit-status))
+
+(el-get-bundle smartparens
+  (progn (require 'smartparens-config)
+         (smartparens-global-mode 1)))
+
+(el-get-bundle undo-tree
+  (global-undo-tree-mode 1))
 
 (el-get-bundle swiper
   (ivy-mode 1))
@@ -655,13 +598,23 @@
 
 (el-get-bundle php-mode)
 
+(el-get-bundle s)
+
+(el-get-bundle web-mode)
+
+(el-get-bundle csv-mode)
+
+(el-get-bundle apache-mode)
+
+(el-get-bundle yaml-mode)
+
+(el-get-bundle auctex)
+
 (setq my-packages
       (append 
-       '(el-get yasnippet magit undo-tree smartparens company-mode s web-mode
-		dired+ mode-compile dired-tar info+ bookmark+ dired-sort-menu
-		replace+ grep+ ffap- lacarte cperl-mode dired-sort-menu+ auctex
-		fixme-mode apache-mode nyan-mode yaml-mode haskell-mode
-		rainbow-delimiters csv-mode popup solarized-theme circe org-mode)
+       '(el-get yasnippet mode-compile dired-tar dired-sort-menu
+		replace+ grep+ ffap- dired-sort-menu+
+		fixme-mode circe org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
