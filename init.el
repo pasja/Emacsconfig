@@ -324,6 +324,11 @@
 
 (setq calendar-week-start-day 1)
 
+;; spelling
+
+(setq-default ispell-program-name "hunspell")
+(ispell-change-dictionary "hu_HU" t)
+
 ;; BB spec stuff
 
 ;; browse kayako from BOSS folder
@@ -668,11 +673,6 @@
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 (mapc 'load-file
       (directory-files "~/Emacsconfig/plugins" t ".elc$")) ; load them all!
-
-;; spelling
-
-(setq-default ispell-program-name "hunspell")
-(ispell-change-dictionary "hu_HU" t)
 
 ;; circe
 
