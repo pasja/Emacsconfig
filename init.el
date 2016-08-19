@@ -579,10 +579,12 @@
   (add-to-list 'company-dabbrev-code-modes 'cperl-mode))
 
 (el-get-bundle magit
-  (setq magit-git-global-arguments '("--no-pager" "-c" "core.quotepath=false")
-        magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-  (global-set-key (kbd "C-x g")
-                  'magit-status))
+  (progn
+    (global-set-key (kbd "C-x g")
+                    'magit-status)
+    (with-eval-after-load 'magit
+      (setq magit-git-global-arguments '("--no-pager" "-c" "core.quotepath=false")
+            magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))))
 
 (el-get-bundle smartparens
   (progn (require 'smartparens-config)
