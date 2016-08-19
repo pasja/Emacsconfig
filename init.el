@@ -576,8 +576,9 @@
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (el-get-bundle company-mode
-  (global-company-mode)
-  (add-to-list 'company-dabbrev-code-modes 'cperl-mode))
+  (progn (global-company-mode)
+         (with-eval-after-load 'cperl-mode
+           (add-to-list 'company-dabbrev-code-modes 'cperl-mode))))
 
 (el-get-bundle magit
   (progn
