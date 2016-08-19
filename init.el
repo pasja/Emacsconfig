@@ -524,13 +524,14 @@
         ))
 
 (el-get-bundle cperl-mode
-  (progn (cperl-set-style "BSD")
-         (setq cperl-invalid-face nil
-               cperl-indent-parens-as-block t
-               cperl-tab-always-indent nil
-               cperl-highlight-variables-indiscriminately t)
-         ; smartparens fixup
-         (define-key cperl-mode-map "{" 'nil)))
+  (with-eval-after-load 'cperl-mode
+    (cperl-set-style "BSD")
+    (setq cperl-invalid-face nil
+          cperl-indent-parens-as-block t
+          cperl-tab-always-indent nil
+          cperl-highlight-variables-indiscriminately t)
+                                        ; smartparens fixup
+    (define-key cperl-mode-map "{" 'nil)))
 
 (el-get-bundle haskell-mode
   (progn (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
