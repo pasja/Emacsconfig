@@ -605,9 +605,54 @@
 
 (el-get-bundle! ffap-)
 
+(el-get-bundle circe
+  (with-eval-after-load 'circe
+    (setq circe-reduce-lurker-spam t
+          circe-active-users-timeout 43200
+          circe-color-nicks-everywhere t
+          circe-highlight-nick-type 'occurence
+          circe-server-max-reconnect-attempts nil
+          circe-format-server-topic "*** Topic change by {origin}: {topic-diff}"
+          circe-format-self-say "<{nick}> {body}"
+          circe-new-buffer-behavior 'ignore)
+
+    (require 'circe-color-nicks)
+    (enable-circe-color-nicks)
+
+    (add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+    (defun my-circe-prompt ()
+      (lui-set-prompt
+       (concat (propertize (concat (buffer-name) "")
+                           'face 'circe-prompt-face)
+               " ")))
+
+    (require 'circe-lagmon)
+    (circe-lagmon-mode)
+
+    (require 'lui-autopaste)
+    (add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
+
+    (require 'lui-logging)
+    (setq lui-logging-directory "~/irclog/"
+          lui-logging-file-format "{buffer}@{network}"
+          lui-logging-format "[%Y-%m-%d %T] {text}")
+    (add-hook 'circe-chat-mode-hook 'enable-lui-logging)
+
+    (setq lui-time-stamp-position 'left
+          lui-time-stamp-format "%H:%M "
+          lui-fill-type nil)
+
+    (when (string= (chomp (hostname-to-string)) "midgard") ; autojoin
+      (progn (add-to-list 'load-path "~/.emacs.d/secrets/")
+             (require 'server)
+             (functionp 'server-running-p)
+             (if (and (not (server-running-p "irc"))
+                      (string= server-name "irc"))
+                 (require 'ercidentities))))))
+
 (setq my-packages
       (append 
-       '(yasnippet mode-compile fixme-mode circe org-mode)
+       '(yasnippet mode-compile fixme-mode org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
@@ -619,53 +664,6 @@
 (byte-recompile-directory "~/.emacs.d/plugins/" 0) ; auto byte-compile all of them
 (mapc 'load-file
       (directory-files "~/Emacsconfig/plugins" t ".elc$")) ; load them all!
-
-;; circe
-
-(setq circe-reduce-lurker-spam t
-      circe-active-users-timeout 43200
-      circe-color-nicks-everywhere t
-      circe-highlight-nick-type 'occurence
-      circe-server-max-reconnect-attempts nil
-      circe-format-server-topic "*** Topic change by {origin}: {topic-diff}"
-      circe-format-self-say "<{nick}> {body}"
-      circe-new-buffer-behavior 'ignore)
-
-(require 'circe-color-nicks)
-(enable-circe-color-nicks)
-
-(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
-(defun my-circe-prompt ()
-  (lui-set-prompt
-   (concat (propertize (concat (buffer-name) "")
-                       'face 'circe-prompt-face)
-           " ")))
-
-(require 'circe-lagmon)
-(circe-lagmon-mode)
-
-(require 'lui-autopaste)
-(add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
-
-(require 'lui-logging)
-(setq lui-logging-directory "~/irclog/"
-      lui-logging-file-format "{buffer}@{network}"
-      lui-logging-format "[%Y-%m-%d %T] {text}")
-(add-hook 'circe-chat-mode-hook 'enable-lui-logging)
-
-(add-hook 'circe-chat-mode-hook '(lambda ()(linum-mode -1)))
-
-(setq lui-time-stamp-position 'left
-      lui-time-stamp-format "%H:%M "
-      lui-fill-type nil)
-
-(when (string= (chomp (hostname-to-string)) "midgard") ; autojoin
-  (progn (add-to-list 'load-path "~/.emacs.d/secrets/")
-	 (require 'server)
-	 (functionp 'server-running-p)
-	 (if (and (not (server-running-p "irc"))
-		  (string= server-name "irc"))
-	     (require 'ercidentities))))
 
 ;; Customize
  
