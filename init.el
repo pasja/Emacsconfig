@@ -360,16 +360,6 @@
 (setq el-get-sources
       '(
 
-	(:name mode-compile
-	       :after (progn
-			(autoload 'mode-compile "mode-compile"
-			  "Command to compile current buffer file based on the major mode" t)
-			(global-set-key (kbd "C-c c") 'mode-compile)
-			(autoload 'mode-compile-kill "mode-compile"
-			  "Command to kill a compilation launched by `mode-compile'" t)
-			(global-set-key (kbd "C-c k") 'mode-compile-kill)
-			))
-
 	(:name fixme-mode
 	       :type emacswiki
 	       :before (progn
@@ -475,6 +465,14 @@
         ))
 
 (el-get-bundle el-get)
+
+(el-get-bundle mode-compile
+  (autoload 'mode-compile "mode-compile"
+    "Command to compile current buffer file based on the major mode" t)
+  (global-set-key (kbd "C-c c") 'mode-compile)
+  (autoload 'mode-compile-kill "mode-compile"
+    "Command to kill a compilation launched by `mode-compile'" t)
+  (global-set-key (kbd "C-c k") 'mode-compile-kill))
 
 (el-get-bundle cperl-mode
   (with-eval-after-load 'cperl-mode
@@ -638,7 +636,7 @@
 
 (setq my-packages
       (append 
-       '(mode-compile fixme-mode org-mode)
+       '(fixme-mode org-mode emms)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
