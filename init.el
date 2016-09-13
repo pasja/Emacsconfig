@@ -467,12 +467,13 @@
 (el-get-bundle el-get)
 
 (el-get-bundle mode-compile
-  (autoload 'mode-compile "mode-compile"
-    "Command to compile current buffer file based on the major mode" t)
-  (global-set-key (kbd "C-c c") 'mode-compile)
-  (autoload 'mode-compile-kill "mode-compile"
-    "Command to kill a compilation launched by `mode-compile'" t)
-  (global-set-key (kbd "C-c k") 'mode-compile-kill))
+  :url "https://raw.github.com/emacsattic/mode-compile/master/mode-compile.el"
+  (progn (autoload 'mode-compile "mode-compile"
+           "Command to compile current buffer file based on the major mode" t)
+         (global-set-key (kbd "C-c c") 'mode-compile)
+         (autoload 'mode-compile-kill "mode-compile"
+           "Command to kill a compilation launched by `mode-compile'" t)
+         (global-set-key (kbd "C-c k") 'mode-compile-kill)))
 
 (el-get-bundle cperl-mode
   (with-eval-after-load 'cperl-mode
