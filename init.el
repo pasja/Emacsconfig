@@ -361,8 +361,7 @@
 ;; External libraries (with el-get)
 
 (setq el-get-sources
-      '(el-get
-
+      '(
 	(:name yasnippet
 	       :type github
 	       :website "https://github.com/capitaomorte/yasnippet.git"
@@ -388,26 +387,6 @@
 			(global-set-key (kbd "C-c k") 'mode-compile-kill)
 			))
 
-	(:name dired-tar
-	       :type "http"
-	       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
-	       :build ("gunzip -c dired-tar.el.gz > dired-tar.el")
-	       :compile "dired-tar.el"
-	       :features "dired-tar")
-
-	(:name replace+
-	       :type emacswiki
-	       :after (progn
-			(eval-after-load "replace" '(require 'replace+))))
-
-	(:name grep+
-	       :type emacswiki
-	       :features "grep+")
-
-	(:name ffap-
-	       :type emacswiki
-	       :features "ffap-")
-
 	(:name fixme-mode
 	       :type emacswiki
 	       :before (progn
@@ -416,17 +395,6 @@
 	       :features "fixme-mode"
 	       :after (progn
 			(fixme-mode 1)))
-
-	(:name dired-sort-menu
-	       :type emacswiki
-	       :features "dired-sort-menu"
-	       :after (progn
-			(add-hook 'dired-load-hook
-				  (lambda () (require 'dired-sort-menu)))))
-
-	(:name dired-sort-menu+
-	       :type emacswiki
-	       :features "dired-sort-menu+")
 
 	(:name org-mode
 	       :website "http://orgmode.org/"
@@ -523,6 +491,8 @@
 			(emms-player-mpd-connect)))
         ))
 
+(el-get-bundle el-get)
+
 (el-get-bundle cperl-mode
   (with-eval-after-load 'cperl-mode
     (cperl-set-style "BSD")
@@ -592,6 +562,22 @@
   (progn (require 'smartparens-config)
          (smartparens-global-mode 1)))
 
+(el-get-bundle dired-tar
+       :type "http"
+       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
+       :build ("gunzip -c dired-tar.el.gz > dired-tar.el")
+       :compile "dired-tar.el")
+
+(el-get-bundle replace+
+  (with-eval-after-load "replace"
+    '(require 'replace+)))
+
+(el-get-bundle dired-sort-menu
+  (with-eval-after-load "dired"
+    '(require 'dired-sort-menu)))
+
+(el-get-bundle dired-sort-menu+)
+
 (el-get-bundle undo-tree
   (global-undo-tree-mode 1))
 
@@ -618,11 +604,13 @@
 
 (el-get-bundle dockerfile-mode)
 
+(el-get-bundle! grep+)
+
+(el-get-bundle! ffap-)
+
 (setq my-packages
       (append 
-       '(el-get yasnippet mode-compile dired-tar dired-sort-menu
-		replace+ grep+ ffap- dired-sort-menu+
-		fixme-mode circe org-mode)
+       '(yasnippet mode-compile fixme-mode circe org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
