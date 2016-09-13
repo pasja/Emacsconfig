@@ -21,8 +21,8 @@
 	      indent-tabs-mode nil)
 
 (unless (string= window-system "x")
-    (progn (tool-bar-mode -1)
-	   (scroll-bar-mode -1)))
+  (progn (tool-bar-mode -1)
+         (scroll-bar-mode -1)))
 (menu-bar-mode -1)
 (set-fringe-mode  '(0 . 0))
 (show-paren-mode 1)
@@ -56,12 +56,11 @@
 
 ;; scrolling
 
-(setq
- scroll-margin 0                         ; do smooth scrolling, ...
- scroll-conservatively 100000            ; ... the defaults ...
- scroll-up-aggressively 0.0              ; ... are very ...
- scroll-down-aggressively 0.0            ; ... annoying
- scroll-preserve-screen-position t)      ; preserve screen pos with C-v/M-v
+(setq scroll-margin 0                         ; do smooth scrolling, ...
+      scroll-conservatively 100000            ; ... the defaults ...
+      scroll-up-aggressively 0.0              ; ... are very ...
+      scroll-down-aggressively 0.0            ; ... annoying
+      scroll-preserve-screen-position t)      ; preserve screen pos with C-v/M-v
 
 ;; some UTF-8 goodies
 
@@ -94,7 +93,7 @@
       (remq 'process-kill-buffer-query-function
 	    kill-buffer-query-functions))
 (defadvice save-buffers-kill-emacs
-  (around no-query-kill-emacs activate)            ; ... and on quit
+    (around no-query-kill-emacs activate)            ; ... and on quit
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
 
@@ -146,14 +145,13 @@
 (unless (file-exists-p "~/.autosaves")
   (make-directory "~/.autosaves"))
 
-(setq
-   backup-by-copying t           ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.autosaves"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)            ; use versioned backups
+(setq backup-by-copying t           ; don't clobber symlinks
+      backup-directory-alist
+      '(("." . "~/.autosaves"))    ; don't litter my fs tree
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)            ; use versioned backups
 
 (defun force-backup-of-buffer ()
     (setq buffer-backed-up nil))
@@ -185,31 +183,31 @@
 (require 'ibuffer)
 (setq ibuffer-saved-filter-groups
       (quote (("Default"
-                   ("Dired" (mode . dired-mode))
-                   ("Perl" (mode . cperl-mode))
-		   ("Org" (or (mode . org-mode)
-			      (name . "^\\*Calendar\\*$")))
-		   ("Magit" (name . "^\\*magit*"))
-		   ("Documentation" (or
-				     (name . "^\\*WoMan*")
-				     (mode . Info-mode)
-				     (name . "^\\*Man*")
-				     (name . "^\\*Help\\*$")))
-		   ("Elisp" (or
-			     (mode . emacs-lisp-mode)))
-		   ("ERC" (or
-			     (mode . erc-mode)))
-		   ("System" (or
-                             (name . "^\\*scratch\\*$")
-                             (name . "^\\*Messages\\*$")
-			     (name . "^\\*Completions\\*$")
-			     (mode . compilation-mode)
-			     (name . "^\\*Shell*")
-			     (mode . Custom-mode)))))))
+               ("Dired" (mode . dired-mode))
+               ("Perl" (mode . cperl-mode))
+               ("Org" (or (mode . org-mode)
+                          (name . "^\\*Calendar\\*$")))
+               ("Magit" (name . "^\\*magit*"))
+               ("Documentation" (or
+                                 (name . "^\\*WoMan*")
+                                 (mode . Info-mode)
+                                 (name . "^\\*Man*")
+                                 (name . "^\\*Help\\*$")))
+               ("Elisp" (or
+                         (mode . emacs-lisp-mode)))
+               ("ERC" (or
+                       (mode . erc-mode)))
+               ("System" (or
+                          (name . "^\\*scratch\\*$")
+                          (name . "^\\*Messages\\*$")
+                          (name . "^\\*Completions\\*$")
+                          (mode . compilation-mode)
+                          (name . "^\\*Shell*")
+                          (mode . Custom-mode)))))))
 
 (add-hook 'ibuffer-mode-hook
-  (lambda ()
-    (ibuffer-switch-to-saved-filter-groups "Default")))
+          (lambda ()
+            (ibuffer-switch-to-saved-filter-groups "Default")))
 
 ;; configure tramp
 
@@ -219,8 +217,8 @@
 
 ;; Copy/Paste one line without selecting it
 
-(defadvice kill-ring-save (before slick-copy activate compile) "When called
-  interactively with no active region, copy a single line instead."
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
   (interactive (if mark-active (list (region-beginning) (region-end))
 		 (message "Copied line")
 		 (list (line-beginning-position) 
@@ -242,7 +240,7 @@
 ;; configure vc
 
 (setq vc-follow-symlinks t ) ; auto-follow version controlled symlinks
-      
+
 (add-hook 'log-edit-mode 
 	  (lambda ()
 	    (flyspell-mode -1)))
@@ -274,8 +272,8 @@
 (setq dired-listing-switches "-alhX")                   ; display size in human readable form
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 (eval-after-load "dired-aux"                            ; support .zip uncompress
-   '(add-to-list 'dired-compress-file-suffixes 
-                 '("\\.zip\\'" ".zip" "unzip")))
+  '(add-to-list 'dired-compress-file-suffixes
+                '("\\.zip\\'" ".zip" "unzip")))
 
 (setq dired-guess-shell-alist-user
       '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mplayer" "vlc")))
@@ -657,10 +655,9 @@
 
 (add-hook 'circe-chat-mode-hook '(lambda ()(linum-mode -1)))
 
-(setq
- lui-time-stamp-position 'left
- lui-time-stamp-format "%H:%M "
- lui-fill-type nil)
+(setq lui-time-stamp-position 'left
+      lui-time-stamp-format "%H:%M "
+      lui-fill-type nil)
 
 (when (string= (chomp (hostname-to-string)) "midgard") ; autojoin
   (progn (add-to-list 'load-path "~/.emacs.d/secrets/")
