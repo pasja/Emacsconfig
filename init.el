@@ -27,7 +27,6 @@
 (set-fringe-mode  '(0 . 0))
 (show-paren-mode 1)
 (column-number-mode 1)
-(global-linum-mode 1)
 (setq linum-format "%d ")
 (size-indication-mode t)
 (display-time)
