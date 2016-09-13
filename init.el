@@ -614,6 +614,10 @@
 
 (el-get-bundle auctex)
 
+(el-get-bundle alchemist)
+
+(el-get-bundle dockerfile-mode)
+
 (setq my-packages
       (append 
        '(el-get yasnippet mode-compile dired-tar dired-sort-menu
