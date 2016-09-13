@@ -359,20 +359,6 @@
 
 (setq el-get-sources
       '(
-	(:name yasnippet
-	       :type github
-	       :website "https://github.com/capitaomorte/yasnippet.git"
-	       :description "YASnippet is a template system for Emacs."
-	       :pkgname "capitaomorte/yasnippet"
-	       :features yasnippet
-	       :compile "yasnippet.el"
-	       :after (progn
-			(setq yas-snippet-dirs
-			      '("~/.emacs.d/yas/") ; my own snippets
-			      yas/wrap-around-region t
-			      yas-use-menu nil)
-			(add-to-list 'auto-mode-alist '("yas/.*" . snippet-mode))
-			(yas/global-mode 1)))         ; make it global
 
 	(:name mode-compile
 	       :after (progn
@@ -652,7 +638,7 @@
 
 (setq my-packages
       (append 
-       '(yasnippet mode-compile fixme-mode org-mode)
+       '(mode-compile fixme-mode org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
