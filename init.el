@@ -431,30 +431,28 @@
 			  (not (string= lang "plantuml")))  ; don't ask for plantuml
 			(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)))
 
-	(:name emms
-	       :description "The Emacs Multimedia System"
-	       :type git
-	       :url "git://git.sv.gnu.org/emms.git"
-	       :info "doc"
-	       :load-path ("./lisp")
-	       :features emms-setup
-	       :build `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
-			("make" ,(format "EMACS=%s" el-get-emacs)
-			 ,(format "SITEFLAG=\\\"--no-site-file -L %s/emacs-w3m/ \\\""
-				  el-get-dir)
-			 "autoloads" "lisp" "docs"))
-	       :build/berkeley-unix `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
-				      ("gmake" ,(format "EMACS=%s" el-get-emacs)
-				       ,(format "SITEFLAG=\\\"--no-site-file -L %s/emacs-w3m/ \\\""
-						el-get-dir)
-				       "autoloads" "lisp" "docs"))
+        (:name emms
+               :description "The Emacs Multimedia System"
+               :type git
+               :url "git://git.sv.gnu.org/emms.git"
+               :info "doc"
+               :load-path ("./lisp")
+               :features emms-setup
+               :build `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
+                        ("make" ,(format "EMACS=%s" el-get-emacs)
+                         ,(format "SITEFLAG=--no-site-file")
+                         "autoloads" "lisp" "docs"))
+               :build/berkeley-unix `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
+                                      ("gmake" ,(format "EMACS=%s" el-get-emacs)
+                                       ,(format "SITEFLAG=--no-site-file")
+                                       "autoloads" "lisp" "docs"))
 	       :after (progn
 			(emms-all)
 			(setq emms-cache-file "~/.emacs.d/cache/emms-cache"
 			      emms-info-auto-update nil
 			      emms-playlist-buffer-name "EMMS Playlist")
 			(if (file-readable-p "~/.emacs.d/cache/emms-cache")
-			      (emms-cache-restore))
+                            (emms-cache-restore))
 			(require 'emms-player-mpd)
 			(setq emms-player-mpd-music-directory "~/Zene/"
 			      emms-player-mpd-server-name "localhost"
