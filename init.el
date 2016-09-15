@@ -361,18 +361,6 @@
 
 ;; External libraries (with el-get)
 
-(setq el-get-sources
-      '(
-
-	(:name fixme-mode
-	       :type emacswiki
-	       :before (progn
-			 (setq fixme-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE" "XXX")
-			       fixme-modes '(erlang-mode java-mode c-mode emacs-lisp-mode jde-mode scheme-mode python-mode ruby-mode cperl-mode slime-mode common-lisp-mode c++-mode d-mode js2-mode haskell-mode tuareg-mode lua-mode pascal-mode fortran-mode prolog-mode asm-mode csharp-mode sml-mode conf-mode conf-ppd-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-javaprop-mode conf-xdefaults-mode)))
-	       :features "fixme-mode"
-	       :after (progn
-			(fixme-mode 1)))))
-
 (el-get-bundle el-get)
 
 (el-get-bundle org-mode
@@ -602,14 +590,6 @@
              (if (and (not (server-running-p "irc"))
                       (string= server-name "irc"))
                  (require 'ercidentities))))))
-
-(setq my-packages
-      (append 
-       '(fixme-mode org-mode)
-       (eval-after-load "el-get"
-	 '(mapcar 'el-get-source-name el-get-sources))))
-
-(el-get 'sync my-packages)
 
 ;; External libraries
 
