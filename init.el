@@ -363,6 +363,12 @@
 
 (el-get-bundle el-get)
 
+(el-get-bundle fixme
+  :type github
+  :pkgname "lewang/fic-mode"
+  :description "Show FIXME/TODO/BUG(...) in special face only in comments and strings"
+  (add-hook 'prog-mode-hook 'fic-mode))
+
 (el-get-bundle org-mode
   (with-eval-after-load 'org
     (setq org-link-abbrev-alist
