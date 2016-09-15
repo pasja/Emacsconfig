@@ -42,9 +42,20 @@
 
 (global-set-key (kbd "<f5>")                               ; open ~/.emacs.d/init.el
 		(lambda ()
-		  (interactive)(find-file "~/.emacs.d/init.el")))
+		  (interactive)
+                  (find-file "~/.emacs.d/init.el")))
+
+(global-set-key (kbd "<f6>")
+                (lambda ()
+                  (interactive)
+                  (find-file "~/org/rovancs.org")))
 
 (global-set-key (kbd "<f9>") 'save-buffers-kill-emacs)     ; hotkey for quit
+
+(global-set-key (kbd "M-3")                                ; easy timestamp for rovancs.org
+		(lambda ()
+		  (interactive)
+		  (insert(format-time-string "%Y-%m-%d"))))
 
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
   (make-directory "~/.emacs.d/cache/"))
@@ -259,13 +270,6 @@
 
 (setq sql-sqlite-program "sqlite3")
 
-;; insert today
-
-(global-set-key (kbd "M-3")                             ; easy timestamp for rovancs.org
-		(lambda ()
-		  (interactive)
-		  (insert(format-time-string "%Y-%m-%d"))))
-
 ;; configure dired
 
 (require 'dired)
@@ -382,11 +386,6 @@
     (add-hook 'org-shiftleft-final-hook 'windmove-left)
     (add-hook 'org-shiftdown-final-hook 'windmove-down)
     (add-hook 'org-shiftright-final-hook 'windmove-right)
-
-    (global-set-key (kbd "<f6>")
-                    (lambda ()
-                      (interactive)
-                      (find-file "~/org/rovancs.org")))
 
     (defun myorg-update-parent-cookie ()
       (when (equal major-mode 'org-mode)
