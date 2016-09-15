@@ -431,41 +431,27 @@
 			  (not (string= lang "plantuml")))  ; don't ask for plantuml
 			(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)))
 
-        (:name emms
-               :description "The Emacs Multimedia System"
-               :type git
-               :url "git://git.sv.gnu.org/emms.git"
-               :info "doc"
-               :load-path ("./lisp")
-               :features emms-setup
-               :build `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
-                        ("make" ,(format "EMACS=%s" el-get-emacs)
-                         ,(format "SITEFLAG=--no-site-file")
-                         "autoloads" "lisp" "docs"))
-               :build/berkeley-unix `(("mkdir" "-p" ,(expand-file-name (format "%s/emms" user-emacs-directory)))
-                                      ("gmake" ,(format "EMACS=%s" el-get-emacs)
-                                       ,(format "SITEFLAG=--no-site-file")
-                                       "autoloads" "lisp" "docs"))
-	       :after (progn
-			(emms-all)
-			(setq emms-cache-file "~/.emacs.d/cache/emms-cache"
-			      emms-info-auto-update nil
-			      emms-playlist-buffer-name "EMMS Playlist")
-			(if (file-readable-p "~/.emacs.d/cache/emms-cache")
-                            (emms-cache-restore))
-			(require 'emms-player-mpd)
-			(setq emms-player-mpd-music-directory "~/Zene/"
-			      emms-player-mpd-server-name "localhost"
-			      emms-player-mpd-server-port "6600")
-			(setq emms-info-functions 'emms-info-mpd)
-			(add-to-list 'emms-player-list 'emms-player-mpd)
-			(emms-player-mpd-connect)))
         ))
 
 (el-get-bundle el-get)
 
+(el-get-bundle emms
+  (with-eval-after-load 'emms
+    (emms-all)
+    (setq emms-cache-file "~/.emacs.d/cache/emms-cache"
+          emms-info-auto-update nil
+          emms-playlist-buffer-name "EMMS Playlist")
+    (if (file-readable-p "~/.emacs.d/cache/emms-cache")
+        (emms-cache-restore))
+    (require 'emms-player-mpd)
+    (setq emms-player-mpd-music-directory "~/Zene/"
+          emms-player-mpd-server-name "localhost"
+          emms-player-mpd-server-port "6600")
+    (setq emms-info-functions 'emms-info-mpd)
+    (add-to-list 'emms-player-list 'emms-player-mpd)
+    (emms-player-mpd-connect)))
+
 (el-get-bundle mode-compile
-  :url "https://raw.github.com/emacsattic/mode-compile/master/mode-compile.el"
   (progn (autoload 'mode-compile "mode-compile"
            "Command to compile current buffer file based on the major mode" t)
          (global-set-key (kbd "C-c c") 'mode-compile)
@@ -638,7 +624,7 @@
 
 (setq my-packages
       (append 
-       '(fixme-mode org-mode emms)
+       '(fixme-mode org-mode)
        (eval-after-load "el-get"
 	 '(mapcar 'el-get-source-name el-get-sources))))
 
