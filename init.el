@@ -367,73 +367,56 @@
 			       fixme-modes '(erlang-mode java-mode c-mode emacs-lisp-mode jde-mode scheme-mode python-mode ruby-mode cperl-mode slime-mode common-lisp-mode c++-mode d-mode js2-mode haskell-mode tuareg-mode lua-mode pascal-mode fortran-mode prolog-mode asm-mode csharp-mode sml-mode conf-mode conf-ppd-mode conf-unix-mode conf-colon-mode conf-space-mode conf-windows-mode conf-javaprop-mode conf-xdefaults-mode)))
 	       :features "fixme-mode"
 	       :after (progn
-			(fixme-mode 1)))
-
-	(:name org-mode
-	       :website "http://orgmode.org/"
-	       :description "Org-mode is for keeping notes, maintaining ToDo lists, doing project planning, and authoring with a fast and effective plain-text system."
-	       :type git
-	       :url "git://orgmode.org/org-mode.git"
-	       :info "doc"
-	       :build/berkeley-unix `,(mapcar
-				       (lambda (target)
-					 (list "gmake" target (concat "EMACS=" (shell-quote-argument el-get-emacs))))
-				       '("oldorg"))
-	       :build `,(mapcar
-			 (lambda (target)
-			   (list "make" target (concat "EMACS=" (shell-quote-argument el-get-emacs))))
-			 '("oldorg"))
-	       :load-path ("." "lisp" "contrib/lisp")
-	       :features "org"
-	       :after (progn
-			(setq org-link-abbrev-alist
-			      '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
-			      org-return-follows-link t
-			      org-CUA-compatible t)
-
-			(add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
-			(add-hook 'org-shiftleft-final-hook 'windmove-left)
-			(add-hook 'org-shiftdown-final-hook 'windmove-down)
-			(add-hook 'org-shiftright-final-hook 'windmove-right)
-
-			(global-set-key (kbd "<f6>")
-					(lambda ()
-					  (interactive)
-					  (find-file "~/org/rovancs.org")))
-
-			(defun myorg-update-parent-cookie ()
-			  (when (equal major-mode 'org-mode)
-			    (save-excursion
-			      (ignore-errors
-				(org-back-to-heading)
-				(org-update-parent-todo-statistics)))))
-
-			(defadvice org-kill-line (after fix-cookies activate)
-			  (myorg-update-parent-cookie))
-
-			(defadvice kill-whole-line (after fix-cookies activate)
-			  (myorg-update-parent-cookie))
-			(eval-after-load 'org '(progn
-						 (setq org-default-notes-file (concat org-directory "/notes.org"))
-						 (define-key global-map (kbd "<f8>") 'org-capture)))
-			;; plantuml
-
-			;; active Org-babel languages
-			(org-babel-do-load-languages
-			 'org-babel-load-languages
-			 '(;; other Babel languages
-			   (plantuml . t)))
-
-			(setq org-plantuml-jar-path
-			      (expand-file-name "~/bin/plantuml.jar"))
-
-			(defun my-org-confirm-babel-evaluate (lang body)
-			  (not (string= lang "plantuml")))  ; don't ask for plantuml
-			(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)))
-
-        ))
+			(fixme-mode 1)))))
 
 (el-get-bundle el-get)
+
+(el-get-bundle org-mode
+  (with-eval-after-load 'org
+    (setq org-link-abbrev-alist
+          '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
+          org-return-follows-link t
+          org-CUA-compatible t)
+
+    (add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
+    (add-hook 'org-shiftleft-final-hook 'windmove-left)
+    (add-hook 'org-shiftdown-final-hook 'windmove-down)
+    (add-hook 'org-shiftright-final-hook 'windmove-right)
+
+    (global-set-key (kbd "<f6>")
+                    (lambda ()
+                      (interactive)
+                      (find-file "~/org/rovancs.org")))
+
+    (defun myorg-update-parent-cookie ()
+      (when (equal major-mode 'org-mode)
+        (save-excursion
+          (ignore-errors
+            (org-back-to-heading)
+            (org-update-parent-todo-statistics)))))
+
+    (defadvice org-kill-line (after fix-cookies activate)
+      (myorg-update-parent-cookie))
+
+    (defadvice kill-whole-line (after fix-cookies activate)
+      (myorg-update-parent-cookie))
+    (eval-after-load 'org '(progn
+                             (setq org-default-notes-file (concat org-directory "/notes.org"))
+                             (define-key global-map (kbd "<f8>") 'org-capture)))
+    ;; plantuml
+
+    ;; active Org-babel languages
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '(;; other Babel languages
+       (plantuml . t)))
+
+    (setq org-plantuml-jar-path
+          (expand-file-name "~/bin/plantuml.jar"))
+
+    (defun my-org-confirm-babel-evaluate (lang body)
+      (not (string= lang "plantuml")))  ; don't ask for plantuml
+    (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)))
 
 (el-get-bundle emms
   (with-eval-after-load 'emms
