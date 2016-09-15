@@ -587,6 +587,10 @@
 
 (el-get-bundle ffap-)
 
+(el-get-bundle image+
+  (with-eval-after-load 'image
+    '(require 'image+)))
+
 (el-get-bundle circe
   (with-eval-after-load 'circe
     (setq circe-reduce-lurker-spam t
