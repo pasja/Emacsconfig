@@ -520,7 +520,14 @@
   (global-undo-tree-mode 1))
 
 (el-get-bundle swiper
-  (ivy-mode 1))
+  (ivy-mode 1)
+  (defun ivy-immediate-done () ; temporary override
+    "Exit the minibuffer with current input instead of current candidate."
+    (interactive)
+    (delete-minibuffer-contents)
+    (insert (setq ivy--current ivy-text))
+    (setq ivy-exit 'done)
+    (exit-minibuffer)))
 
 (el-get-bundle markdown-mode)
 
