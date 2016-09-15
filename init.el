@@ -583,9 +583,9 @@
 
 (el-get-bundle dockerfile-mode)
 
-(el-get-bundle! grep+)
+(el-get-bundle grep+)
 
-(el-get-bundle! ffap-)
+(el-get-bundle ffap-)
 
 (el-get-bundle circe
   (with-eval-after-load 'circe
