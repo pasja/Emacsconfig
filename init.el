@@ -239,7 +239,7 @@
 
 ;; configure vc
 
-(setq vc-follow-symlinks t ) ; auto-follow version controlled symlinks
+(setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
 
 (add-hook 'log-edit-mode 
 	  (lambda ()
@@ -531,8 +531,7 @@
            (add-to-list 'company-dabbrev-code-modes 'cperl-mode))))
 
 (el-get-bundle magit
-  (progn
-    (global-set-key (kbd "C-x g")
+  (progn (global-set-key (kbd "C-x g")
                     'magit-status)
     (with-eval-after-load 'magit
       (setq magit-git-global-arguments '("--no-pager" "-c" "core.quotepath=false")
