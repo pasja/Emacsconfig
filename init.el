@@ -16,7 +16,7 @@
       display-time-24hr-format t
       redisplay-dont-pause t                 ; faster scrolling
       sentence-end-double-space nil          ; period single space ends sentence
-      load-prefer-new t)
+      load-prefer-newer t)
 (setq-default major-mode 'text-mode
 	      indent-tabs-mode nil)
 
