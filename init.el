@@ -483,6 +483,8 @@
                      (setq dired-omit-mode t)))))
 
 (el-get-bundle rainbow-delimiters
+  (outline-minor-mode t) ; TODO: https://github.com/sellout/emacs-color-theme-solarized/issues/165
+  (outline-minor-mode nil)
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (el-get-bundle company-mode
