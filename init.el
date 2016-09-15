@@ -91,9 +91,7 @@
 ;; savehist: save some history
 
 (setq savehist-additional-variables                      ; also save...
-      '(search ring regexp-search-ring                   ; ... my search entries ...
-	       icicle-previous-raw-file-name-inputs      ; ... and my icicles history
-	       icicle-previous-raw-non-file-name-inputs)
+      '(search ring regexp-search-ring)                  ; ... my search entries ...
       savehist-autosave-interval 60                      ; save every minute (default: 5 min)
       savehist-file "~/.emacs.d/cache/savehist")         ; keep my home clean
 (savehist-mode t)                                        ; do customization before activation
