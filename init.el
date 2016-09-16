@@ -529,15 +529,7 @@
   (global-set-key (kbd "C-c g") 'counsel-git)
   (global-set-key (kbd "C-c j") 'counsel-git-grep)
   (global-set-key (kbd "C-c k") 'counsel-ag)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-
-  (defun ivy-immediate-done () ; temporary override
-    "Exit the minibuffer with current input instead of current candidate."
-    (interactive)
-    (delete-minibuffer-contents)
-    (insert (setq ivy--current ivy-text))
-    (setq ivy-exit 'done)
-    (exit-minibuffer)))
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 
 (el-get-bundle markdown-mode)
 
