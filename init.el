@@ -391,9 +391,10 @@
 
     (defadvice kill-whole-line (after fix-cookies activate)
       (myorg-update-parent-cookie))
+
     (eval-after-load 'org '(progn
-                             (setq org-default-notes-file (concat org-directory "/notes.org"))
-                             (define-key global-map (kbd "<f8>") 'org-capture)))
+                             (setq org-default-notes-file (concat org-directory "/notes.org"))))
+
     ;; plantuml
 
     ;; active Org-babel languages
