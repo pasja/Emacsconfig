@@ -339,6 +339,13 @@
 
 (global-set-key (kbd "<f8>") 'browse-url-kayako)
 
+;; find unknown logs in bundles
+(defun pasja--dired-find-unknown ()
+  (interactive)
+  (find-name-dired "." "*unknown*"))
+
+(define-key dired-mode-map (kbd "C-M-<up>") 'pasja--dired-find-unknown)
+
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essentials
