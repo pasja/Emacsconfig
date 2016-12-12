@@ -440,9 +440,9 @@
     (setq cperl-invalid-face nil
           cperl-indent-parens-as-block t
           cperl-tab-always-indent nil
-          cperl-highlight-variables-indiscriminately t)
-                                        ; smartparens fixup
-    (define-key cperl-mode-map "{" 'nil)))
+          cperl-highlight-variables-indiscriminately t
+          cperl-merge-trailing-else nil)
+    (define-key cperl-mode-map "{" 'nil))) ; smartparens fixup
 
 (el-get-bundle haskell-mode
   (progn (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
