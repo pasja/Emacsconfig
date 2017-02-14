@@ -563,6 +563,8 @@
 
 (el-get-bundle ffap-)
 
+(el-get-bundle restclient)
+
 (el-get-bundle image+
   (with-eval-after-load 'image
     '(require 'image+)))
