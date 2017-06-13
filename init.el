@@ -348,7 +348,7 @@
 
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
-;; apt install hunspell hunspell-hu texinfo build-essentials
+;; apt install hunspell hunspell-hu texinfo build-essential
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
