@@ -1,3 +1,6 @@
+;; necessary to keep emacs 25.1.1 happy
+; (package-initialize)
+
 ;; forbidden commands
 
 (put 'narrow-to-region 'disabled nil)
