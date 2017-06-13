@@ -352,6 +352,7 @@
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essential
+;; apt install global python-pygments silversearcher-ag
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -541,6 +542,10 @@
          (global-set-key (kbd "C-c j") 'counsel-git-grep)
          (global-set-key (kbd "C-c k") 'counsel-ag)
          (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+
+(el-get-bundle ggtags
+  (progn
+    (add-hook 'prog-mode-hook #'ggtags-mode)))
 
 (el-get-bundle markdown-mode)
 
