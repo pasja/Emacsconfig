@@ -331,6 +331,10 @@
 (setq-default ispell-program-name "hunspell")
 (ispell-change-dictionary "hu_HU" t)
 
+;; turn off auto revert messages
+
+(setq auto-revert-verbose nil)
+
 ;; BB spec stuff
 
 ;; browse kayako from BOSS folder
