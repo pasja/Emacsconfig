@@ -283,22 +283,6 @@
 (setq dired-guess-shell-alist-user
       '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mplayer" "vlc")))
 
-(defun dired-back-to-top ()
-  (interactive)
-  (beginning-of-buffer)
-  (dired-next-line 2))
-
-(define-key dired-mode-map
-  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
-
-(defun dired-jump-to-bottom ()
-  (interactive)
-  (end-of-buffer)
-  (dired-next-line -1))
-
-(define-key dired-mode-map
-  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
-
 ;; configure woman
 
 (require 'woman)
