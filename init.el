@@ -387,7 +387,9 @@
     (setq org-link-abbrev-alist
           '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
           org-return-follows-link t
-          org-CUA-compatible t)
+          org-CUA-compatible t
+          org-fontify-done-headline t
+          org-M-RET-may-split-line '((default . nil)))
 
     (add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
     (add-hook 'org-shiftleft-final-hook 'windmove-left)
