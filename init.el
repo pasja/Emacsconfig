@@ -335,6 +335,10 @@
 
 (setq auto-revert-verbose nil)
 
+;; recentf
+
+(setq recentf-save-file "~/emacs.d/cache/recentf.el")
+
 ;; BB spec stuff
 
 ;; browse kayako from BOSS folder
