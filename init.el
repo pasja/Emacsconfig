@@ -321,7 +321,8 @@
 
 ;; recentf
 
-(setq recentf-save-file "~/emacs.d/cache/recentf.el")
+(setq recentf-save-file "~/.emacs.d/cache/recentf.el")
+(recentf-mode)
 
 ;; BB spec stuff
 
