@@ -143,6 +143,10 @@
 
 (setq mouse-yank-at-point t)
 
+;; configure cursor length according to character width
+
+(setq x-stretch-cursor t)
+
 ;; zone-mode for .hu
 
 (add-to-list 'auto-mode-alist '("\\.hu$" . zone-mode))
