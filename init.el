@@ -349,7 +349,7 @@
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essential
-;; apt install global python-pygments silversearcher-ag
+;; apt install global python-pygments silversearcher-ag install-info
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
