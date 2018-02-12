@@ -541,6 +541,7 @@
          (global-set-key (kbd "C-c g") 'counsel-git)
          (global-set-key (kbd "C-c j") 'counsel-git-grep)
          (global-set-key (kbd "C-c k") 'counsel-ag)
+         (global-set-key (kbd "C-x 8") 'counsel-unicode-char)
          (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
          (setq ivy-use-virtual-buffers t)))
 
