@@ -554,6 +554,11 @@
   :description "Redefine M-< and M-> (or any key bound to beginning-of-buffer or end-of-buffer) for some modes so that point moves to meaningful locations."
   (beginend-global-mode))
 
+(el-get-bundle ox-jira
+  :type github
+  :pkgname "stig/ox-jira.el"
+  :description "JIRA Backend for Org Export Engine")
+
 (el-get-bundle markdown-mode)
 
 (el-get-bundle php-mode)
