@@ -590,6 +590,10 @@
   (with-eval-after-load 'image
     '(require 'image+)))
 
+(el-get-bundle! pdf-tools
+  :build (("make" "autobuild"))
+  (pdf-tools-install))
+
 (el-get-bundle circe
   (with-eval-after-load 'circe
     (setq circe-reduce-lurker-spam t
