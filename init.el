@@ -585,6 +585,10 @@
   :build (("make" "autobuild"))
   (pdf-tools-install))
 
+(el-get-bundle edit-server
+  (when (and (require 'edit-server nil t) (daemonp))
+    (edit-server-start)))
+
 (el-get-bundle circe
   (with-eval-after-load 'circe
     (setq circe-reduce-lurker-spam t
