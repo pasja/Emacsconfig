@@ -585,6 +585,11 @@
   :build (("make" "autobuild"))
   (pdf-tools-install))
 
+(el-get-bundle x509-mode
+  :type github
+  :pkgname "jobbflykt/x509-mode"
+  :description "View certificates and CRLs using OpenSSL in Emacs")
+
 
 (el-get-bundle lua-mode)
 
