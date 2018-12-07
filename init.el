@@ -19,7 +19,10 @@
       display-time-24hr-format t
       redisplay-dont-pause t                 ; faster scrolling
       sentence-end-double-space nil          ; period single space ends sentence
-      load-prefer-newer t)
+      load-prefer-newer t
+      frame-resize-pixelwise t
+      x-underline-at-descent-line t)
+
 (setq-default major-mode 'text-mode
 	      indent-tabs-mode nil)
 
@@ -462,17 +465,8 @@
 (el-get-bundle info+
     (eval-after-load "info" '(require 'info+)))
 
-(el-get-bundle solarized-theme
-  :type github
-  :pkgname "sellout/emacs-color-theme-solarized"
-  :description "Solarized themes for Emacs"
-  :prepare (add-to-list 'custom-theme-load-path default-directory)
-  (progn (add-hook 'after-make-frame-functions
-                   (lambda (frame)
-                     (set-frame-parameter frame
-                                          'background-mode
-                                          'dark)))
-         (load-theme 'solarized t)))
+(el-get-bundle solarized-emacs
+  (load-theme 'solarized-dark t))
 
 (el-get-bundle dired+
   :before (setq diredp-hide-details-initially-flag nil)
