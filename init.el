@@ -590,6 +590,7 @@
   :pkgname "jobbflykt/x509-mode"
   :description "View certificates and CRLs using OpenSSL in Emacs")
 
+(el-get-bundle erlang-mode)
 
 (el-get-bundle lua-mode)
 
