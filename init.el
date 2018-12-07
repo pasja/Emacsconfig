@@ -21,7 +21,8 @@
       sentence-end-double-space nil          ; period single space ends sentence
       load-prefer-newer t
       frame-resize-pixelwise t
-      x-underline-at-descent-line t)
+      x-underline-at-descent-line t
+      x-stretch-cursor t)
 
 (setq-default major-mode 'text-mode
 	      indent-tabs-mode nil)
@@ -145,10 +146,6 @@
 (global-set-key (kbd "S-<insert>") 'insert-from-primary-clipboard)
 
 (setq mouse-yank-at-point t)
-
-;; configure cursor length according to character width
-
-(setq x-stretch-cursor t)
 
 ;; zone-mode for .hu
 
