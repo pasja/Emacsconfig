@@ -596,6 +596,10 @@
 
 (el-get-bundle lua-mode)
 
+(el-get-bundle orgaggregate
+  :type github
+  :pkgname "tbanel/orgaggregate"
+  :description "Aggregating a table is creating a new table by computing sums, averages, and so on, out of material from the first table.")
 
 (el-get-bundle circe
   (with-eval-after-load 'circe
