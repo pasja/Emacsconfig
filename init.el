@@ -383,7 +383,9 @@
           org-CUA-compatible t
           org-fontify-done-headline t
           org-highlight-latex-and-related '(latex)
-          org-M-RET-may-split-line '((default . nil)))
+          org-M-RET-may-split-line '((default . nil))
+          org-agenda-start-on-weekday 1
+          org-enforce-todo-checkbox-dependencies t)
 
     (add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
     (add-hook 'org-shiftleft-final-hook 'windmove-left)
