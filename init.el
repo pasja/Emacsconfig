@@ -228,7 +228,7 @@
 ;; configure tramp
 
 (setq shell-prompt-pattern "^[^a-zA-Z].*[~#$%>] *" ; we need a bit more funky pattern, as tramp will start $SHELL (sudo -s), ie., zsh for root user
-      tramp-default-method "ssh"
+      tramp-default-method "sshx"
       tramp-persistency-file-name "~/.emacs.d/cache/tramp")
 
 ;; Copy/Paste one line without selecting it
