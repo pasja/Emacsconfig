@@ -596,9 +596,6 @@
 
 (el-get-bundle lua-mode)
 
-(el-get-bundle edit-server
-  (when (and (require 'edit-server nil t) (daemonp))
-    (edit-server-start)))
 
 (el-get-bundle circe
   (with-eval-after-load 'circe
