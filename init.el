@@ -106,13 +106,10 @@
 
 ;; autokill attached processess
 
-(setq kill-buffer-query-functions                  ; on buffers ...
+(setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function
-	    kill-buffer-query-functions))
-(defadvice save-buffers-kill-emacs
-    (around no-query-kill-emacs activate)            ; ... and on quit
-  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
-  (flet ((process-list ())) ad-do-it))
+	    kill-buffer-query-functions)
+      confirm-kill-processes nil)
 
 ;; clipboard settings
 
