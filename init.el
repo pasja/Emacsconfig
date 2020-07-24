@@ -22,7 +22,8 @@
       load-prefer-newer t
       frame-resize-pixelwise t
       x-underline-at-descent-line t
-      x-stretch-cursor t)
+      x-stretch-cursor t
+      calc-multiplication-has-precedence nil)
 
 (setq-default major-mode 'text-mode
 	      indent-tabs-mode nil)
