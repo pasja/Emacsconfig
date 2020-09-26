@@ -505,12 +505,6 @@
   (progn (require 'smartparens-config)
          (smartparens-global-mode 1)))
 
-(el-get-bundle dired-tar
-       :type "http"
-       :url "http://www-ftp.lip6.fr/pub/emacs/elisp-archive/incoming/dired-tar.el.gz"
-       :build ("gunzip -c dired-tar.el.gz > dired-tar.el")
-       :compile "dired-tar.el")
-
 (el-get-bundle replace+
   (with-eval-after-load "replace"
     '(require 'replace+)))
