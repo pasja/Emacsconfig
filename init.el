@@ -315,7 +315,6 @@
 ;; spelling
 
 (setq-default ispell-program-name "hunspell")
-(load-file "~/Emacsconfig/plugins/ispell.el")
 (ispell-change-dictionary "en_US" t)
 
 ;; turn off auto revert messages
