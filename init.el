@@ -40,7 +40,7 @@
 (display-time)
 
 (global-set-key (kbd "M-g") 'goto-line)                    ; M-g  'goto-line
-(global-set-key (kbd "<delete>") 'delete-char)             ; delete == delete
+(global-set-key (kbd "<delete>") 'delete-forward-char)     ; delete == delete
 (global-set-key (kbd "M-2") 'hippie-expand)
 
 (require 'windmove)                                        ; windmove
