@@ -159,13 +159,23 @@
 (unless (file-exists-p "~/.autosaves")
   (make-directory "~/.autosaves"))
 
-(setq backup-by-copying t           ; don't clobber symlinks
+(defun my-do-not-backup-pass-predicate (name)
+  (let ((case-fold-search nil))
+    (not
+     (string-match-p "/dev/shm/.*" name))))
+
+(defun my-backup-predicate (name)
+  (and (normal-backup-enable-predicate name)
+       (my-do-not-backup-pass-predicate name)))
+
+(setq backup-by-copying t          ; don't clobber symlinks
       backup-directory-alist
       '(("." . "~/.autosaves"))    ; don't litter my fs tree
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
-      version-control t)            ; use versioned backups
+      version-control t            ; use versioned backups
+      backup-enable-predicate #'my-backup-predicate)
 
 (defun force-backup-of-buffer ()
     (setq buffer-backed-up nil))
