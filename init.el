@@ -28,11 +28,13 @@
 (setq-default major-mode 'text-mode
 	      indent-tabs-mode nil)
 
-(unless (string= window-system "x")
-  (progn (tool-bar-mode -1)
-         (scroll-bar-mode -1)))
+(with-eval-after-load 'tool-bar
+  (tool-bar-mode -1))
+(with-eval-after-load 'scroll-bar
+  (scroll-bar-mode -1))
+(with-eval-after-load 'fringe
+  (set-fringe-mode  '(0 . 0)))
 (menu-bar-mode -1)
-(set-fringe-mode  '(0 . 0))
 (show-paren-mode 1)
 (column-number-mode 1)
 (setq linum-format "%d ")
