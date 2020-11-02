@@ -657,6 +657,8 @@
       (when (string= server-name "irc")
         (add-to-list 'load-path "~/.emacs.d/secrets/")
         (require 'ercidentities)
+        (enable-circe-new-day-notifier)
+        (add-to-list 'circe-format-not-tracked 'circe-new-day-notifier-format-message)))))
 
 ;; External libraries
 
