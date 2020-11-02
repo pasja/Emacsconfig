@@ -356,6 +356,17 @@
 
 (define-key dired-mode-map (kbd "C-M-<up>") 'pasja--dired-find-unknown)
 
+;; small utility functions which are needed for el-get initialization
+
+(defun my--hostname-to-string ()
+  "insert the contents of /etc/hostname to a string"
+  (when (file-readable-p "/etc/hostname")
+    (with-temp-buffer
+      (insert-file-contents "/etc/hostname")
+      (buffer-string))))
+
+(require 'subr-x)
+
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essential
