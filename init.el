@@ -654,7 +654,7 @@
           lui-fill-type nil)
 
     (when (string= (string-trim-right (my--hostname-to-string)) "hel") ; autojoin
-      (when (string= server-name "irc")
+      (when (string= (daemonp) "irc")
         (add-to-list 'load-path "~/.emacs.d/secrets/")
         (require 'ercidentities)
         (enable-circe-new-day-notifier)
