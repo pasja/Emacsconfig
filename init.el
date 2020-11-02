@@ -616,7 +616,7 @@
   :pkgname "tbanel/orgaggregate"
   :description "Aggregating a table is creating a new table by computing sums, averages, and so on, out of material from the first table.")
 
-(el-get-bundle circe
+(el-get-bundle! circe
   (with-eval-after-load 'circe
     (setq circe-reduce-lurker-spam t
           circe-active-users-timeout 43200
