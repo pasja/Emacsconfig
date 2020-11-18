@@ -521,7 +521,8 @@
 (el-get-bundle magit
   (progn (global-set-key (kbd "C-x g") 'magit-status)
     (with-eval-after-load 'magit
-      (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))))
+      (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
+            magit-diff-refine-hunk t))))
 
 (el-get-bundle smartparens
   (progn (require 'smartparens-config)
