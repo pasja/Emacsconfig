@@ -539,6 +539,7 @@
 (el-get-bundle dired-sort-menu+)
 
 (el-get-bundle undo-tree
+  :before (setq undo-tree-history-directory-alist '(("." . "/tmp")))
   (global-undo-tree-mode 1))
 
 (el-get-bundle swiper
