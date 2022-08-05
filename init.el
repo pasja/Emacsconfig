@@ -617,6 +617,37 @@
   :pkgname "tbanel/orgaggregate"
   :description "Aggregating a table is creating a new table by computing sums, averages, and so on, out of material from the first table.")
 
+(el-get-bundle posframe)
+
+(el-get-bundle ivy-posframe
+  :type github
+  :pkgname "tumashu/ivy-posframe"
+  :description "ivy-posframe is a ivy extension, which let ivy use posframe to show its candidate menu."
+  (progn
+    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+    (ivy-posframe-mode 1)))
+
+(el-get-bundle prescient
+  :type github
+  :pkgname "radian-software/prescient.el"
+  :description "prescient.el is a library which sorts and filters lists of candidates, such as appear when you use a package like Ivy or Company."
+  (progn
+    (ivy-prescient-mode)
+    (company-prescient-mode)
+    (prescient-persist-mode)))
+
+(el-get-bundle dired-rsync
+  :type github
+  :pkgname "stsquad/dired-rsync"
+  :description "This package adds a single command dired-rsync which allows the user to copy marked files in a dired buffer via rsync."
+  (define-key dired-mode-map (kbd "C-c C-r") 'dired-rsync))
+
+(el-get-bundle dired-launch
+  :type github
+  :pkgname "thomp/dired-launch"
+  :description "dired-launch is a launcher for the Emacs dired-mode. In a nutshell, it lets you select a file and then launch an external application with that file."
+  (dired-launch-enable))
+
 (el-get-bundle! circe
   (with-eval-after-load 'circe
     (setq circe-reduce-lurker-spam t
