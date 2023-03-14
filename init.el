@@ -288,7 +288,7 @@
 ;; configure dired
 
 (require 'dired)
-(setq dired-listing-switches "-alhX")                   ; display size in human readable form
+(setq dired-listing-switches "-alhX --time-style=long-iso")                   ; display size in human readable form
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 (eval-after-load "dired-aux"                            ; support .zip uncompress
   '(add-to-list 'dired-compress-file-suffixes
