@@ -334,24 +334,6 @@
 (setq recentf-save-file "~/.emacs.d/cache/recentf.el")
 (recentf-mode)
 
-;; BB spec stuff
-
-;; browse kayako from BOSS folder
-(defun browse-url-kayako ()
-  (interactive)
-  (let* ((baseurl "https://support.balabit.com/staff/index.php?/Tickets/Ticket/View/")
-         (url (concat baseurl (thing-at-point 'filename t))))
-    (browse-url url)))
-
-(global-set-key (kbd "<f8>") 'browse-url-kayako)
-
-;; find unknown logs in bundles
-(defun pasja--dired-find-unknown ()
-  (interactive)
-  (find-name-dired "." "*unknown*"))
-
-(define-key dired-mode-map (kbd "C-M-<up>") 'pasja--dired-find-unknown)
-
 ;; small utility functions which are needed for el-get initialization
 
 (defun my--hostname-to-string ()
