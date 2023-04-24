@@ -14,7 +14,6 @@
       confirm-nonexistent-file-or-buffer nil
       display-time-day-and-date t
       display-time-24hr-format t
-      redisplay-dont-pause t                 ; faster scrolling
       sentence-end-double-space nil          ; period single space ends sentence
       load-prefer-newer t
       frame-resize-pixelwise t
@@ -125,16 +124,16 @@
 	   ;; in x-get-selection-value (the latter only accesses the
 	   ;; clipboard).  So try PRIMARY first, in case they selected
 	   ;; something with the mouse in the current Emacs session.
-	   (or (x-get-selection 'PRIMARY)
-	       (x-get-selection-value)))
-	  ((fboundp 'x-get-selection-value) ; MS-DOS and X.
+	   (or (gui-get-selection 'PRIMARY)
+	       (gui-get-primary-selection)))
+	  ((fboundp 'gui-get-primary-selection) ; MS-DOS and X.
 	   ;; On X, x-get-selection-value supports more formats and
 	   ;; encodings, so use it in preference to x-get-selection.
-	   (or (x-get-selection-value)
-	       (x-get-selection 'PRIMARY)))
+	   (or (gui-get-primary-selection)
+	       (gui-get-selection 'PRIMARY)))
 	  ;; FIXME: What about xterm-mouse-mode etc.?
 	  (t
-	   (x-get-selection 'PRIMARY)))))
+	   (gui-get-selection 'PRIMARY)))))
     (unless primary
       (error "No selection is available"))
     (push-mark (point))
@@ -196,9 +195,9 @@
 
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
-  (toggle-read-only)
+  (read-only-mode)
   (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
+  (read-only-mode))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;; configure ibuffer
@@ -375,7 +374,7 @@
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
    (lambda (s)
-     (end-of-buffer)
+     (goto-char (point-max))
      (eval-print-last-sexp))))
 
 ;; configure elpa
