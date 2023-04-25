@@ -358,7 +358,7 @@
 (unless (require 'el-get nil t)
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
+   (lambda (_s)
      (goto-char (point-max))
      (eval-print-last-sexp))))
 
