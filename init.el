@@ -22,7 +22,7 @@
       calc-multiplication-has-precedence nil)
 
 (setq-default major-mode 'text-mode
-	      indent-tabs-mode nil)
+              indent-tabs-mode nil)
 
 (with-eval-after-load 'tool-bar
   (tool-bar-mode -1))
@@ -47,8 +47,8 @@
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 
 (global-set-key (kbd "<f5>")                               ; open ~/.emacs.d/init.el
-		(lambda ()
-		  (interactive)
+                (lambda ()
+                  (interactive)
                   (find-file "~/.emacs.d/init.el")))
 
 (global-set-key (kbd "<f6>")
@@ -59,9 +59,9 @@
 (global-set-key (kbd "<f9>") 'save-buffers-kill-emacs)     ; hotkey for quit
 
 (global-set-key (kbd "M-3")                                ; easy timestamp for rovancs.org
-		(lambda ()
-		  (interactive)
-		  (insert(format-time-string "%Y-%m-%d"))))
+                (lambda ()
+                  (interactive)
+                  (insert(format-time-string "%Y-%m-%d"))))
 
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
   (make-directory "~/.emacs.d/cache/"))
@@ -106,7 +106,7 @@
 
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function
-	    kill-buffer-query-functions)
+            kill-buffer-query-functions)
       confirm-kill-processes nil)
 
 ;; clipboard settings
@@ -118,22 +118,22 @@
     (let (select-active-regions)
       (deactivate-mark)))
     (let ((primary
-	 (cond
-	  ((eq system-type 'windows-nt)
-	   ;; MS-Windows emulates PRIMARY in x-get-selection, but not
-	   ;; in x-get-selection-value (the latter only accesses the
-	   ;; clipboard).  So try PRIMARY first, in case they selected
-	   ;; something with the mouse in the current Emacs session.
-	   (or (gui-get-selection 'PRIMARY)
-	       (gui-get-primary-selection)))
-	  ((fboundp 'gui-get-primary-selection) ; MS-DOS and X.
-	   ;; On X, x-get-selection-value supports more formats and
-	   ;; encodings, so use it in preference to x-get-selection.
-	   (or (gui-get-primary-selection)
-	       (gui-get-selection 'PRIMARY)))
-	  ;; FIXME: What about xterm-mouse-mode etc.?
-	  (t
-	   (gui-get-selection 'PRIMARY)))))
+         (cond
+          ((eq system-type 'windows-nt)
+           ;; MS-Windows emulates PRIMARY in x-get-selection, but not
+           ;; in x-get-selection-value (the latter only accesses the
+           ;; clipboard).  So try PRIMARY first, in case they selected
+           ;; something with the mouse in the current Emacs session.
+           (or (gui-get-selection 'PRIMARY)
+               (gui-get-primary-selection)))
+          ((fboundp 'gui-get-primary-selection) ; MS-DOS and X.
+           ;; On X, x-get-selection-value supports more formats and
+           ;; encodings, so use it in preference to x-get-selection.
+           (or (gui-get-primary-selection)
+               (gui-get-selection 'PRIMARY)))
+          ;; FIXME: What about xterm-mouse-mode etc.?
+          (t
+           (gui-get-selection 'PRIMARY)))))
     (unless primary
       (error "No selection is available"))
     (push-mark (point))
@@ -150,7 +150,7 @@
 ;; save hooks
 
 (add-hook 'after-save-hook
-	  'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
+          'executable-make-buffer-file-executable-if-script-p)   ; auto chmod scripts
 
 ;; configure autosave
 
@@ -243,16 +243,16 @@
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single line instead."
   (interactive (if mark-active (list (region-beginning) (region-end))
-		 (message "Copied line")
-		 (list (line-beginning-position) 
-		       (line-beginning-position 2)))))
+                 (message "Copied line")
+                 (list (line-beginning-position)
+                       (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
-	   (line-beginning-position 2)))))
+           (line-beginning-position 2)))))
 
 ;; configure undo
 
@@ -265,8 +265,8 @@
 (setq vc-follow-symlinks t) ; auto-follow version controlled symlinks
 
 (add-hook 'log-edit-mode 
-	  (lambda ()
-	    (flyspell-mode -1)))
+          (lambda ()
+            (flyspell-mode -1)))
 
 ;; configure diff
 
