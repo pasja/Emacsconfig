@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;; forbidden commands
 
 (put 'narrow-to-region 'disabled nil)
