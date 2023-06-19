@@ -21,7 +21,8 @@
       frame-resize-pixelwise t
       x-underline-at-descent-line t
       x-stretch-cursor t
-      calc-multiplication-has-precedence nil)
+      calc-multiplication-has-precedence nil
+      isearch-lazy-count t)
 
 (setq-default major-mode 'text-mode
               indent-tabs-mode nil)
