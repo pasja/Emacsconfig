@@ -31,7 +31,7 @@
 (with-eval-after-load 'scroll-bar
   (scroll-bar-mode -1))
 (with-eval-after-load 'fringe
-  (set-fringe-mode  '(0 . 0)))
+  (set-fringe-mode '(0 . 0)))
 (menu-bar-mode -1)
 (show-paren-mode 1)
 (column-number-mode 1)
