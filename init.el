@@ -351,8 +351,10 @@
 
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
-;; apt install hunspell hunspell-hu texinfo build-essential
-;; apt install global python-pygments silversearcher-ag install-info
+;; apt install hunspell hunspell-hu texinfo build-essential texlive
+;; apt install global python3-pygments silversearcher-ag install-info
+;; apt install autoconf automake gcc libpng-dev libpoppler-dev
+;; apt install libpoppler-glib-dev libz-dev make pkg-config zip
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
