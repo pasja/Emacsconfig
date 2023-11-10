@@ -521,7 +521,8 @@
                                         (magit-status "/yadm::")))
     (with-eval-after-load 'magit
       (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
-            magit-diff-refine-hunk t))))
+            magit-diff-refine-hunk t
+            magit-bury-buffer-function #'magit-restore-window-configuration))))
 
 (el-get-bundle smartparens
   (progn (require 'smartparens-config)
