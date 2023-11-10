@@ -238,9 +238,21 @@
 
 ;; configure tramp
 
+(require 'tramp)
+
 (setq shell-prompt-pattern "^[^a-zA-Z].*[~#$%>] *" ; we need a bit more funky pattern, as tramp will start $SHELL (sudo -s), ie., zsh for root user
       tramp-default-method "sshx"
       tramp-persistency-file-name "~/.emacs.d/cache/tramp")
+
+;; yadm support
+
+(add-to-list 'tramp-methods
+             '("yadm"
+               (tramp-login-program "yadm")
+               (tramp-login-args (("enter")))
+               (tramp-login-env (("SHELL") ("/bin/sh")))
+               (tramp-remote-shell "/bin/sh")
+               (tramp-remote-shell-args ("-c"))))
 
 ;; Copy/Paste one line without selecting it
 
@@ -504,6 +516,9 @@
 
 (el-get-bundle magit
   (progn (global-set-key (kbd "C-x g") 'magit-status)
+         (global-set-key (kbd "<f7>") (lambda ()
+                                        (interactive)
+                                        (magit-status "/yadm::")))
     (with-eval-after-load 'magit
       (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
             magit-diff-refine-hunk t))))
