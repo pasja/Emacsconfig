@@ -596,6 +596,9 @@
 
 (el-get-bundle restclient)
 
+(el-get-bundle yasnippet
+  (yas-global-mode 1))
+
 (el-get-bundle image+
   (with-eval-after-load 'image
     '(require 'image+)))
