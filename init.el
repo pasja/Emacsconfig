@@ -308,7 +308,7 @@
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 
 (setq dired-guess-shell-alist-user
-      '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mplayer" "vlc")))
+      '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mpv" "vlc")))
 
 ;; configure woman
 
