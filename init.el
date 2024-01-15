@@ -499,9 +499,7 @@
              (find-alternate-file "..")
              (dired-goto-file pasja-prev-dir-name)))
 
-         (add-hook 'dired-mode-hook
-                   (lambda ()
-                     (setq dired-omit-mode t)))))
+         (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))))
 
 (el-get-bundle rainbow-delimiters
   (outline-minor-mode t) ; TODO: https://github.com/sellout/emacs-color-theme-solarized/issues/165
