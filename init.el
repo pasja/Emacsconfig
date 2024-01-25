@@ -23,7 +23,8 @@
       x-stretch-cursor t
       calc-multiplication-has-precedence nil
       isearch-lazy-count t
-      display-raw-bytes-as-hex t)
+      display-raw-bytes-as-hex t
+      help-window-keep-selected t)
 
 (setq-default major-mode 'text-mode
               indent-tabs-mode nil)
