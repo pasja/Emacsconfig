@@ -21,6 +21,7 @@
       frame-resize-pixelwise t
       x-underline-at-descent-line t
       x-stretch-cursor t
+      use-system-tooltips nil
       calc-multiplication-has-precedence nil
       calc-kill-line-numbering nil
       isearch-lazy-count t
