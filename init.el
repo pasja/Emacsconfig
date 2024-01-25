@@ -22,6 +22,7 @@
       x-underline-at-descent-line t
       x-stretch-cursor t
       calc-multiplication-has-precedence nil
+      calc-kill-line-numbering nil
       isearch-lazy-count t
       display-raw-bytes-as-hex t
       help-window-keep-selected t)
