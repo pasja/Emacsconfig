@@ -402,7 +402,7 @@ the mouse is clicked, or on the file at point."
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essential texlive
-;; apt install global python3-pygments silversearcher-ag install-info
+;; apt install global python3-pygments ripgrep install-info
 ;; apt install autoconf automake gcc libpng-dev libpoppler-dev
 ;; apt install libpoppler-glib-dev libz-dev make pkg-config zip
 
@@ -587,7 +587,7 @@ the mouse is clicked, or on the file at point."
          (global-set-key (kbd "C-x C-f") 'counsel-find-file)
          (global-set-key (kbd "C-c g") 'counsel-git)
          (global-set-key (kbd "C-c j") 'counsel-git-grep)
-         (global-set-key (kbd "C-c k") 'counsel-ag)
+         (global-set-key (kbd "C-c r") 'counsel-rg)
          (global-set-key (kbd "C-x 8") 'counsel-unicode-char)
          (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
          (setq ivy-use-virtual-buffers t)))
