@@ -99,8 +99,7 @@
 
 ;; rectangles
 
-(setq cua-enable-cua-keys nil)
-(cua-mode t)
+(global-set-key (kbd "C-M-<return>") #'cua-rectangle-mark-mode)
 
 ;; savehist: save some history
 
