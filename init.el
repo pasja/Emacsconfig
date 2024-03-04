@@ -308,6 +308,11 @@
 (setq dired-listing-switches "-alhX --time-style=long-iso")                   ; display size in human readable form
 (setq image-dired-dir "~/.emacs.d/cache/image-dired/")
 
+(setq dired-recursive-copies  'always
+      dired-recursive-deletes 'always
+      wdired-use-dired-vertical-movement t
+      wdired-allow-to-change-permissions t)
+
 (setq dired-guess-shell-alist-user
       '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mpv" "vlc")))
 
