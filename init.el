@@ -311,7 +311,8 @@
 (setq dired-recursive-copies  'always
       dired-recursive-deletes 'always
       wdired-use-dired-vertical-movement t
-      wdired-allow-to-change-permissions t)
+      wdired-allow-to-change-permissions t
+      dired-vc-rename-file t)
 
 (setq dired-guess-shell-alist-user
       '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mpv" "vlc")))
