@@ -743,6 +743,7 @@ the mouse is clicked, or on the file at point."
       (directory-files "~/Emacsconfig/plugins" t ".elc$")) ; load them all!
 
 ;; Customize
- 
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
+
