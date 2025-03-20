@@ -725,6 +725,9 @@ the mouse is clicked, or on the file at point."
         (enable-circe-new-day-notifier)
         (add-to-list 'circe-format-not-tracked 'circe-new-day-notifier-format-message)))))
 
+(el-get-bundle exec-path-from-shell
+  (exec-path-from-shell-initialize))
+
 (el-get 'sync)
 
 ;; External libraries
