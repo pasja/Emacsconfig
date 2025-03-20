@@ -663,7 +663,7 @@ the mouse is clicked, or on the file at point."
   (with-eval-after-load 'image
     '(require 'image+)))
 
-(unless (string= (string-trim-right (my--hostname-to-string)) "hel")
+(when (string= (system-name) "asgard")
   (el-get-bundle! pdf-tools
     :build (("make" "autobuild"))
     (pdf-tools-install)))
