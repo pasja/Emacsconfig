@@ -47,8 +47,7 @@
 (global-set-key (kbd "M-g") 'goto-line)                    ; M-g  'goto-line
 (global-set-key (kbd "M-2") 'hippie-expand)
 
-(require 'windmove)                                        ; windmove
-(windmove-default-keybindings 'shift)
+(windmove-default-keybindings 'shift)                      ; windmove
 (global-set-key (kbd "C-<left>") 'next-buffer)             ; buffer move
 (global-set-key (kbd "C-<right>") 'previous-buffer)
 
