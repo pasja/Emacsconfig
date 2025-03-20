@@ -410,6 +410,17 @@ the mouse is clicked, or on the file at point."
 
 (global-set-key (kbd "C-x x v") 'view-text-file-as-info-manual)
 
+(when (eq system-type 'darwin)
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+  (setq ns-command-modifier 'control
+        ns-control-modifier 'meta
+        ns-right-option-modifier 'none)
+  (global-set-key [home] 'beginning-of-line-text)
+  (global-set-key [end] 'move-end-of-line)
+  (global-set-key (kbd "<M-right>") #'right-word)
+  (global-set-key (kbd "<M-left>") #'left-word)
+  (global-set-key (kbd "<M-delete>") #'kill-word))
+
 ;; Boostrap el-get
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essential texlive
