@@ -196,16 +196,9 @@
 
 ;; colorize shell and comint
 
-(require 'ansi-color)
+(add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
-(defun colorize-compilation-buffer ()
-  (read-only-mode)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (read-only-mode))
-
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
 
 ;; configure ibuffer
 
