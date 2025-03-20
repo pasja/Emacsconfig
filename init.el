@@ -427,11 +427,11 @@ the mouse is clicked, or on the file at point."
   (add-hook 'prog-mode-hook 'fic-mode))
 
 (el-get-bundle org-mode
+  :before (setq org-CUA-compatible t)
   (with-eval-after-load 'org
     (setq org-link-abbrev-alist
           '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
           org-return-follows-link t
-          org-CUA-compatible t
           org-fontify-done-headline t
           org-highlight-latex-and-related '(latex)
           org-M-RET-may-split-line '((default . nil))
