@@ -436,7 +436,19 @@ the mouse is clicked, or on the file at point."
           org-highlight-latex-and-related '(latex)
           org-M-RET-may-split-line '((default . nil))
           org-agenda-start-on-weekday 1
-          org-enforce-todo-checkbox-dependencies t)
+          org-enforce-todo-checkbox-dependencies t
+          org-agenda-files '("~/Notes/Master.org")
+          org-capture-templates
+          '(("n" "New" entry (file+headline "~/Notes/Master.org" "Incoming")
+             "* NEW %?\n  %i\n" :empty-lines 1))
+          org-refile-use-outline-path 'file
+          org-outline-path-complete-in-steps nil         ; Refile in a single go
+          org-enforce-todo-dependencies t
+          org-log-into-drawer t
+          org-log-states-order-reversed t
+          org-startup-folded nil
+          org-todo-keywords
+          '((sequence "TODO(t!)" "NEW(n)" "INPROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d!)" "CANCELLED(c@/!)")))
 
     (add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
     (add-hook 'org-shiftleft-final-hook 'windmove-left)
