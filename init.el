@@ -769,6 +769,11 @@ the mouse is clicked, or on the file at point."
 (el-get-bundle exec-path-from-shell
   (exec-path-from-shell-initialize))
 
+(el-get-bundle git-link
+  :type github
+  :pkgname "sshaw/git-link"
+  :description "Interactive Emacs functions that create URLs for files and commits in GitHub/Bitbucket/GitLab/... repositories.")
+
 (el-get 'sync)
 
 ;; External libraries
