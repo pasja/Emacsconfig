@@ -385,6 +385,31 @@ the mouse is clicked, or on the file at point."
 (setq recentf-save-file "~/.emacs.d/cache/recentf.el")
 (recentf-mode)
 
+(defun view-text-file-as-info-manual ()
+  (interactive)
+  (require 'ox-texinfo)
+  (let ((org-export-with-broken-links 'mark))
+    (pcase (file-name-extension (buffer-file-name))
+      (`"info"
+       (info (buffer-file-name)))
+      (`"texi"
+       (info (org-texinfo-compile (buffer-file-name))))
+      (`"org"
+       (info (org-texinfo-export-to-info)))
+      (`"md"
+       (let ((org-file-name (concat (file-name-sans-extension (buffer-file-name)) ".org")))
+         (apply #'call-process "pandoc" nil standard-output nil
+                `("-f" "markdown"
+                  "-t" "org"
+                  "-o" , org-file-name
+                  , (buffer-file-name)))
+         (with-current-buffer (find-file-noselect org-file-name)
+           (info (org-texinfo-export-to-info)))))
+      (_ (user-error "Don't know how to convert `%s' to an `info' file"
+                     (file-name-extension (buffer-file-name)))))))
+
+(global-set-key (kbd "C-x x v") 'view-text-file-as-info-manual)
+
 ;; small utility functions which are needed for el-get initialization
 
 (defun my--hostname-to-string ()
