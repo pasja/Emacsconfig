@@ -664,6 +664,10 @@ the mouse is clicked, or on the file at point."
   :description "ivy-posframe is a ivy extension, which let ivy use posframe to show its candidate menu."
   (progn
     (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+    (defface ivy-posframe-cursor
+      '((t (:inherit ivy-cursor)))
+      "Face used by the ivy-posframe's fake cursor."
+      :group 'ivy-posframe)
     (ivy-posframe-mode 1)))
 
 (el-get-bundle prescient
