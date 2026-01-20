@@ -71,8 +71,9 @@
 (unless (file-exists-p "~/.emacs.d/cache/")                ; create default cache directory
   (make-directory "~/.emacs.d/cache/"))
 
-(defalias 'yes-or-no-p 'y-or-n-p)                          ; Useful aliases
-(defalias 'perl-mode 'cperl-mode)
+(setopt use-short-answers t)
+
+(defalias 'perl-mode 'cperl-mode)                          ; Useful aliases
 (defalias 'eb 'eval-buffer)
 (defalias 'list-buffers 'ibuffer)
 
