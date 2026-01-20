@@ -291,6 +291,16 @@
       ediff-keep-variants nil)
 (setq-default ediff-auto-refine 'on)
 
+(defun ediff-current-windows ()
+  "Run ediff on the buffers displayed in the current frame's two windows."
+  (interactive)
+  (let ((windows (window-list)))
+    (if (= (length windows) 2)
+       (let ((buf1 (window-buffer (car windows)))
+             (buf2 (window-buffer (cadr windows))))
+         (ediff-buffers buf1 buf2))
+     (error "This function requires exactly 2 windows"))))
+
 ;; configure SQL
 
 (setq sql-sqlite-program "sqlite3")
