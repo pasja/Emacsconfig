@@ -627,16 +627,18 @@ the mouse is clicked, or on the file at point."
   (global-undo-tree-mode 1))
 
 (el-get-bundle swiper
-  (progn (ivy-mode 1)
-         (global-set-key (kbd "C-c C-r") 'ivy-resume)
-         (global-set-key (kbd "M-x") 'counsel-M-x)
-         (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-         (global-set-key (kbd "C-c g") 'counsel-git)
-         (global-set-key (kbd "C-c j") 'counsel-git-grep)
-         (global-set-key (kbd "C-c r") 'counsel-rg)
-         (global-set-key (kbd "C-x 8") 'counsel-unicode-char)
-         (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-         (setq ivy-use-virtual-buffers t)))
+    :type github
+    :pkgname "pasja/swiper"
+    (progn (ivy-mode 1)
+           (global-set-key (kbd "C-c C-r") 'ivy-resume)
+           (global-set-key (kbd "M-x") 'counsel-M-x)
+           (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+           (global-set-key (kbd "C-c g") 'counsel-git)
+           (global-set-key (kbd "C-c j") 'counsel-git-grep)
+           (global-set-key (kbd "C-c r") 'counsel-rg)
+           (global-set-key (kbd "C-x 8") 'counsel-unicode-char)
+           (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+           (setq ivy-use-virtual-buffers t)))
 
 (el-get-bundle ggtags
   (progn
