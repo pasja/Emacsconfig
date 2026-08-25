@@ -485,6 +485,19 @@ the mouse is clicked, or on the file at point."
 
 (setq use-package-always-ensure t)
 
+(use-package compat)
+
+(use-package transient)
+
+(use-package magit
+  :bind (("C-x g" . magit-status)
+         ("<f7>" . (lambda () (interactive
+                          (magit-status "/yadm::")))))
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
+        magit-diff-refine-hunk t
+        magit-bury-buffer-function #'magit-restore-window-configuration))
+
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
