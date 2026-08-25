@@ -319,6 +319,12 @@
 (setq dired-guess-shell-alist-user
       '(("\\.avi\\|\\.flv\\|\\.mp4\\|\\.wmv\\|.mov" "mpv" "vlc")))
 
+(defun pasja--goto-up-in-dired ()
+  (interactive)
+  (let ((pasja-prev-dir-name (file-truename default-directory)))
+    (find-alternate-file "..")
+    (dired-goto-file pasja-prev-dir-name)))
+
 (require 'dired-aux)
 (declare-function w32-shell-execute "w32fns.c")
 (declare-function shell-command-guess "dired-aux" (files))
@@ -738,6 +744,77 @@ the mouse is clicked, or on the file at point."
   ;; (add-hook 'completion-at-point-functions #'cape-history)
   ;; ...
 )
+
+(use-package solarized-theme
+  :ensure (:wait t)
+  :config (load-theme 'solarized-dark t))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode)
+  :config
+  (outline-minor-mode t) ; TODO: https://github.com/sellout/emacs-color-theme-solarized/issues/165
+  (outline-minor-mode nil))
+
+(use-package smartparens
+  :ensure (:wait t)
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1))
+
+(use-package beginend
+  :config
+  (beginend-global-mode))
+
+(use-package markdown-mode)
+
+(use-package php-mode)
+
+(use-package s)
+
+(use-package web-mode)
+
+(use-package csv-mode)
+
+(use-package apache-mode)
+
+(use-package yaml-mode)
+
+(use-package dockerfile-mode)
+
+(use-package restclient)
+
+(use-package yasnippet
+  :ensure (:wait t)
+  :config
+  (yas-global-mode 1))
+
+(use-package x509-mode)
+
+(use-package lua-mode)
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
+(use-package git-link)
+
+(use-package dired+
+  :ensure (:host github :repo "emacsmirror/dired-plus" :wait t)
+  :demand
+  :init
+  (setq diredp-hide-details-initially-flag nil)
+   :bind (:map dired-mode-map
+               ("j" . dired-do-open)
+               ("^" . pasja--goto-up-in-dired))
+   :hook (dired-mode . dired-omit-mode)
+   :config
+   (diredp-toggle-find-file-reuse-dir 1) ; reuse existing dired buffer
+   (setq dired-recursive-copies 'always  ; recursive copy/delete
+         dired-recursive-deletes 'top
+         dired-dwim-target t
+         dired-omit-files (concat dired-omit-files "\\|^\\..+$")))
+
+(use-package orgtbl-aggregate)
 
 ;; External libraries
 
