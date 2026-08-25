@@ -432,363 +432,58 @@ the mouse is clicked, or on the file at point."
   (global-set-key (kbd "<M-left>") #'left-word)
   (global-set-key (kbd "<M-delete>") #'kill-word))
 
-;; Boostrap el-get
+;; Boostrap elpaca
 ;; preinstall the following debian packages:
 ;; apt install hunspell hunspell-hu texinfo build-essential texlive
 ;; apt install global python3-pygments ripgrep install-info
 ;; apt install autoconf automake gcc libpng-dev libpoppler-dev
 ;; apt install libpoppler-glib-dev libz-dev make pkg-config zip
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-;; configure elpa
-
-(require 'package)
-
-;; External libraries (with el-get)
-
-(el-get-bundle el-get)
-
-(el-get-bundle fixme
-  :type github
-  :pkgname "lewang/fic-mode"
-  :description "Show FIXME/TODO/BUG(...) in special face only in comments and strings"
-  (add-hook 'prog-mode-hook 'fic-mode))
-
-(el-get-bundle org-mode
-  :before (setq org-CUA-compatible t)
-  (with-eval-after-load 'org
-    (setq org-link-abbrev-alist
-          '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
-          org-return-follows-link t
-          org-fontify-done-headline t
-          org-highlight-latex-and-related '(latex)
-          org-M-RET-may-split-line '((default . nil))
-          org-agenda-start-on-weekday 1
-          org-enforce-todo-checkbox-dependencies t
-          org-agenda-files '("~/Notes/Master.org")
-          org-capture-templates
-          '(("n" "New" entry (file+headline "~/Notes/Master.org" "Incoming")
-             "* NEW %?\n  %i\n" :empty-lines 1))
-          org-refile-use-outline-path 'file
-          org-outline-path-complete-in-steps nil         ; Refile in a single go
-          org-enforce-todo-dependencies t
-          org-log-into-drawer t
-          org-log-states-order-reversed t
-          org-startup-folded nil
-          org-todo-keywords
-          '((sequence "TODO(t!)" "NEW(n)" "INPROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d!)" "CANCELLED(c@/!)")))
-
-    (add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
-    (add-hook 'org-shiftleft-final-hook 'windmove-left)
-    (add-hook 'org-shiftdown-final-hook 'windmove-down)
-    (add-hook 'org-shiftright-final-hook 'windmove-right)
-
-    (defun myorg-update-parent-cookie ()
-      (when (equal major-mode 'org-mode)
-        (save-excursion
-          (ignore-errors
-            (org-back-to-heading)
-            (org-update-parent-todo-statistics)))))
-
-    (defadvice org-kill-line (after fix-cookies activate)
-      (myorg-update-parent-cookie))
-
-    (defadvice kill-whole-line (after fix-cookies activate)
-      (myorg-update-parent-cookie))
-
-    (eval-after-load 'org '(progn
-                             (setq org-default-notes-file (concat org-directory "/notes.org"))))
-
-    ;; plantuml
-
-    ;; active Org-babel languages
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '(;; other Babel languages
-       (plantuml . t)))
-
-    (setq org-plantuml-jar-path
-          (expand-file-name "~/bin/plantuml.jar"))
-
-    (defun my-org-confirm-babel-evaluate (lang body)
-      (not (string= lang "plantuml")))  ; don't ask for plantuml
-    (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)))
-
-(when (string= (system-name) "asgard")
-  (el-get-bundle emms
-    (with-eval-after-load 'emms
-      (emms-all)
-      (setq emms-cache-file "~/.emacs.d/cache/emms-cache"
-            emms-info-auto-update nil
-            emms-playlist-buffer-name "EMMS Playlist")
-      (if (file-readable-p "~/.emacs.d/cache/emms-cache")
-          (emms-cache-restore))
-      (require 'emms-player-mpd)
-      (setq emms-player-mpd-music-directory "~/Zene/"
-            emms-player-mpd-server-name "localhost"
-            emms-player-mpd-server-port "6600")
-      (setq emms-info-functions 'emms-info-mpd)
-      (add-to-list 'emms-player-list 'emms-player-mpd)
-      (emms-player-mpd-connect))))
-
-(el-get-bundle mode-compile
-  (progn (autoload 'mode-compile "mode-compile"
-           "Command to compile current buffer file based on the major mode" t)
-         (global-set-key (kbd "C-c c") 'mode-compile)
-         (autoload 'mode-compile-kill "mode-compile"
-           "Command to kill a compilation launched by `mode-compile'" t)
-         (global-set-key (kbd "C-c k") 'mode-compile-kill)))
-
-(el-get-bundle cperl-mode
-  (with-eval-after-load 'cperl-mode
-    (cperl-set-style "BSD")
-    (setq cperl-invalid-face nil
-          cperl-indent-parens-as-block t
-          cperl-tab-always-indent nil
-          cperl-highlight-variables-indiscriminately t
-          cperl-merge-trailing-else nil)
-    (define-key cperl-mode-map "{" 'nil))) ; smartparens fixup
-
-(el-get-bundle haskell-mode
-  (progn (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-         (setq haskell-process-type 'cabal-repl)))
-
-(el-get-bundle info+
-    (eval-after-load "info" '(require 'info+)))
-
-(el-get-bundle solarized-emacs
-  (load-theme 'solarized-dark t))
-
-(el-get-bundle dired+
-  :before (setq diredp-hide-details-initially-flag nil)
-  (progn (diredp-toggle-find-file-reuse-dir 1) ; reuse existing dired buffer
-         (setq dired-recursive-copies 'always  ; recursive copy/delete
-               dired-recursive-deletes 'top
-               dired-dwim-target t
-               dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
-
-         (define-key dired-mode-map (kbd "^") 'pasja-goto-up-in-dired)
-
-         (defun pasja-goto-up-in-dired ()
-           (interactive)
-           (let ((pasja-prev-dir-name (file-truename default-directory)))
-             (find-alternate-file "..")
-             (dired-goto-file pasja-prev-dir-name)))
-
-         (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
-
-         (define-key dired-mode-map (kbd "j") #'dired-do-open)))
-
-
-(el-get-bundle rainbow-delimiters
-  (outline-minor-mode t) ; TODO: https://github.com/sellout/emacs-color-theme-solarized/issues/165
-  (outline-minor-mode nil)
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
-(el-get-bundle company-mode
-  (progn (global-company-mode)
-         (with-eval-after-load 'cperl-mode
-           (add-to-list 'company-dabbrev-code-modes 'cperl-mode))))
-
-(el-get-bundle magit
-  (progn (global-set-key (kbd "C-x g") 'magit-status)
-         (global-set-key (kbd "<f7>") (lambda ()
-                                        (interactive)
-                                        (magit-status "/yadm::")))
-    (with-eval-after-load 'magit
-      (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
-            magit-diff-refine-hunk t
-            magit-bury-buffer-function #'magit-restore-window-configuration))))
-
-(el-get-bundle smartparens
-  (progn (require 'smartparens-config)
-         (smartparens-global-mode 1)))
-
-(el-get-bundle replace+
-  (with-eval-after-load "replace"
-    '(require 'replace+)))
-
-(el-get-bundle dired-sort-menu
-  (with-eval-after-load "dired"
-    '(require 'dired-sort-menu)))
-
-(el-get-bundle dired-sort-menu+)
-
-(el-get-bundle undo-tree
-  :before (setq undo-tree-history-directory-alist '(("." . "/tmp")))
-  (global-undo-tree-mode 1))
-
-(el-get-bundle swiper
-    :type github
-    :pkgname "pasja/swiper"
-    (progn (ivy-mode 1)
-           (global-set-key (kbd "C-c C-r") 'ivy-resume)
-           (global-set-key (kbd "M-x") 'counsel-M-x)
-           (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-           (global-set-key (kbd "C-c g") 'counsel-git)
-           (global-set-key (kbd "C-c j") 'counsel-git-grep)
-           (global-set-key (kbd "C-c r") 'counsel-rg)
-           (global-set-key (kbd "C-x 8") 'counsel-unicode-char)
-           (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-           (setq ivy-use-virtual-buffers t)))
-
-(el-get-bundle ggtags
-  (progn
-    (add-hook 'prog-mode-hook #'ggtags-mode)))
-
-(el-get-bundle beginend
-  :type github
-  :pkgname "DamienCassou/beginend"
-  :description "Redefine M-< and M-> (or any key bound to beginning-of-buffer or end-of-buffer) for some modes so that point moves to meaningful locations."
-  (beginend-global-mode))
-
-(el-get-bundle ox-jira
-  :type github
-  :pkgname "stig/ox-jira.el"
-  :description "JIRA Backend for Org Export Engine")
-
-(el-get-bundle markdown-mode)
-
-(el-get-bundle php-mode)
-
-(el-get-bundle s)
-
-(el-get-bundle web-mode)
-
-(el-get-bundle csv-mode)
-
-(el-get-bundle apache-mode)
-
-(el-get-bundle yaml-mode)
-
-(el-get-bundle auctex)
-
-(el-get-bundle alchemist)
-
-(el-get-bundle dockerfile-mode)
-
-(el-get-bundle grep+)
-
-(el-get-bundle ffap-)
-
-(el-get-bundle restclient)
-
-(el-get-bundle yasnippet
-  (yas-global-mode 1))
-
-(el-get-bundle image+
-  (with-eval-after-load 'image
-    '(require 'image+)))
-
-(when (string= (system-name) "asgard")
-  (el-get-bundle! pdf-tools
-    :build (("make" "autobuild"))
-    (pdf-tools-install)))
-
-(el-get-bundle x509-mode
-  :type github
-  :pkgname "jobbflykt/x509-mode"
-  :description "View certificates and CRLs using OpenSSL in Emacs")
-
-(el-get-bundle erlang-mode)
-
-(el-get-bundle lua-mode)
-
-(el-get-bundle orgaggregate
-  :type github
-  :pkgname "tbanel/orgaggregate"
-  :description "Aggregating a table is creating a new table by computing sums, averages, and so on, out of material from the first table.")
-
-(el-get-bundle posframe)
-
-(el-get-bundle ivy-posframe
-  :type github
-  :pkgname "tumashu/ivy-posframe"
-  :description "ivy-posframe is a ivy extension, which let ivy use posframe to show its candidate menu."
-  (progn
-    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-    (defface ivy-posframe-cursor
-      '((t (:inherit ivy-cursor)))
-      "Face used by the ivy-posframe's fake cursor."
-      :group 'ivy-posframe)
-    (ivy-posframe-mode 1)))
-
-(el-get-bundle prescient
-  :type github
-  :pkgname "radian-software/prescient.el"
-  :description "prescient.el is a library which sorts and filters lists of candidates, such as appear when you use a package like Ivy or Company."
-  (progn
-    (ivy-prescient-mode)
-    (company-prescient-mode)
-    (prescient-persist-mode)))
-
-(el-get-bundle dired-rsync
-  :type github
-  :pkgname "stsquad/dired-rsync"
-  :description "This package adds a single command dired-rsync which allows the user to copy marked files in a dired buffer via rsync."
-  (define-key dired-mode-map (kbd "C-c C-r") 'dired-rsync))
-
-(el-get-bundle! circe
-  (with-eval-after-load 'circe
-    (setq circe-reduce-lurker-spam t
-          circe-active-users-timeout 43200
-          circe-color-nicks-everywhere t
-          circe-highlight-nick-type 'occurence
-          circe-server-max-reconnect-attempts nil
-          circe-format-server-topic "*** Topic change by {origin}: {topic-diff}"
-          circe-format-self-say "<{nick}> {body}"
-          circe-new-buffer-behavior 'ignore)
-
-    (require 'circe-color-nicks)
-    (enable-circe-color-nicks)
-
-    (add-hook 'circe-chat-mode-hook 'my-circe-prompt)
-    (defun my-circe-prompt ()
-      (lui-set-prompt
-       (concat (propertize (concat (buffer-name) "")
-                           'face 'circe-prompt-face)
-               " ")))
-
-    (require 'circe-lagmon)
-    (circe-lagmon-mode)
-
-    (require 'lui-autopaste)
-    (add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
-
-    (require 'lui-logging)
-    (setq lui-logging-directory "~/irclog/"
-          lui-logging-file-format "{buffer}@{network}"
-          lui-logging-format "[%Y-%m-%d %T] {text}")
-    (add-hook 'circe-chat-mode-hook 'enable-lui-logging)
-
-    (setq lui-time-stamp-position 'left
-          lui-time-stamp-format "%H:%M "
-          lui-fill-type nil)
-
-    (when (string= (system-name) "midgard") ; autojoin
-      (when (string= (daemonp) "irc")
-        (add-to-list 'load-path "~/.emacs.d/secrets/")
-        (require 'ercidentities)
-        (enable-circe-new-day-notifier)
-        (add-to-list 'circe-format-not-tracked 'circe-new-day-notifier-format-message)))))
-
-(el-get-bundle exec-path-from-shell
-  (exec-path-from-shell-initialize))
-
-(el-get-bundle git-link
-  :type github
-  :pkgname "sshaw/git-link"
-  :description "Interactive Emacs functions that create URLs for files and commits in GitHub/Bitbucket/GitLab/... repositories.")
-
-(el-get 'sync)
+(defvar elpaca-installer-version 0.12)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                              :ref nil :depth 1 :inherit ignore
+                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                              :build (:not elpaca-activate)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
+       (build (expand-file-name "elpaca/" elpaca-builds-directory))
+       (order (cdr elpaca-order))
+       (default-directory repo))
+  (add-to-list 'load-path (if (file-exists-p build) build repo))
+  (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (<= emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+        (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                  ,@(when-let* ((depth (plist-get order :depth)))
+                                                      (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                  ,(plist-get order :repo) ,repo))))
+                  ((zerop (call-process "git" nil buffer t "checkout"
+                                        (or (plist-get order :ref) "--"))))
+                  (emacs (concat invocation-directory invocation-name))
+                  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                        "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                  ((require 'elpaca))
+                  ((elpaca-generate-autoloads "elpaca" repo)))
+            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+          (error "%s" (with-current-buffer buffer (buffer-string))))
+      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
+
+;; Install use-package support
+(elpaca elpaca-use-package
+  ;; Enable use-package :ensure support for Elpaca.
+  (elpaca-use-package-mode))
+
+(setq use-package-always-ensure t)
 
 ;; External libraries
 
@@ -802,3 +497,8 @@ the mouse is clicked, or on the file at point."
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
 
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
