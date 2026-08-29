@@ -828,8 +828,7 @@ the mouse is clicked, or on the file at point."
 
 (use-package orgtbl-aggregate)
 
-(use-package cperl-mode
-  :ensure (:host github :repo "HaraldJoerg/cperl-mode"))
+(use-package cperl-mode)
 
 (use-package hl-todo
   :config
@@ -844,11 +843,9 @@ the mouse is clicked, or on the file at point."
   :config
   (setq vundo-glyph-alist vundo-unicode-symbols))
 
-(use-package ox-jira
-  :ensure( :host github :repo "stig/ox-jira.el"))
+(use-package ox-jira)
 
 (use-package dired-rsync
-  :ensure (:host github :repo "stsquad/dired-rsync")
   :bind (:map dired-mode-map
               ("C-c C-r" . dired-rsync)))
 
