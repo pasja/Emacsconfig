@@ -428,6 +428,7 @@ the mouse is clicked, or on the file at point."
 
 (when (eq system-type 'darwin)
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+  (toggle-frame-maximized)
   (setq ns-command-modifier 'control
         ns-control-modifier 'meta
         ns-right-option-modifier 'none)
