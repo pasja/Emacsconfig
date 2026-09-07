@@ -850,6 +850,7 @@ the mouse is clicked, or on the file at point."
   :bind (:map dired-mode-map
               ("C-c C-r" . dired-rsync)))
 
+(use-package time-zones)
 
 ;; External libraries
 
