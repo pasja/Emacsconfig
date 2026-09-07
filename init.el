@@ -265,6 +265,8 @@
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
+(add-to-list 'yank-excluded-properties 'face)
+
 ;; configure undo
 
 (setq undo-limit 800000
