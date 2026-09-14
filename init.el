@@ -117,35 +117,7 @@
 
 ;; clipboard settings
 
-(defun insert-from-primary-clipboard ()
-  "Insert the text from the current x-selection."
-  (interactive)
-  (when select-active-regions
-    (let (select-active-regions)
-      (deactivate-mark)))
-    (let ((primary
-         (cond
-          ((eq system-type 'windows-nt)
-           ;; MS-Windows emulates PRIMARY in x-get-selection, but not
-           ;; in x-get-selection-value (the latter only accesses the
-           ;; clipboard).  So try PRIMARY first, in case they selected
-           ;; something with the mouse in the current Emacs session.
-           (or (gui-get-selection 'PRIMARY)
-               (gui-get-primary-selection)))
-          ((fboundp 'gui-get-primary-selection) ; MS-DOS and X.
-           ;; On X, x-get-selection-value supports more formats and
-           ;; encodings, so use it in preference to x-get-selection.
-           (or (gui-get-primary-selection)
-               (gui-get-selection 'PRIMARY)))
-          ;; FIXME: What about xterm-mouse-mode etc.?
-          (t
-           (gui-get-selection 'PRIMARY)))))
-    (unless primary
-      (error "No selection is available"))
-    (push-mark (point))
-    (insert primary)))
-
-(global-set-key (kbd "S-<insert>") 'insert-from-primary-clipboard)
+(global-set-key (kbd "S-<insert>") 'mouse-yank-primary)
 
 (setq mouse-yank-at-point t)
 
