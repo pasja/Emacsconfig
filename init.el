@@ -881,6 +881,15 @@
 
 (use-package hcl-mode)
 
+(use-package info+
+  :ensure (:host github :repo "emacsmirror/info-plus"))
+
+(when (string= (system-name) "asgard")
+  (use-package pdf-tools
+    :config
+    (pdf-loader-install)
+    :hook (pdf-view-mode . pdf-view-roll-minor-mode)))
+
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
