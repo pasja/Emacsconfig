@@ -792,6 +792,10 @@
   :config
   (setq time-zones-show-details t))
 
+(use-package crontab-mode)
+
+(use-package hcl-mode)
+
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
