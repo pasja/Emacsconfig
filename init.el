@@ -696,6 +696,63 @@
   ;; ...
 )
 
+(use-package org
+  :init (setq org-CUA-compatible t)
+  :config
+    (setq org-link-abbrev-alist
+          '(("RT" . "https://rt.info.ppke.hu/Ticket/Display.html?id=%s"))
+          org-return-follows-link t
+          org-fontify-done-headline t
+          org-highlight-latex-and-related '(latex)
+          org-M-RET-may-split-line '((default . nil))
+          org-agenda-start-on-weekday 1
+          org-enforce-todo-checkbox-dependencies t
+          org-agenda-files '("~/Notes/Master.org")
+          org-capture-templates
+          '(("n" "New" entry (file+headline "~/Notes/Master.org" "Incoming")
+             "* NEW %?\n  %i\n" :empty-lines 1))
+          org-refile-use-outline-path 'file
+          org-outline-path-complete-in-steps nil         ; Refile in a single go
+          org-enforce-todo-dependencies t
+          org-log-into-drawer t
+          org-log-states-order-reversed t
+          org-startup-folded nil
+          org-todo-keywords
+          '((sequence "TODO(t!)" "NEW(n)" "INPROGRESS(i!)" "BLOCKED(b@/!)" "|" "DONE(d!)" "CANCELLED(c@/!)"))
+          org-default-notes-file (concat org-directory "/notes.org"))
+
+    (add-hook 'org-shiftup-final-hook 'windmove-up)         ; Make windmove work in org-mode
+    (add-hook 'org-shiftleft-final-hook 'windmove-left)
+    (add-hook 'org-shiftdown-final-hook 'windmove-down)
+    (add-hook 'org-shiftright-final-hook 'windmove-right)
+
+    (defun myorg-update-parent-cookie ()
+      (when (equal major-mode 'org-mode)
+        (save-excursion
+          (ignore-errors
+            (org-back-to-heading)
+            (org-update-parent-todo-statistics)))))
+
+    (defadvice org-kill-line (after fix-cookies activate)
+      (myorg-update-parent-cookie))
+
+    (defadvice kill-whole-line (after fix-cookies activate)
+      (myorg-update-parent-cookie))
+
+    ;; plantuml
+
+    ;; active Org-babel languages
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '(;; other Babel languages
+       (plantuml . t)))
+
+    (setq org-plantuml-jar-path
+          (expand-file-name "~/bin/plantuml.jar"))
+
+    (defun my-org-confirm-babel-evaluate (lang body)
+      (not (string= lang "plantuml")))  ; don't ask for plantuml
+    (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate))
 (use-package solarized-theme
   :ensure (:wait t)
   :config (load-theme 'solarized-dark t))
