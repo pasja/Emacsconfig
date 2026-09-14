@@ -753,6 +753,24 @@
     (defun my-org-confirm-babel-evaluate (lang body)
       (not (string= lang "plantuml")))  ; don't ask for plantuml
     (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate))
+
+(when (string= (system-name) "asgard")
+  (use-package emms
+    :config
+    (emms-all)
+    (setq emms-cache-file "~/.emacs.d/cache/emms-cache"
+          emms-info-auto-update nil
+          emms-playlist-buffer-name "EMMS Playlist")
+    (if (file-readable-p "~/.emacs.d/cache/emms-cache")
+        (emms-cache-restore))
+    (require 'emms-player-mpd)
+    (setq emms-player-mpd-music-directory "~/Zene/"
+          emms-player-mpd-server-name "localhost"
+          emms-player-mpd-server-port "6600")
+    (setq emms-info-functions 'emms-info-mpd)
+    (add-to-list 'emms-player-list 'emms-player-mpd)
+    (emms-player-mpd-connect)))
+
 (use-package solarized-theme
   :ensure (:wait t)
   :config (load-theme 'solarized-dark t))
