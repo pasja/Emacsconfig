@@ -842,7 +842,17 @@
 
 (use-package orgtbl-aggregate)
 
-(use-package cperl-mode)
+(use-package cperl-mode
+  :config
+  (cperl-set-style "BSD")
+  (setq cperl-invalid-face nil
+        cperl-indent-parens-as-block t
+        cperl-tab-always-indent nil
+        cperl-highlight-variables-indiscriminately t
+        cperl-merge-trailing-else nil)
+  :bind
+  (:map cperl-mode-map
+        ("{" . nil))) ; smartparens fixup
 
 (use-package hl-todo
   :config
