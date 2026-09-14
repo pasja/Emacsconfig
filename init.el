@@ -299,42 +299,6 @@
     (find-alternate-file "..")
     (dired-goto-file pasja-prev-dir-name)))
 
-(require 'dired-aux)
-(declare-function w32-shell-execute "w32fns.c")
-(declare-function shell-command-guess "dired-aux" (files))
-(defvar shell-command-guess-open "open")
-
-(defun dired-do-open (&optional arg)
-  "Open the marked files or a file at click/point externally.
-If files are marked, run the command from `shell-command-guess-open'
-on each of marked files.  Otherwise, run it on the file where
-the mouse is clicked, or on the file at point."
-  (interactive "P" dired-mode)
-  (let ((files (if (mouse-event-p last-nonmenu-event)
-                   (save-excursion
-                     (mouse-set-point last-nonmenu-event)
-                     (dired-get-marked-files nil arg))
-                 (dired-get-marked-files nil arg)))
-        (command shell-command-guess-open))
-    (when (and (memq system-type '(windows-nt))
-               (equal command "start"))
-      (setq command "open"))
-    (when command
-      (dolist (file files)
-        (cond
-         ((memq system-type '(gnu/linux))
-          (call-process command nil 0 nil file))
-         ((memq system-type '(ms-dos))
-          (shell-command (concat command " " (shell-quote-argument file))))
-         ((memq system-type '(windows-nt))
-          (w32-shell-execute command (convert-standard-filename file)))
-         ((memq system-type '(cygwin))
-          (call-process command nil nil nil file))
-         ((memq system-type '(darwin))
-          (start-process (concat command " " file) nil command file))
-         (t
-          (error "Open not supported on this system")))))))
-
 ;; configure woman
 
 (require 'woman)
