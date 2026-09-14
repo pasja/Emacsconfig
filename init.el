@@ -788,7 +788,9 @@
   :bind (:map dired-mode-map
               ("C-c C-r" . dired-rsync)))
 
-(use-package time-zones)
+(use-package time-zones
+  :config
+  (setq time-zones-show-details t))
 
 ;; External libraries
 
