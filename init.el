@@ -890,6 +890,50 @@
     (pdf-loader-install)
     :hook (pdf-view-mode . pdf-view-roll-minor-mode)))
 
+(use-package circe
+  :config
+  (setq circe-reduce-lurker-spam t
+        circe-active-users-timeout 43200
+        circe-color-nicks-everywhere t
+        circe-highlight-nick-type 'occurence
+        circe-server-max-reconnect-attempts nil
+        circe-format-server-topic "*** Topic change by {origin}: {topic-diff}"
+        circe-format-self-say "<{nick}> {body}"
+        circe-new-buffer-behavior 'ignore)
+
+  (require 'circe-color-nicks)
+  (enable-circe-color-nicks)
+
+  (add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+  (defun my-circe-prompt ()
+    (lui-set-prompt
+     (concat (propertize (concat (buffer-name) "")
+                         'face 'circe-prompt-face)
+             " ")))
+
+  (require 'circe-lagmon)
+  (circe-lagmon-mode)
+
+  (require 'lui-autopaste)
+  (add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
+
+  (require 'lui-logging)
+  (setq lui-logging-directory "~/irclog/"
+        lui-logging-file-format "{buffer}@{network}"
+        lui-logging-format "[%Y-%m-%d %T] {text}")
+  (add-hook 'circe-chat-mode-hook 'enable-lui-logging)
+
+  (setq lui-time-stamp-position 'left
+        lui-time-stamp-format "%H:%M "
+        lui-fill-type nil)
+
+  (when (string= (system-name) "midgard") ; autojoin
+    (when (string= (daemonp) "irc")
+      (add-to-list 'load-path "~/.emacs.d/secrets/")
+      (require 'ercidentities)
+      (enable-circe-new-day-notifier)
+      (add-to-list 'circe-format-not-tracked 'circe-new-day-notifier-format-message))))
+
 ;; External libraries
 
 (add-to-list 'load-path "~/.emacs.d/plugins")
