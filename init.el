@@ -911,8 +911,8 @@
                          'face 'circe-prompt-face)
              " ")))
 
-  (require 'circe-lagmon)
-  (circe-lagmon-mode)
+  (require 'circe-pingmon)
+  (circe-pingmon-mode)
 
   (require 'lui-autopaste)
   (add-hook 'circe-channel-mode-hook 'enable-lui-autopaste)
